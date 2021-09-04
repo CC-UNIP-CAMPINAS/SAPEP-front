@@ -26,7 +26,7 @@ export function Sidebar() {
         value="Inicio"
         icons="far fa-fw fa-window-maximize"
         subName="Pog champ"
-        subValues={["Medicos", "Enfeiros", "Administração", "Outros"]}
+        subValues={["Medicos", "Enfermeiros", "Administração", "Outros"]}
       ></SideItem>
 
       <SideItem
