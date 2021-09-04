@@ -1,12 +1,12 @@
 import React from "react";
-export function input(tipo, ident, placeH) {
+export function input(type, id, placeholder) {
   return (
     <div className="form-group">
-      <InputComp tipo={tipo} id={ident} placeholder={placeH}></InputComp>
+      <InputComp type={type} id={id} placeholder={placeholder}></InputComp>
     </div>
   );
 }
 
 const InputComp = (props) => {
-  return <input type={props.tipo} className="form-control" id={props.id} aria-describedby="emailHelp" placeholder={props.placeholder} />;
+  return <input type={props.type} className="form-control" id={props.id} aria-describedby="emailHelp" placeholder={props.placeholder} />;
 };
