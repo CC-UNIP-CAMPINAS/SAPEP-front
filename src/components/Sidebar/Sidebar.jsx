@@ -5,16 +5,16 @@ import { SideItem } from "./SideItem";
 
 export function Sidebar() {
   return (
-    <ul class="navbar-nav sidebar sidebar-light accordion" id="accordionSidebar">
-      <a class="sidebar-brand d-flex align-items-center justify-content-center" href="index.html">
-        <div class="sidebar-brand-icon">
+    <ul className="navbar-nav sidebar sidebar-light accordion" id="accordionSidebar">
+      <a className="sidebar-brand d-flex align-items-center justify-content-center" href="index.html">
+        <div className="sidebar-brand-icon">
           <img src={logo} alt="logo" />
         </div>
       </a>
-      <hr class="sidebar-divider my-0" />
-      <li class="nav-item active">
-        <a class="nav-link" href="index.html">
-          <i class="fas fa-fw fa-tachometer-alt"></i>
+      <hr className="sidebar-divider my-0" />
+      <li className="nav-item active">
+        <a className="nav-link" href="index.html">
+          <i className="fas fa-fw fa-tachometer-alt"></i>
           <span>Geral</span>
         </a>
       </li>
@@ -49,7 +49,7 @@ export function Sidebar() {
       ></SideItem>
 
       <SideItem id="item4" value="Terceiro Item" icons="fab fa-fw fa-wpforms"></SideItem>
-      <hr class="sidebar-divider" />
+      <hr className="sidebar-divider" />
     </ul>
   );
 }

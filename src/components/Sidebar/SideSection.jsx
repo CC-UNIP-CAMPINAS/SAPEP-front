@@ -3,8 +3,8 @@ import React from "react";
 export function SideSection(props) {
   return (
     <>
-      <hr class="sidebar-divider" />
-      <div class="sidebar-heading">{props.value}</div>
+      <hr className="sidebar-divider" />
+      <div className="sidebar-heading">{props.value}</div>
     </>
   );
 }
