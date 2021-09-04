@@ -2,9 +2,9 @@ import React from "react";
 
 export function SideSubItem(props) {
   return (
-    <div id={props.subId} class="collapse" aria-labelledby={props.subId} data-parent="#accordionSidebar">
-      <div class="bg-white py-2 collapse-inner rounded">
-        <h6 class="collapse-header">{props.subName}</h6>
+    <div id={props.subId} className="collapse" aria-labelledby={props.subId} data-parent="#accordionSidebar">
+      <div className="bg-white py-2 collapse-inner rounded">
+        <h6 className="collapse-header">{props.subName}</h6>
         {createSubItens(props)}
       </div>
     </div>
@@ -13,8 +13,8 @@ export function SideSubItem(props) {
 
 function createSubItens(props) {
   if (props.subValues) {
-    return props.subValues.map((e) => (
-      <a class="collapse-item" href={e + ".html"}>
+    return props.subValues.map((e, index) => (
+      <a className="collapse-item" key={index} href={e + ".html"}>
         {e}
       </a>
     ));

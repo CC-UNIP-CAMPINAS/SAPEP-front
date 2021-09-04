@@ -3,7 +3,7 @@ import { SideSubItem } from "./SideSubItem";
 
 export function SideItem(props) {
   return (
-    <li class="nav-item">
+    <li className="nav-item">
       {createAtag(props)}
       {hasSubItems(props)}
     </li>
@@ -12,11 +12,10 @@ export function SideItem(props) {
 
 function createAtag(props) {
   if (props.subValues) {
-    console.log("wtfffff");
     return (
       <>
         <a
-          class="nav-link collapsed"
+          className="nav-link collapsed"
           href="index.html"
           data-toggle="collapse"
           data-target={"#" + props.id}
@@ -30,7 +29,7 @@ function createAtag(props) {
     );
   } else {
     return (
-      <a class="nav-link" href="index.html">
+      <a className="nav-link" href="index.html">
         <i className={props.icons}></i>
         <span>{props.value}</span>
       </a>
