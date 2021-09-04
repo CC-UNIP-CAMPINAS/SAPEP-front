@@ -20,8 +20,8 @@ export function Login() {
                         <h1 className="h4 text-gray-900 mb-4">Login</h1>
                       </div>
                       <form className="user">
-                        {input("email", "emailLongin", "seuemail@gmail.com")}
-                        {input("password", "senhaLongin", "*******")}
+                        {input("email", "emailLogin", "seuemail@gmail.com")}
+                        {input("password", "passwordLogin", "*******")}
                         {checkbox("checkboxLogin", "teste")}
                         {button("login", "Entrar", "index.html")}
                       </form>

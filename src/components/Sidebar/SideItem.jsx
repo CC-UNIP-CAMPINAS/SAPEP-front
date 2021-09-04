@@ -23,7 +23,7 @@ function createAtag(props) {
           aria-expanded="true"
           aria-controls={props.id}
         >
-          <i classNameName={props.icons}></i>
+          <i className={props.icons}></i>
           <span>{props.value}</span>
         </a>
       </>
