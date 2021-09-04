@@ -1,5 +1,5 @@
 import React from "react";
-import logo from "../../Assets/imagens/logo.png";
+import logo from "../../assets/img/logo.png";
 import { input } from "../../components/input";
 import { checkbox } from "../../components/checkbox";
 import { button } from "../../components/button";

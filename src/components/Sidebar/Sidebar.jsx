@@ -1,5 +1,5 @@
 import React from "react";
-import logo from "../../Assets/imagens/logo.png";
+import logo from "../../assets/img/logo.png";
 import { SideSection } from "./SideSection";
 import { SideItem } from "./SideItem";
 

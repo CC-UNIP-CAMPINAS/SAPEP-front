@@ -3,8 +3,8 @@ import "./App.css";
 import { Adm } from "./pages/adm";
 
 function App(props) {
-  //return <Login></Login>;
-  return <Adm></Adm>;
+    //return <Login></Login>;
+    return <Adm></Adm>;
 }
 
 export default App;
