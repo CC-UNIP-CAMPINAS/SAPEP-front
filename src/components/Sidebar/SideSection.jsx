@@ -1,10 +1,10 @@
 import React from "react";
 
 export function SideSection(props) {
-  return (
-    <>
-      <hr class="sidebar-divider" />
-      <div class="sidebar-heading">{props.value}</div>
-    </>
-  );
+    return (
+        <>
+            <hr className="sidebar-divider" />
+            <div className="sidebar-heading">{props.value}</div>
+        </>
+    );
 }
