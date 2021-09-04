@@ -1,6 +1,6 @@
 import "./App.css";
 //import { Login } from "./pages/Login/Login";
-import { Adm } from "./pages/adm";
+import { Adm } from "./pages/Adm/adm";
 
 function App(props) {
     //return <Login></Login>;
