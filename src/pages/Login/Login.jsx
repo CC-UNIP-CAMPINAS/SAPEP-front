@@ -1,8 +1,8 @@
 import React from "react";
 import logo from "../../assets/img/logo.png";
-import { input } from "../../components/Input/input";
-import { checkbox } from "../../components/Checkbox/checkbox";
-import { button } from "../../components/Button/button";
+import { input } from "../../components/Input/Input";
+import { checkbox } from "../../components/Checkbox/Checkbox";
+import { button } from "../../components/Button/Button";
 
 export function Login() {
     return (
