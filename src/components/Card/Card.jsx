@@ -7,6 +7,6 @@ export function Card(props) {
 
 function checkCard(props) {
   if (props.type === "small") {
-    return <SmallCard category={props.category} quantity={props.quantity} update={props.update}></SmallCard>;
+    return <SmallCard category={props.category} size={props.size} quantity={props.quantity} update={props.update} icon={props.icon}></SmallCard>;
   }
 }

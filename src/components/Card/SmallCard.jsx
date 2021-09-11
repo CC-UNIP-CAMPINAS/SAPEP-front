@@ -2,7 +2,7 @@ import React from "react";
 
 export function SmallCard(props) {
   return (
-    <div className="col-xl-3 col-md-6 mb-4">
+    <div className={defSize(props)}>
       <div className="card h-100">
         <div className="card-body">
           <div className="row align-items-center">
@@ -24,9 +24,17 @@ export function SmallCard(props) {
   );
 }
 
+function defSize(props) {
+  if (props.size) {
+    return props.size + " mb-4";
+  } else {
+    return "col-xl-3 col-md-6  mb-4";
+  }
+}
+
 function defIcon(props) {
   if (props.icon) {
-    return <i className={props.icon + "fa-2x text-primary"}></i>;
+    return <i className={props.icon + " fa-2x text-primary"}></i>;
   } else {
     if (props.category.toLowerCase() === "médicos" || props.category.toLowerCase() === "enfermeiros") {
       return <i className="fas fa-briefcase-medical fa-2x text-primary"></i>;
