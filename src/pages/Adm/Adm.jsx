@@ -4,6 +4,7 @@ import { Topbar } from "../../components/Topbar/Topbar";
 import { Breadcrumb } from "../../components/Breadcrumb/Breadcrumb";
 import { Card } from "../../components/Card/Card";
 import { Table } from "../../components/Table/Table";
+import { tableData } from "../../components/Table/tableData";
 
 export function Adm() {
   return (
@@ -20,7 +21,7 @@ export function Adm() {
               <Card type="small" category="Enfermeiros" quantity="75 Registros" update="07/08"></Card>
               <Card type="small" category="Pacientes" quantity="450 Registros" update="12/08"></Card>
               <Card type="small" category="Administradores" quantity="28 Registros" update="08/09" icon="fas fa-book-dead"></Card>
-              <Table name="Teste Tabela" head={["Name", "Position", "Office", "Age", "Start date", "Salary"]}></Table>
+              <Table name="Teste Tabela" content={tableData}></Table>
             </div>
           </div>
         </div>
