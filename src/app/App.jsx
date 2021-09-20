@@ -1,10 +1,9 @@
 import "./App.css";
-//import { Login } from "./pages/Login/Login";
-import { Adm } from "../pages/Adm/Adm";
+import React from "react";
+import Routes from "../routes/routes";
 
 function App(props) {
-    //return <Login></Login>;
-    return <Adm></Adm>;
+  return <Routes />;
 }
 
 export default App;
