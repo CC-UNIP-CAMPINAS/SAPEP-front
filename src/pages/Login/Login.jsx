@@ -1,18 +1,20 @@
 import React from "react";
+import { connect } from "react-redux";
+import { Redirect } from "react-router-dom";
 import logo from "../../assets/img/logo.png";
-import { Input } from "../../components/Input/Input";
-import { checkbox } from "../../components/Checkbox/Checkbox";
 import { button } from "../../components/Button/Button";
+import { checkbox } from "../../components/Checkbox/Checkbox";
+import { Input } from "../../components/Input/Input";
 import api from "../../services/api";
 import { setUser } from "../../store/actions/user.action";
-import { connect } from "react-redux";
 import { createNotification } from "../../utils/NotificationUtils";
 import types from "../../utils/types";
 
 const Login = (props) => {
+    const [redirect, setRedirect] = React.useState("");
     const [inputs, setInputs] = React.useState({ email: "", password: "" });
 
-    async function executeLogin(e) {
+    async function handleLogin(e) {
         e.preventDefault();
         try {
             const { data } = await api.post(
@@ -24,6 +26,7 @@ const Login = (props) => {
             const user = { email: data.payload.user.email, auth: data.payload.auth };
             props.setUser(user);
             createNotification(types.SUCCESS, data.message);
+            setRedirect(<Redirect to="/" />);
         } catch (error) {
             switch (error.response.status) {
                 case 404:
@@ -41,6 +44,7 @@ const Login = (props) => {
 
     return (
         <section>
+            {redirect}
             <div className="container-login">
                 <div className="row justify-content-center">
                     <div className="col-xl-6 col-lg-12 col-md-9">
@@ -53,7 +57,7 @@ const Login = (props) => {
                                             <div className="text-center">
                                                 <h1 className="h4 text-gray-900 mb-4">Login</h1>
                                             </div>
-                                            <form className="user" onSubmit={(e) => executeLogin(e)}>
+                                            <form className="user" onSubmit={(e) => handleLogin(e)}>
                                                 <Input
                                                     type="email"
                                                     id="emailLogin"
