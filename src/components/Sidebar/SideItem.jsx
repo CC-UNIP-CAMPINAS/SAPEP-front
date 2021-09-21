@@ -12,7 +12,6 @@ export function SideItem(props) {
 
 function createAtag(props) {
     if (props.subValues) {
-        console.log("wtfffff");
         return (
             <>
                 <a
