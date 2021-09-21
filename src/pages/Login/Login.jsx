@@ -14,6 +14,20 @@ const Login = (props) => {
     const [redirect, setRedirect] = React.useState("");
     const [inputs, setInputs] = React.useState({ email: "", password: "" });
 
+    const { setUser } = props;
+
+    React.useEffect(() => {
+        async function handleLoginWithJwt() {
+            const { data } = await api.post("/login-jwt", {}, { withCredentials: true });
+            const user = { email: data.payload.user.email, auth: data.payload.auth };
+            setUser(user);
+            createNotification(types.SUCCESS, data.message);
+            setRedirect(<Redirect to="/" />);
+        }
+
+        handleLoginWithJwt();
+    }, [setUser]);
+
     async function handleLogin(e) {
         e.preventDefault();
         try {
