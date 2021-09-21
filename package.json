@@ -39,7 +39,5 @@
       "last 1 safari version"
     ]
   },
-  "devDependencies": {
-    "remote-redux-devtools": "^0.5.16"
-  }
+  "devDependencies": {}
 }
