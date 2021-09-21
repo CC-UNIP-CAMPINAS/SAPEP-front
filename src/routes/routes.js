@@ -1,5 +1,5 @@
 import { BrowserRouter, Switch, Route, Redirect } from "react-router-dom";
-import { Login } from "../pages/Login/Login";
+import Login from "../pages/Login/Login";
 
 const AppRoutes = (props) => {
   //   function routesAuth() {
