@@ -1,4 +1,5 @@
 import React from "react";
+import Button from "../Button/Button";
 import "./styles.scoped.scss";
 
 function CardLogin({ inputs, setInputs, handleLogin }) {
@@ -26,9 +27,7 @@ function CardLogin({ inputs, setInputs, handleLogin }) {
                 />
             </div>
 
-            <button type="button" onClick={handleLogin}>
-                Entrar
-            </button>
+            <Button handle={handleLogin} text="Entrar" isLoading={true} color="cyan" />
         </div>
     );
 }
