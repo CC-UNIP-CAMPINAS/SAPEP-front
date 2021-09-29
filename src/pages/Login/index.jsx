@@ -26,7 +26,9 @@ function Login() {
             if (error.response.status === 401) {
                 notification(types.NOT_AUTHORIZED, error.response.data.message);
             }
-            console.log(error.response);
+            if (error.response.status === 500) {
+                notification(types.ERROR, "Algum problema ocorreu, tente novamente.");
+            }
         }
     }
 
