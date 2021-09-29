@@ -1,4 +1,5 @@
 import React from "react";
+import ButtonDefault from "../../../components/Button/ButtonDefault";
 import "./styles.scoped.scss";
 
 function CardLogin() {
@@ -9,6 +10,7 @@ function CardLogin() {
 
             <label>Senha</label>
             <input type="password" />
+            <ButtonDefault text="Entrar" color="cyan"></ButtonDefault>
         </div>
     );
 }
