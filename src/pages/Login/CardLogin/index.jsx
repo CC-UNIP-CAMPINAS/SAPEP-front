@@ -1,16 +1,17 @@
 import React from "react";
 import ButtonDefault from "../../../components/Button/ButtonDefault";
 import "./styles.scoped.scss";
+import InputDefault from "../../../components/Button/Input/InputDefault/index";
 
 function CardLogin() {
     return (
         <div className="container">
             <label>Usuário</label>
-            <input type="text" />
+            <InputDefault placeholder="Usuário" type="text" />
 
             <label>Senha</label>
-            <input type="password" />
-            <ButtonDefault text="Entrar" color="cyan"></ButtonDefault>
+            <InputDefault placeholder="Senha" type="password" />
+            <ButtonDefault text="Entrar" color="cyan" />
         </div>
     );
 }
