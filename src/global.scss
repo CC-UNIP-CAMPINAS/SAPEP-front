@@ -32,3 +32,55 @@ body {
     background: var(--white);
     -webkit-font-smoothing: antialiased;
 }
+
+button {
+    padding: 1rem;
+    cursor: pointer;
+    background: rgb(221, 221, 221);
+    border-radius: 0.5rem;
+
+    color: rgb(136, 136, 136);
+
+    font-size: 1.2rem;
+    font-weight: 600;
+
+    box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
+    border: none;
+
+    transition: filter 0.2s;
+
+    &:hover {
+        filter: opacity(0.8);
+    }
+
+    &:active {
+        filter: opacity(1);
+    }
+
+    width: fit-content;
+
+    &.cyan {
+        background: var(--cyan-200);
+        color: var(--white);
+    }
+}
+
+input {
+    padding: 1rem;
+    background: var(--white);
+    border-radius: 0.5rem;
+
+    color: rgb(47, 47, 47);
+
+    font-size: 1.1rem;
+
+    border: none;
+
+    width: fit-content;
+
+    outline: none;
+
+    &::placeholder {
+        color: rgb(187, 187, 187);
+    }
+}

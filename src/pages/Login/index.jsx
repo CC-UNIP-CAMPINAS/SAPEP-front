@@ -1,5 +1,5 @@
 import "./styles.scoped.scss";
-import CardLogin from "./CardLogin/index";
+import CardLogin from "../../components/CardLogin/index";
 
 function Login() {
     return (
