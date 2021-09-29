@@ -57,6 +57,11 @@ button {
         filter: opacity(1);
     }
 
+    &:disabled {
+        filter: opacity(0.3);
+        cursor: not-allowed;
+    }
+
     width: fit-content;
 
     &.cyan {
