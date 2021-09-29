@@ -36,10 +36,14 @@
         width: 100%;
     }
 
-    img {
-        width: 13rem;
+    span {
+        filter: drop-shadow(-1px 6px 3px rgba(50, 50, 0, 0.5));
+        align-self: center;
         position: absolute;
         top: -100px;
-        align-self: center;
+
+        img {
+            width: 13rem;
+        }
     }
 }

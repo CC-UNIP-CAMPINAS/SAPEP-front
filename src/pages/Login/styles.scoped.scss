@@ -4,4 +4,16 @@
     flex-direction: column;
     justify-content: center;
     align-items: center;
+
+    div {
+        width: 100%;
+        height: 225px;
+        background-image: linear-gradient(
+            180deg,
+            var(--cyan-200) 0% 33%,
+            var(--cyan-500) 33% 66%,
+            var(--gray-700) 66% 99%
+        );
+        position: fixed;
+    }
 }

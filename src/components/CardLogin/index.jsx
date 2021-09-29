@@ -4,7 +4,10 @@ import "./styles.scoped.scss";
 function CardLogin() {
     return (
         <div className="container">
-            <img src="/logo.svg" alt="logo" />
+            <span>
+                <img src="/logo.svg" alt="logo" />
+            </span>
+
             <div>
                 <label>Usuário</label>
                 <input type="text" placeholder="Usuário" />
