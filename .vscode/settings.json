@@ -1,6 +1,7 @@
 {
     "conventionalCommits.scopes": [
         "Login",
-        "Component"
+        "Component",
+        "yup"
     ]
 }

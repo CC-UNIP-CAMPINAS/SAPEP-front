@@ -2,8 +2,6 @@ import * as yup from "yup";
 import { notification } from "./toastify";
 import types from "./types";
 
-const idEmpty = "O id não pode ser vazio";
-
 const emailMatch = "Digite um email válido";
 const emailEmpty = "O email não pode ser vazio";
 
@@ -12,8 +10,8 @@ const nameEmpty = "O nome não pode ser vazio";
 
 const lastNameEmpty = "O sobrenome não pode ser vazio";
 
-const phoneEmpty = "O telefone não pode ser vazio";
-const phoneMatch = "O telefone precisa ter no mínimo 11 caractéres. Ex. DDD + 9 Dígitos.";
+// const phoneEmpty = "O telefone não pode ser vazio";
+// const phoneMatch = "O telefone precisa ter no mínimo 11 caractéres. Ex. DDD + 9 Dígitos.";
 
 const cpfEmpty = "O CPF não pode ser vazio";
 const cpfMatch = "O CPF precisa ter no mínimo 11 caractéres. Ex. 000.000.000-00";
@@ -47,39 +45,39 @@ const schemaSign = yup.object().shape({
         }),
 });
 
-const schemaPassword = yup.object().shape({
-    password: yup
-        .string()
-        .required(passwordEmpty)
-        .min(8, passwordMatch),
-    newPassword: yup
-        .string()
-        .required(passwordEmpty)
-        .min(8, passwordMatch)
-        .test("passwords-match", "A nova senha é igual a anterior.", function(value) {
-            return this.parent.password !== value;
-        }),
-    reNewPassword: yup
-        .string()
-        .required(passwordEmpty)
-        .min(8, passwordMatch)
-        .test("passwords-match", "As senhas digitadas estão diferentes!", function(value) {
-            return this.parent.newPassword === value;
-        }),
-});
+// const schemaPassword = yup.object().shape({
+//     password: yup
+//         .string()
+//         .required(passwordEmpty)
+//         .min(8, passwordMatch),
+//     newPassword: yup
+//         .string()
+//         .required(passwordEmpty)
+//         .min(8, passwordMatch)
+//         .test("passwords-match", "A nova senha é igual a anterior.", function(value) {
+//             return this.parent.password !== value;
+//         }),
+//     reNewPassword: yup
+//         .string()
+//         .required(passwordEmpty)
+//         .min(8, passwordMatch)
+//         .test("passwords-match", "As senhas digitadas estão diferentes!", function(value) {
+//             return this.parent.newPassword === value;
+//         }),
+// });
 
-const schemaComparePassword = yup.object().shape({
-    password: yup
-        .string()
-        .required(passwordEmpty)
-        .min(8, passwordMatch),
-    rePassword: yup
-        .string()
-        .required(passwordEmpty)
-        .test("passwords-match", "Senhas diferem!", function(value) {
-            return this.parent.password === value;
-        }),
-});
+// const schemaComparePassword = yup.object().shape({
+//     password: yup
+//         .string()
+//         .required(passwordEmpty)
+//         .min(8, passwordMatch),
+//     rePassword: yup
+//         .string()
+//         .required(passwordEmpty)
+//         .test("passwords-match", "Senhas diferem!", function(value) {
+//             return this.parent.password === value;
+//         }),
+// });
 
 const schemaLogin = yup.object().shape({
     email: yup
@@ -92,18 +90,20 @@ const schemaLogin = yup.object().shape({
         .min(8, passwordMatch),
 });
 
-const schemaResetPassword = yup.object().shape({
-    email: yup
-        .string()
-        .email(emailMatch)
-        .required(emailEmpty),
-});
+// const schemaResetPassword = yup.object().shape({
+//     email: yup
+//         .string()
+//         .email(emailMatch)
+//         .required(emailEmpty),
+// });
 
 async function validate(schemaName, body) {
     try {
         switch (schemaName) {
             case "login":
                 return await schemaLogin.validate(body);
+            case "sign":
+                return await schemaSign.validate(body);
             default:
                 return false.valueOf;
         }
