@@ -3,6 +3,7 @@
         "Login",
         "Component",
         "yup",
-        "Redux"
+        "Redux",
+        "Routes"
     ]
 }

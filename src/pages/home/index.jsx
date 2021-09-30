@@ -1,4 +1,4 @@
-import "./styles.module.scss";
+import "./styles.scoped.scss";
 
 function Home() {
     return <div className="container">Olá mundo</div>;

@@ -1,23 +1,22 @@
+import { connect } from "react-redux";
 import { BrowserRouter, Redirect, Route, Switch } from "react-router-dom";
 import Login from "../pages/Login";
+import Home from "../pages/home/index";
 
-const AppRoutes = () => {
-    // function routesAuth() {
-    //     if (props.user.auth) {
-    //         return [
-    //             <Route path="/profile" key="/profile" component={Profile} />,
-    //             <Route key="/" component={MainPage} />,
-    //         ];
-    //     } else {
-    //         return <Redirect to="/login"></Redirect>;
-    //     }
-    // }
+const AppRoutes = ({ user }) => {
+    function routesAuth() {
+        if (user.auth) {
+            return [<Route key="/" component={Home} />];
+        } else {
+            return <Redirect to="/login" />;
+        }
+    }
 
     return (
         <BrowserRouter>
             <Switch>
                 <Route exact path="/login" component={Login} />
-                {/* {routesAuth()} */}
+                {routesAuth()}
                 <Route path="*">
                     <Redirect to="/login" />
                 </Route>
@@ -26,4 +25,13 @@ const AppRoutes = () => {
     );
 };
 
-export default AppRoutes;
+const mapStateToProps = (states) => {
+    return {
+        user: states.user,
+    };
+};
+
+export default connect(
+    mapStateToProps,
+    null
+)(AppRoutes);

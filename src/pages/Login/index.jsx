@@ -7,12 +7,15 @@ import { notification } from "../../services/toastify";
 import types from "../../services/types";
 import { connect } from "react-redux";
 import { setUser } from "../../store/actions/user.action";
+import { Redirect } from "react-router-dom";
 
 function Login({ setUser }) {
     const [inputs, setInputs] = useState({
         password: "",
         user: "",
     });
+
+    const [redirect, setRedirect] = useState("");
 
     async function handleLogin() {
         try {
@@ -22,6 +25,7 @@ function Login({ setUser }) {
                 console.log(data);
                 setUser({ ...data.payload.user, auth: true });
                 notification(types.SUCCESS, data.message);
+                setRedirect(<Redirect to="/" />);
             }
         } catch (error) {
             if (error.response.status === 404) {
@@ -38,6 +42,7 @@ function Login({ setUser }) {
 
     return (
         <div className="container">
+            {redirect}
             <div />
             <CardLogin inputs={inputs} setInputs={setInputs} handleLogin={handleLogin} />
         </div>
