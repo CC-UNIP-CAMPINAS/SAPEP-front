@@ -2,6 +2,7 @@
     "conventionalCommits.scopes": [
         "Login",
         "Component",
-        "yup"
+        "yup",
+        "Redux"
     ]
 }
