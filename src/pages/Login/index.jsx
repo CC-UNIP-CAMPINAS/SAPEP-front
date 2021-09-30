@@ -19,7 +19,6 @@ function Login({ setUser }) {
 
     useEffect(() => {
         const loginJwt = async () => {
-            console.log("FOI");
             try {
                 const { data } = await api.post("/login-jwt");
                 setUser({ ...data.payload.user, auth: true });
