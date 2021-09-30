@@ -1,9 +1,9 @@
 import types from "../types";
 
 const initialState = {
+    id: "",
     email: "",
     groupId: null,
-    id: "",
     createdAt: "",
     auth: false,
 };

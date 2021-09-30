@@ -5,8 +5,10 @@ import { api } from "../../services/api";
 import yup from "../../services/yup";
 import { notification } from "../../services/toastify";
 import types from "../../services/types";
+import { connect } from "react-redux";
+import { setUser } from "../../store/actions/user.action";
 
-function Login() {
+function Login({ setUser }) {
     const [inputs, setInputs] = useState({
         password: "",
         user: "",
@@ -17,6 +19,8 @@ function Login() {
             const body = { email: inputs.user, password: inputs.password };
             if (await yup("login", body)) {
                 const { data } = await api.post("/login", body);
+                console.log(data);
+                setUser({ ...data.payload.user, auth: true });
                 notification(types.SUCCESS, data.message);
             }
         } catch (error) {
@@ -40,4 +44,16 @@ function Login() {
     );
 }
 
-export default Login;
+const mapDispatchToProps = (dispatch) => {
+    return {
+        setUser(user) {
+            const action = setUser(user);
+            dispatch(action);
+        },
+    };
+};
+
+export default connect(
+    null,
+    mapDispatchToProps
+)(Login);
