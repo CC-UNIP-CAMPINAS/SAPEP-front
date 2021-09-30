@@ -1,6 +1,6 @@
 import "./styles.scoped.scss";
 import CardLogin from "../../components/CardLogin/index";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { api } from "../../services/api";
 import yup from "../../services/yup";
 import { notification } from "../../services/toastify";
@@ -16,6 +16,21 @@ function Login({ setUser }) {
     });
 
     const [redirect, setRedirect] = useState("");
+
+    useEffect(() => {
+        const loginJwt = async () => {
+            console.log("FOI");
+            try {
+                const { data } = await api.post("/login-jwt");
+                setUser({ ...data.payload.user, auth: true });
+                notification(types.SUCCESS, data.message);
+                setRedirect(<Redirect to="/" />);
+            } catch (error) {
+                console.log(error);
+            }
+        };
+        loginJwt();
+    }, [setUser]);
 
     async function handleLogin() {
         try {
