@@ -3,8 +3,16 @@ import React from "react";
 import "./styles.scoped.scss";
 import { Icon } from "@iconify/react";
 import Button from "../Button/Button";
+import { api } from "../../services/api";
+import { connect } from "react-redux";
+import { clearStore } from "../../store/actions/app.action";
 
-function NavBar() {
+function NavBar({ logoff }) {
+    async function handleLogoff() {
+        await api.get("logoff");
+        logoff();
+    }
+
     return (
         <header className="container">
             <img src="/logo_mini.svg" alt="logo" />
@@ -13,15 +21,27 @@ function NavBar() {
                 <header>
                     <Icon id="icon-user" icon="carbon:user-avatar-filled-alt" />
                     <div>Leonardo Petta do Nascimento</div>
-                    <Icon icon="bx:bxs-down-arrow" />
+                    <Icon id="icon-drop" icon="bx:bxs-down-arrow-circle" />
                 </header>
 
                 <div id="button-area">
-                    <Button text="Sair" color="cyan" />
+                    <Button text="Sair" color="cyan" handle={handleLogoff} />
                 </div>
             </section>
         </header>
     );
 }
 
-export default NavBar;
+const mapDispatchToProps = (dispatch) => {
+    return {
+        logoff() {
+            const action = clearStore();
+            dispatch(action);
+        },
+    };
+};
+
+export default connect(
+    null,
+    mapDispatchToProps
+)(NavBar);

@@ -20,6 +20,10 @@ export default function configsReducer(state = initialState, action) {
                 ...state,
                 auth: action.payload,
             };
+        case types.CLEAR:
+            return {
+                ...initialState,
+            };
         default:
             return state;
     }
