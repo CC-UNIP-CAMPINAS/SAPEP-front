@@ -1,12 +1,12 @@
 import { connect } from "react-redux";
 import { BrowserRouter, Redirect, Route, Switch } from "react-router-dom";
 import Login from "../pages/Login";
-import Home from "../pages/home/index";
+import App from "../pages/App";
 
 const AppRoutes = ({ user }) => {
     function routesAuth() {
         if (user.auth) {
-            return [<Route key="/" component={Home} />];
+            return [<Route key="/" component={App} />];
         } else {
             return <Redirect to="/login" />;
         }
