@@ -1,0 +1,10 @@
+{
+    "conventionalCommits.scopes": [
+        "Login",
+        "Component",
+        "yup",
+        "Redux",
+        "Routes",
+        "Modal"
+    ]
+}
