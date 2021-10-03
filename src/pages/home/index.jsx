@@ -1,4 +1,5 @@
 import CardMenuHome from "../../components/CardMenuHome";
+import Table from "../../components/Table";
 import "./styles.scoped.scss";
 
 function Home() {
@@ -6,17 +7,20 @@ function Home() {
         <div className="container">
             <section id="cards">
                 <span>
-                    <CardMenuHome title="Médicos" icon="vaadin:doctor" quant={100} />
+                    <CardMenuHome title="Médicos" icon="vaadin:doctor" quant={100} active />
                 </span>
                 <span>
                     <CardMenuHome title="Enfermeiros" icon="wpf:medical-doctor" quant={100} />
                 </span>
                 <span>
+                    <CardMenuHome title="Administração" icon="wpf:administrator" quant={100} />
+                </span>
+                <span>
                     <CardMenuHome title="Pacientes" icon="fluent:doctor-48-filled" quant={100} />
                 </span>
             </section>
-            <section id="graph">
-                <h1>Oi</h1>
+            <section id="table">
+                <Table />
             </section>
         </div>
     );

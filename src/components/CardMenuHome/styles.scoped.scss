@@ -4,8 +4,20 @@
         0px 0px 1px rgba(0, 0, 0, 0.04);
     padding: 1.875rem;
     border-radius: 0.9375rem;
+    zoom: 0.8;
 
-    transition: all 0.2s ease-in-out;
+    transition: all 0.2s;
+
+    &.true {
+        background: var(--gray-600);
+
+        h1 {
+            color: white;
+        }
+        h2 {
+            color: var(--cyan-200);
+        }
+    }
 
     &:hover {
         transform: scale(1.1);
