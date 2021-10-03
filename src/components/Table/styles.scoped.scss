@@ -1,6 +1,5 @@
 .container {
     width: 100%;
-    height: 100%;
     text-align: left;
     border-collapse: collapse;
     border-radius: 1em;
@@ -22,6 +21,11 @@
         height: 100%;
         td {
             padding: 15px 30px;
+        }
+
+        tr:hover {
+            background: var(--gray-150);
+            cursor: pointer;
         }
     }
 

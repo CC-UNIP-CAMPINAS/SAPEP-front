@@ -1,6 +1,7 @@
 import CardMenuHome from "../../components/CardMenuHome";
 import Table from "../../components/Table";
 import "./styles.scoped.scss";
+import React from "react";
 
 function Home() {
     return (
