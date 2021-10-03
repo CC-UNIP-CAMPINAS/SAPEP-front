@@ -8,8 +8,9 @@ import types from "../../services/types";
 import { connect } from "react-redux";
 import { setUser } from "../../store/actions/user.action";
 import { Redirect } from "react-router-dom";
+import { setGroups } from "../../store/actions/groups.action";
 
-function Login({ setUser }) {
+function Login({ setUser, setGroups }) {
     const [inputs, setInputs] = useState({
         password: "",
         user: "",
@@ -20,6 +21,9 @@ function Login({ setUser }) {
     useEffect(() => {
         const loginJwt = async () => {
             try {
+                const resp = await api.get("/group");
+                setGroups(resp.data);
+
                 const { data } = await api.post("/login-jwt");
                 setUser({ ...data.payload.user, auth: true });
                 notification(types.SUCCESS, data.message);
@@ -29,7 +33,7 @@ function Login({ setUser }) {
             }
         };
         loginJwt();
-    }, [setUser]);
+    }, [setUser, setGroups]);
 
     async function handleLogin() {
         try {
@@ -67,6 +71,10 @@ const mapDispatchToProps = (dispatch) => {
     return {
         setUser(user) {
             const action = setUser(user);
+            dispatch(action);
+        },
+        setGroups(groups) {
+            const action = setGroups(groups);
             dispatch(action);
         },
     };
