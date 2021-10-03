@@ -3,6 +3,7 @@ import ReactDOM from "react-dom";
 import { ToastContainer } from "react-toastify";
 import "./global.scss";
 import "react-toastify/dist/ReactToastify.css";
+import "reactjs-popup/dist/index.css";
 import AppRoutes from "./routes/routes";
 import configStore from "./store/store";
 import { Provider } from "react-redux";

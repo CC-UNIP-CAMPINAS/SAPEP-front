@@ -4,6 +4,7 @@
         "Component",
         "yup",
         "Redux",
-        "Routes"
+        "Routes",
+        "Modal"
     ]
 }
