@@ -28,7 +28,7 @@ function Home({ populateDoctors, doctors }) {
         <div className="container">
             <section id="cards">
                 <span>
-                    <CardMenuHome title="Médicos" icon="vaadin:doctor" quant={100} active />
+                    <CardMenuHome title="Médicos" icon="vaadin:doctor" quant={doctors.length} active />
                 </span>
                 <span>
                     <CardMenuHome title="Enfermeiros" icon="wpf:medical-doctor" quant={100} />
