@@ -8,7 +8,7 @@ import { connect } from "react-redux";
 import { notification } from "../../services/toastify";
 import types from "../../services/types";
 
-function Home({ populateDoctors }) {
+function Home({ populateDoctors, doctors }) {
     React.useEffect(() => {
         async function loadDoctors() {
             try {
@@ -40,7 +40,7 @@ function Home({ populateDoctors }) {
                 </span>
             </section>
             <section id="table">
-                <Table />
+                <Table header={["Id", "Nome", "Email", "CRM", "Área", "Sexo", "Telefone"]} doctors={doctors} />
             </section>
         </div>
     );
@@ -55,7 +55,13 @@ const mapDispatchToProps = (dispatch) => {
     };
 };
 
+const mapStateToProps = (states) => {
+    return {
+        doctors: states.doctors,
+    };
+};
+
 export default connect(
-    null,
+    mapStateToProps,
     mapDispatchToProps
 )(Home);

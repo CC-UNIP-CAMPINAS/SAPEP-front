@@ -1,10 +1,9 @@
 import React from "react";
-
-import "./styles.scoped.scss";
 import { Popup } from "reactjs-popup";
 import CardTableRowInformation from "../CardTableRowInformation/index";
+import "./styles.scoped.scss";
 
-function Table() {
+function Table({ header = [], doctors = [] }) {
     const modalRef = React.useRef();
     const openModal = () => modalRef.current.open();
     const closeModal = () => modalRef.current.close();
@@ -21,23 +20,25 @@ function Table() {
             </Popup>
             <thead>
                 <tr>
-                    <th>Id</th>
-                    <th>Nome</th>
-                    <th>CRM</th>
-                    <th>Área</th>
-                    <th>Sexo</th>
-                    <th>Telefone</th>
+                    {header.map((row, index) => {
+                        return <th key={index}>{row}</th>;
+                    })}
                 </tr>
             </thead>
             <tbody>
-                <tr onClick={handleSelectRow}>
-                    <td>1</td>
-                    <td>Júlia Nobre Colnaghi</td>
-                    <td>210637 - SP</td>
-                    <td>Pediatria</td>
-                    <td>F</td>
-                    <td>(19) 98874-2590</td>
-                </tr>
+                {doctors.map((doctor, index) => {
+                    return (
+                        <tr key={index} onClick={handleSelectRow}>
+                            <td>{doctor.userId}</td>
+                            <td>{doctor.user.name}</td>
+                            <td>{doctor.user.email}</td>
+                            <td>{doctor.crm}</td>
+                            <td>{doctor.area}</td>
+                            <td>{doctor.user.gender}</td>
+                            <td>{doctor.user.phone}</td>
+                        </tr>
+                    );
+                })}
             </tbody>
         </table>
     );

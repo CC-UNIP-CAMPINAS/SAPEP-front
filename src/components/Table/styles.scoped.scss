@@ -2,9 +2,8 @@
     width: 100%;
     text-align: left;
     border-collapse: collapse;
-    border-radius: 1em;
+    border-radius: 1em 1rem 0 0;
     overflow: hidden;
-    table-layout: fixed;
 
     thead {
         color: var(--white);
@@ -15,10 +14,16 @@
         th {
             padding: 15px 0 15px 30px;
         }
+
+        th:last-child {
+            padding: 15px 30px;
+        }
     }
     tbody {
+        line-break: auto;
         color: var(--gray-700);
         height: 100%;
+
         td {
             padding: 15px 30px;
         }
@@ -29,7 +34,7 @@
         }
     }
 
-    @media (max-width: 870px) {
+    @media (max-width: 1200px) {
         display: block;
         overflow-x: auto;
         white-space: nowrap;
