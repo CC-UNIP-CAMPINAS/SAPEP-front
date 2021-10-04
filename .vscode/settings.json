@@ -6,6 +6,7 @@
         "Redux",
         "Routes",
         "Modal",
-        "Navbar"
+        "Navbar",
+        "Doctor"
     ]
 }

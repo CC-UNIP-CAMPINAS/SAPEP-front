@@ -2,8 +2,27 @@ import CardMenuHome from "../../components/CardMenuHome";
 import Table from "../../components/Table";
 import "./styles.scoped.scss";
 import React from "react";
+import { api } from "../../services/api";
+import { setDoctors } from "../../store/actions/doctor.action";
+import { connect } from "react-redux";
+import { notification } from "../../services/toastify";
+import types from "../../services/types";
 
-function Home() {
+function Home({ populateDoctors }) {
+    React.useEffect(() => {
+        async function loadDoctors() {
+            try {
+                const { data } = await api.get("/user/doctor");
+                populateDoctors(data);
+            } catch (error) {
+                console.log(error);
+                notification(types.ERROR, error.message);
+            }
+        }
+
+        loadDoctors();
+    }, [populateDoctors]);
+
     return (
         <div className="container">
             <section id="cards">
@@ -27,4 +46,16 @@ function Home() {
     );
 }
 
-export default Home;
+const mapDispatchToProps = (dispatch) => {
+    return {
+        populateDoctors(doctors) {
+            const action = setDoctors(doctors);
+            dispatch(action);
+        },
+    };
+};
+
+export default connect(
+    null,
+    mapDispatchToProps
+)(Home);

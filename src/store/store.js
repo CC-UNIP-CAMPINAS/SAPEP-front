@@ -1,9 +1,12 @@
 import { createStore, combineReducers } from "redux";
 import userReducer from "./reducers/user.reducer";
 import groupsReducer from "./reducers/groups.reducer";
+import doctorsReducer from "./reducers/doctor.reducer";
+
 const reducers = combineReducers({
     user: userReducer,
     groups: groupsReducer,
+    doctors: doctorsReducer,
 });
 
 function storeConfig() {
