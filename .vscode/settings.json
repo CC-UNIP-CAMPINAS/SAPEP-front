@@ -5,6 +5,7 @@
         "yup",
         "Redux",
         "Routes",
-        "Modal"
+        "Modal",
+        "Navbar"
     ]
 }

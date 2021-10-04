@@ -7,7 +7,7 @@ import { api } from "../../services/api";
 import { connect } from "react-redux";
 import { clearStore } from "../../store/actions/app.action";
 
-function NavBar({ logoff }) {
+function NavBar({ logoff, user }) {
     async function handleLogoff() {
         await api.get("logoff");
         logoff();
@@ -20,7 +20,7 @@ function NavBar({ logoff }) {
             <section id="menu_drop">
                 <header>
                     <Icon id="icon-user" icon="carbon:user-avatar-filled-alt" />
-                    <div>Leonardo Petta do Nascimento</div>
+                    <div>{user.name}</div>
                     <Icon id="icon-drop" icon="bx:bxs-down-arrow-circle" />
                 </header>
 
@@ -32,6 +32,12 @@ function NavBar({ logoff }) {
     );
 }
 
+const mapStateToProps = (states) => {
+    return {
+        user: states.user,
+    };
+};
+
 const mapDispatchToProps = (dispatch) => {
     return {
         logoff() {
@@ -42,6 +48,6 @@ const mapDispatchToProps = (dispatch) => {
 };
 
 export default connect(
-    null,
+    mapStateToProps,
     mapDispatchToProps
 )(NavBar);
