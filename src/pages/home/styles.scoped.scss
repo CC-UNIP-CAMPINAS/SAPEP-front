@@ -11,7 +11,7 @@
 
         span {
             flex: 1;
-            margin-bottom: 50px;
+            margin-bottom: 30px;
         }
 
         span:not(:last-child) {
@@ -19,9 +19,15 @@
         }
     }
 
+    #buttons {
+        max-width: fit-content;
+        margin-bottom: 30px;
+    }
+
     #table {
-        flex: 1;
-        height: 100vh;
+        display: flex;
+        flex-direction: column;
+        min-height: 70vh;
         border-radius: 1.375rem;
         box-shadow: 0px 24px 32px rgba(0, 0, 0, 0.04), 0px 16px 24px rgba(0, 0, 0, 0.04),
             0px 4px 8px rgba(0, 0, 0, 0.04), 0px 0px 1px rgba(0, 0, 0, 0.04);

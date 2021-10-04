@@ -7,6 +7,7 @@ import { setDoctors } from "../../store/actions/doctor.action";
 import { connect } from "react-redux";
 import { notification } from "../../services/toastify";
 import types from "../../services/types";
+import Button from "../../components/Button/Button";
 
 function Home({ populateDoctors, doctors }) {
     React.useEffect(() => {
@@ -38,6 +39,9 @@ function Home({ populateDoctors, doctors }) {
                 <span>
                     <CardMenuHome title="Pacientes" icon="fluent:doctor-48-filled" quant={100} />
                 </span>
+            </section>
+            <section id="buttons">
+                <Button text="Adicionar médico" color="cyan" />
             </section>
             <section id="table">
                 <Table header={["Id", "Nome", "Email", "CRM", "Área", "Sexo", "Telefone"]} doctors={doctors} />

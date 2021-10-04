@@ -40,3 +40,17 @@
         white-space: nowrap;
     }
 }
+
+div {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    flex: 1;
+
+    color: var(--gray-700);
+
+    h2 {
+        color: var(--gray-300);
+    }
+}
