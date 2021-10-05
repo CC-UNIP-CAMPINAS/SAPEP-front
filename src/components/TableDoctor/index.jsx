@@ -1,16 +1,21 @@
 import React from "react";
 import { Popup } from "reactjs-popup";
-import CardTableRowInformation from "../CardTableRowInformation/index";
+import ModalDoctorInformation from "../ModalDoctorInformation/index";
 import "./styles.scoped.scss";
 
-function Table({ header = [], doctors = [] }) {
+function TableDoctor({ header = [], doctors = [] }) {
     const modalRef = React.useRef();
+    const [activeDoctor, setActiveDoctor] = React.useState(doctors[1]);
     const openModal = () => modalRef.current.open();
     //const closeModal = () => modalRef.current.close();
     //const [selectedRow, setSelectedRow] = React.useState("");
 
-    function handleSelectRow() {
-        openModal();
+    function handleSelectRow(id) {
+        const foundDoctor = doctors.find((doctor) => doctor.userId === id);
+        if (foundDoctor) {
+            setActiveDoctor(foundDoctor);
+            openModal();
+        }
     }
 
     const emptyMessage = (
@@ -24,7 +29,7 @@ function Table({ header = [], doctors = [] }) {
         <>
             <table className="container">
                 <Popup ref={modalRef} modal>
-                    <CardTableRowInformation information={{ name: "Leonardo" }} />
+                    <ModalDoctorInformation doctor={activeDoctor} />
                 </Popup>
                 <thead>
                     <tr>
@@ -36,7 +41,7 @@ function Table({ header = [], doctors = [] }) {
                 <tbody>
                     {doctors.map((doctor, index) => {
                         return (
-                            <tr key={index} onClick={handleSelectRow}>
+                            <tr key={index} onClick={() => handleSelectRow(doctor.userId)}>
                                 <td>{doctor.userId}</td>
                                 <td>{doctor.user.name}</td>
                                 <td>{doctor.user.email}</td>
@@ -54,4 +59,4 @@ function Table({ header = [], doctors = [] }) {
     );
 }
 
-export default Table;
+export default TableDoctor;

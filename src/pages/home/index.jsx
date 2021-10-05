@@ -1,5 +1,5 @@
 import CardMenuHome from "../../components/CardMenuHome";
-import Table from "../../components/Table";
+import TableDoctor from "../../components/TableDoctor";
 import "./styles.scoped.scss";
 import React from "react";
 import { api } from "../../services/api";
@@ -53,7 +53,7 @@ function Home({ populateDoctors, doctors }) {
                 </Popup>
             </section>
             <section id="table">
-                <Table header={["Id", "Nome", "Email", "CRM", "Área", "Sexo", "Telefone"]} doctors={doctors} />
+                <TableDoctor header={["Id", "Nome", "Email", "CRM", "Área", "Sexo", "Telefone"]} doctors={doctors} />
             </section>
         </div>
     );
