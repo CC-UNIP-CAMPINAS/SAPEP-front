@@ -6,8 +6,8 @@ import "./styles.scoped.scss";
 function Table({ header = [], doctors = [] }) {
     const modalRef = React.useRef();
     const openModal = () => modalRef.current.open();
-    const closeModal = () => modalRef.current.close();
-    const [selectedRow, setSelectedRow] = React.useState("");
+    //const closeModal = () => modalRef.current.close();
+    //const [selectedRow, setSelectedRow] = React.useState("");
 
     function handleSelectRow() {
         openModal();

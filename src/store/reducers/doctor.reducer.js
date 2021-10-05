@@ -6,6 +6,8 @@ export default function configsReducer(state = initialState, action) {
     switch (action.type) {
         case types.SET_DOCTORS:
             return action.payload;
+        case types.ADD_DOCTOR:
+            return [...state, action.payload];
         case types.CLEAR:
             return {
                 ...initialState,

@@ -8,8 +8,14 @@ import { connect } from "react-redux";
 import { notification } from "../../services/toastify";
 import types from "../../services/types";
 import Button from "../../components/Button/Button";
+import CardAddDoctor from "../../components/CardAddDoctor";
+import Popup from "reactjs-popup";
 
 function Home({ populateDoctors, doctors }) {
+    const modalRef = React.useRef();
+    const openModal = () => modalRef.current.open();
+    const closeModal = () => modalRef.current.close();
+
     React.useEffect(() => {
         async function loadDoctors() {
             try {
@@ -41,7 +47,10 @@ function Home({ populateDoctors, doctors }) {
                 </span>
             </section>
             <section id="buttons">
-                <Button text="Adicionar médico" color="cyan" />
+                <Button text="Adicionar médico" color="cyan" handle={openModal} />
+                <Popup ref={modalRef} modal>
+                    <CardAddDoctor close={closeModal}/>
+                </Popup>
             </section>
             <section id="table">
                 <Table header={["Id", "Nome", "Email", "CRM", "Área", "Sexo", "Telefone"]} doctors={doctors} />

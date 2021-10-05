@@ -10,6 +10,8 @@
 :root {
     --white: #fff;
 
+    --red: rgb(255, 95, 95);
+
     --gray-100: #f3f3f3;
     --gray-150: #ebe9e9;
     --gray-200: #dbdbdb;
@@ -77,6 +79,26 @@ input {
     padding: 1rem;
     background: var(--white);
     border-radius: 0.5rem;
+
+    color: rgb(47, 47, 47);
+
+    font-size: 1.1rem;
+
+    border: none;
+
+    width: fit-content;
+
+    outline: none;
+
+    &::placeholder {
+        color: rgb(187, 187, 187);
+    }
+}
+
+select {
+    background: var(--white);
+    border-radius: 0.5rem;
+    padding: 0 1rem;
 
     color: rgb(47, 47, 47);
 

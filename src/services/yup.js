@@ -8,10 +8,16 @@ const emailEmpty = "O email não pode ser vazio";
 const nameMatch = "O nome precisa ter no mínimo 3 letras!";
 const nameEmpty = "O nome não pode ser vazio";
 
+const crmMatch = "O CRM precisa ser: XXXXX - UF ";
+const crmEmpty = "O CRM não pode ser vazio";
+
+const areaMatch = "A Área precisa ter no mínimo 3 letras!";
+const areaEmpty = "A Area não pode ser vazia.";
+
 const lastNameEmpty = "O sobrenome não pode ser vazio";
 
-// const phoneEmpty = "O telefone não pode ser vazio";
-// const phoneMatch = "O telefone precisa ter no mínimo 11 caractéres. Ex. DDD + 9 Dígitos.";
+//const phoneEmpty = "O telefone não pode ser vazio";
+const phoneMatch = "O telefone precisa ter no mínimo 11 caractéres. Ex. DDD + 9 Dígitos.";
 
 const cpfEmpty = "O CPF não pode ser vazio";
 const cpfMatch = "O CPF precisa ter no mínimo 11 caractéres. Ex. 000.000.000-00";
@@ -45,40 +51,6 @@ const schemaSign = yup.object().shape({
         }),
 });
 
-// const schemaPassword = yup.object().shape({
-//     password: yup
-//         .string()
-//         .required(passwordEmpty)
-//         .min(8, passwordMatch),
-//     newPassword: yup
-//         .string()
-//         .required(passwordEmpty)
-//         .min(8, passwordMatch)
-//         .test("passwords-match", "A nova senha é igual a anterior.", function(value) {
-//             return this.parent.password !== value;
-//         }),
-//     reNewPassword: yup
-//         .string()
-//         .required(passwordEmpty)
-//         .min(8, passwordMatch)
-//         .test("passwords-match", "As senhas digitadas estão diferentes!", function(value) {
-//             return this.parent.newPassword === value;
-//         }),
-// });
-
-// const schemaComparePassword = yup.object().shape({
-//     password: yup
-//         .string()
-//         .required(passwordEmpty)
-//         .min(8, passwordMatch),
-//     rePassword: yup
-//         .string()
-//         .required(passwordEmpty)
-//         .test("passwords-match", "Senhas diferem!", function(value) {
-//             return this.parent.password === value;
-//         }),
-// });
-
 const schemaLogin = yup.object().shape({
     email: yup
         .string()
@@ -87,21 +59,45 @@ const schemaLogin = yup.object().shape({
     password: yup
         .string()
         .required(passwordEmpty)
-        .min(8, passwordMatch),
+        .min(11, passwordMatch),
 });
 
-// const schemaResetPassword = yup.object().shape({
-//     email: yup
-//         .string()
-//         .email(emailMatch)
-//         .required(emailEmpty),
-// });
+const schemaCreateDoctor = yup.object().shape({
+    email: yup
+        .string()
+        .email(emailMatch)
+        .required(emailEmpty),
+    password: yup
+        .string()
+        .required(passwordEmpty)
+        .min(8, passwordMatch),
+    name: yup
+        .string()
+        .required(nameEmpty)
+        .min(3, nameMatch),
+    crm: yup
+        .string()
+        .required(crmEmpty)
+        .min(6, crmMatch),
+    phone: yup
+        .string()
+        .optional()
+        .min(15, phoneMatch)
+        .max(15, phoneMatch),
+    area: yup
+        .string()
+        .required(areaEmpty)
+        .min(3, areaMatch)
+    
+});
 
 async function validate(schemaName, body) {
     try {
         switch (schemaName) {
             case "login":
                 return await schemaLogin.validate(body);
+            case "create-doctor":
+                return await schemaCreateDoctor.validate(body);
             case "sign":
                 return await schemaSign.validate(body);
             default:
