@@ -59,7 +59,7 @@ const schemaLogin = yup.object().shape({
     password: yup
         .string()
         .required(passwordEmpty)
-        .min(11, passwordMatch),
+        .min(8, passwordMatch),
 });
 
 const schemaCreateDoctor = yup.object().shape({
