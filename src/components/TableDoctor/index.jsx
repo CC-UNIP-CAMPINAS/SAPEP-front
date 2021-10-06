@@ -7,8 +7,7 @@ function TableDoctor({ header = [], doctors = [] }) {
     const modalRef = React.useRef();
     const [activeDoctor, setActiveDoctor] = React.useState(doctors[1]);
     const openModal = () => modalRef.current.open();
-    //const closeModal = () => modalRef.current.close();
-    //const [selectedRow, setSelectedRow] = React.useState("");
+    const closeModal = () => modalRef.current.close();
 
     function handleSelectRow(id) {
         const foundDoctor = doctors.find((doctor) => doctor.userId === id);
@@ -29,7 +28,7 @@ function TableDoctor({ header = [], doctors = [] }) {
         <>
             <table className="container">
                 <Popup ref={modalRef} modal>
-                    <ModalDoctorInformation doctor={activeDoctor} />
+                    <ModalDoctorInformation doctor={activeDoctor} closeModal={closeModal} />
                 </Popup>
                 <thead>
                     <tr>

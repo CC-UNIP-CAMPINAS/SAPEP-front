@@ -2,8 +2,14 @@ import React from "react";
 
 import "./styles.scoped.scss";
 import Button from "../Button/Button/index";
+import { api } from "../../services/api";
+import { notification } from "../../services/toastify";
+import types from "../../services/types";
+import validate from "../../services/yup";
+import { connect } from "react-redux";
+import { updateDoctor } from "../../store/actions/doctor.action";
 
-function ModalDoctorInformation({ doctor }) {
+function ModalDoctorInformation({ doctor, updateDoctor, closeModal }) {
     const [disabled, setDisabled] = React.useState(true);
 
     const initialState = {
@@ -29,6 +35,56 @@ function ModalDoctorInformation({ doctor }) {
         if (element) element.scrollTo({ top: 0, behavior: "smooth" });
 
         disabled ? setDisabled(false) : setDisabled(true);
+    }
+
+    async function handleRemoveDoctor() {
+        try {
+            await api.delete("/user/doctor/" + doctor.userId);
+            notification(types.SUCCESS, "Cadastro desativado.");
+            closeModal();
+        } catch (error) {
+            if (error.response.status === 404) {
+                notification(types.WARNING, error.response.data.message);
+            }
+            if (error.response.status === 500) {
+                notification(types.ERROR, "Algum problema ocorreu, tente novamente.");
+            }
+        }
+    }
+
+    async function handleUpdateDoctor() {
+        try {
+            if (await validate("update-doctor", inputs)) {
+                const body = {
+                    doctorParams: { crm: inputs.crm, area: inputs.area, userId: doctor.userId },
+                    userParams: {
+                        email: inputs.email,
+                        name: inputs.name,
+                        phone: inputs.phone,
+                        gender: inputs.gender,
+                    },
+                };
+
+                const { data } = await api.patch("/user/doctor", body);
+
+                updateDoctor(data.payload.doctor);
+                notification(types.SUCCESS, "Cadastro atualizado.");
+                closeModal();
+            }
+        } catch (error) {
+            if (error.response.status === 401) {
+                notification(types.NOT_AUTHORIZED, error.response.data.message);
+            }
+            if (error.response.status === 409) {
+                notification(types.WARNING, error.response.data.message);
+            }
+            if (error.response.status === 404) {
+                notification(types.WARNING, error.response.data.message);
+            }
+            if (error.response.status === 500) {
+                notification(types.ERROR, "Algum problema ocorreu, tente novamente.");
+            }
+        }
     }
 
     return (
@@ -80,16 +136,38 @@ function ModalDoctorInformation({ doctor }) {
             />
 
             <div>
-                <Button text="Mudar dados" color="cyan" handle={handleEditInputs} />
+                {disabled ? (
+                    <Button text="Liberar atualização" color="cyan" handle={handleEditInputs} />
+                ) : (
+                    <Button text="Atualizar" color="green" handle={handleUpdateDoctor} isLoading={true} />
+                )}
                 <span />
                 {!disabled ? (
                     <Button text="Cancelar" color="red" handle={clear} />
                 ) : (
-                    <Button text="Excluir" color="red" />
+                    <Button text="Excluir" color="red" handle={handleRemoveDoctor} isLoading={true} />
                 )}
             </div>
         </div>
     );
 }
 
-export default ModalDoctorInformation;
+const mapStateToProps = (states) => {
+    return {
+        doctors: states.doctors,
+    };
+};
+
+const mapDispatchToProps = (dispatch) => {
+    return {
+        updateDoctor(doctor) {
+            const action = updateDoctor(doctor);
+            dispatch(action);
+        },
+    };
+};
+
+export default connect(
+    mapStateToProps,
+    mapDispatchToProps
+)(ModalDoctorInformation);
