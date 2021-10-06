@@ -11,6 +11,7 @@
     --white: #fff;
 
     --red: rgb(255, 95, 95);
+    --green: rgb(65, 230, 78);
 
     --gray-100: #f3f3f3;
     --gray-150: #ebe9e9;
@@ -75,6 +76,10 @@ button {
     }
     &.red {
         background: var(--red);
+        color: var(--white);
+    }
+    &.green {
+        background: var(--green);
         color: var(--white);
     }
 }
