@@ -115,7 +115,7 @@ function CardAddDoctor({ addDoctor, close }) {
 
             <div id="button">
                 <span>
-                    <Button text="Criar" color="cyan" handle={handleAddDoctor} isLoading={true} />
+                    <Button text="Criar" color="green" handle={handleAddDoctor} isLoading={true} />
                 </span>
             </div>
         </section>
