@@ -14,6 +14,9 @@ const crmEmpty = "O CRM não pode ser vazio";
 const areaMatch = "A Área precisa ter no mínimo 3 letras!";
 const areaEmpty = "A Area não pode ser vazia.";
 
+const genderMatch = "Escolha um gênero válido.";
+const genderEmpty = "O gênero precisar ser informado.";
+
 const lastNameEmpty = "O sobrenome não pode ser vazio";
 
 //const phoneEmpty = "O telefone não pode ser vazio";
@@ -87,8 +90,35 @@ const schemaCreateDoctor = yup.object().shape({
     area: yup
         .string()
         .required(areaEmpty)
-        .min(3, areaMatch)
-    
+        .min(3, areaMatch),
+});
+
+const schemaUpdateDoctor = yup.object().shape({
+    email: yup
+        .string()
+        .email(emailMatch)
+        .required(emailEmpty),
+    name: yup
+        .string()
+        .required(nameEmpty)
+        .min(3, nameMatch),
+    crm: yup
+        .string()
+        .required(crmEmpty)
+        .min(6, crmMatch),
+    phone: yup
+        .string()
+        .optional()
+        .min(15, phoneMatch)
+        .max(15, phoneMatch),
+    area: yup
+        .string()
+        .required(areaEmpty)
+        .min(3, areaMatch),
+    gender: yup
+        .string()
+        .required(genderEmpty)
+        .matches(/(F|M|INDEFINIDO)/, genderMatch),
 });
 
 async function validate(schemaName, body) {
@@ -98,6 +128,8 @@ async function validate(schemaName, body) {
                 return await schemaLogin.validate(body);
             case "create-doctor":
                 return await schemaCreateDoctor.validate(body);
+            case "update-doctor":
+                return await schemaUpdateDoctor.validate(body);
             case "sign":
                 return await schemaSign.validate(body);
             default:
