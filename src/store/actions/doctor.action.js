@@ -6,9 +6,17 @@ export function setDoctors(doctors) {
         payload: doctors,
     };
 }
+
 export function addDoctor(doctor) {
     return {
         type: types.ADD_DOCTOR,
+        payload: doctor,
+    };
+}
+
+export function updateDoctor(doctor) {
+    return {
+        type: types.UPDATE_DOCTOR,
         payload: doctor,
     };
 }

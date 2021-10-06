@@ -4,6 +4,7 @@ const types = {
 
     SET_DOCTORS: "SET_DOCTORS",
     ADD_DOCTOR: "ADD_DOCTOR",
+    UPDATE_DOCTOR: "UPDATE_DOCTOR",
 
     SET_GROUPS: "SET_GROUPS",
 

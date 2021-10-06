@@ -8,6 +8,11 @@ export default function configsReducer(state = initialState, action) {
             return action.payload;
         case types.ADD_DOCTOR:
             return [...state, action.payload];
+        case types.UPDATE_DOCTOR:
+            const tempDoctors = [...state];
+            const docs = tempDoctors.filter((doctor) => doctor.userId !== action.payload.userId);
+
+            return [...docs, action.payload];
         case types.CLEAR:
             return {
                 ...initialState,
