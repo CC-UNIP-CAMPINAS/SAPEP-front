@@ -40,7 +40,11 @@ function TableDoctor({ header = [], doctors = [] }) {
                 <tbody>
                     {doctors.map((doctor, index) => {
                         return (
-                            <tr key={index} onClick={() => handleSelectRow(doctor.userId)}>
+                            <tr
+                                key={index}
+                                className={doctor.active ? "" : "disable"}
+                                onClick={() => handleSelectRow(doctor.userId)}
+                            >
                                 <td>{doctor.userId}</td>
                                 <td>{doctor.user.name}</td>
                                 <td>{doctor.user.email}</td>

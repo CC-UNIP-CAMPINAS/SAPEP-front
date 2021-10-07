@@ -37,10 +37,18 @@ function ModalDoctorInformation({ doctor, updateDoctor, closeModal }) {
         disabled ? setDisabled(false) : setDisabled(true);
     }
 
-    async function handleRemoveDoctor() {
+    async function handleActivationDoctor() {
         try {
-            await api.delete("/user/doctor/" + doctor.userId);
-            notification(types.SUCCESS, "Cadastro desativado.");
+            if (doctor.active) {
+                await api.patch("/user/doctor/disable/" + doctor.userId);
+                notification(types.SUCCESS, "Cadastro desativado.");
+                updateDoctor({ ...doctor, active: false });
+            } else {
+                await api.patch("/user/doctor/enable/" + doctor.userId);
+                notification(types.SUCCESS, "Cadastro ativado.");
+                updateDoctor({ ...doctor, active: true });
+            }
+
             closeModal();
         } catch (error) {
             if (error.response.status === 404) {
@@ -144,8 +152,10 @@ function ModalDoctorInformation({ doctor, updateDoctor, closeModal }) {
                 <span />
                 {!disabled ? (
                     <Button text="Cancelar" color="red" handle={clear} />
+                ) : doctor.active ? (
+                    <Button text="Desativar" color="red" handle={handleActivationDoctor} isLoading={true} />
                 ) : (
-                    <Button text="Excluir" color="red" handle={handleRemoveDoctor} isLoading={true} />
+                    <Button text="Restaurar" color="green" handle={handleActivationDoctor} isLoading={true} />
                 )}
             </div>
         </div>

@@ -32,6 +32,10 @@
             background: var(--gray-150);
             cursor: pointer;
         }
+
+        tr.disable {
+            filter: opacity(0.5);
+        }
     }
 
     @media (max-width: 1200px) {
