@@ -20,8 +20,25 @@
     }
 
     #buttons {
-        max-width: fit-content;
         margin-bottom: 30px;
+        display: flex;
+        align-items: flex-end;
+        div {
+            flex: 1;
+        }
+
+        p {
+            margin-right: 15px;
+        }
+        p {
+            color: var(--gray-700);
+            font-size: 1.1rem;
+        }
+
+        input[type="checkbox"] {
+            width: 20px;
+            height: 20px;
+        }
     }
 
     #table {

@@ -12,6 +12,7 @@ import CardAddDoctor from "../../components/CardAddDoctor";
 import Popup from "reactjs-popup";
 
 function Home({ populateDoctors, doctors }) {
+    const [isCheck, setIsCheck] = React.useState(true);
     const modalRef = React.useRef();
     const openModal = () => modalRef.current.open();
     const closeModal = () => modalRef.current.close();
@@ -26,9 +27,16 @@ function Home({ populateDoctors, doctors }) {
                 notification(types.ERROR, error.message);
             }
         }
-
         loadDoctors();
     }, [populateDoctors]);
+
+    function handleShowDoctor() {
+        if (!isCheck) {
+            return doctors;
+        } else {
+            return doctors.filter((doctor) => doctor.active);
+        }
+    }
 
     return (
         <div className="container">
@@ -47,13 +55,18 @@ function Home({ populateDoctors, doctors }) {
                 </span>
             </section>
             <section id="buttons">
-                <Button text="Adicionar médico" color="cyan" handle={openModal} />
+                <span>
+                    <Button text="Adicionar médico" color="cyan" handle={openModal} />
+                </span>
+                <div />
+                <p>Somente médicos ativos</p>
+                <input type="checkbox" checked={isCheck} onChange={() => setIsCheck(!isCheck)} />
                 <Popup ref={modalRef} modal>
-                    <CardAddDoctor close={closeModal}/>
+                    <CardAddDoctor close={closeModal} />
                 </Popup>
             </section>
             <section id="table">
-                <TableDoctor header={["Id", "Nome", "Email", "CRM", "Área", "Sexo", "Telefone"]} doctors={doctors} />
+                <TableDoctor header={["Id", "Nome", "Email", "CRM", "Área", "Sexo", "Telefone"]} doctors={handleShowDoctor()} />
             </section>
         </div>
     );
