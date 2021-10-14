@@ -1,6 +1,7 @@
 import React from "react";
 import { connect } from "react-redux";
 import CardMenuHome from "../../components/CardMenuHome";
+import TableDoctor from "../../components/TableDoctor";
 import TableNurse from "../../components/TableNurse";
 import { api } from "../../services/api";
 import { notification } from "../../services/toastify";
@@ -70,7 +71,7 @@ function Home({ populateDoctors, doctors, populateNurses, nurses }) {
                 return <TableNurse />;
             default:
                 //DOCTOR
-                return;
+                return <TableDoctor />;
         }
     }
 

@@ -13,6 +13,7 @@
         "Component: TableNurse",
         "Component: CardMenuHome",
         "Component: ModalNurseInformation",
-        "component: CardAddNurse"
+        "component: CardAddNurse",
+        "Component: TableDoctor"
     ]
 }

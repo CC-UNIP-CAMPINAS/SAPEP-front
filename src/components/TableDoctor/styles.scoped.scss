@@ -1,40 +1,94 @@
 .container {
-    width: 100%;
-    text-align: left;
-    border-collapse: collapse;
-    border-radius: 1em 1rem 0 0;
-    overflow: hidden;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
 
-    thead {
-        color: var(--white);
-        background: var(--gray-700);
-        font-size: 1.2rem;
-        padding: 10px;
-
-        th {
-            padding: 15px 0 15px 30px;
+    #buttons {
+        margin-bottom: 30px;
+        display: flex;
+        align-items: flex-end;
+        div {
+            flex: 1;
         }
 
-        th:last-child {
-            padding: 15px 30px;
+        p {
+            margin-right: 15px;
+        }
+        p {
+            color: var(--gray-700);
+            font-size: 1.1rem;
+        }
+
+        input[type="checkbox"] {
+            width: 20px;
+            height: 20px;
         }
     }
-    tbody {
-        line-break: auto;
-        color: var(--gray-700);
-        height: 100%;
 
-        td {
-            padding: 15px 30px;
+    #table {
+        flex: 1;
+        display: flex;
+        flex-direction: column;
+        box-shadow: 0px 24px 32px rgba(0, 0, 0, 0.04), 0px 16px 24px rgba(0, 0, 0, 0.04),
+            0px 4px 8px rgba(0, 0, 0, 0.04), 0px 0px 1px rgba(0, 0, 0, 0.04);
+
+        div {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            flex: 1;
+
+            color: var(--gray-700);
+
+            h1 {
+                font-size: 1.8rem;
+            }
+
+            h2 {
+                color: var(--gray-300);
+            }
         }
+    }
 
-        tr:hover {
-            background: var(--gray-150);
-            cursor: pointer;
+    table {
+        width: 100%;
+        text-align: left;
+        border-collapse: collapse;
+        border-radius: 1em 1rem 0 0;
+        overflow: hidden;
+
+        thead {
+            color: var(--white);
+            background: var(--gray-700);
+            font-size: 1.2rem;
+            padding: 10px;
+
+            th {
+                padding: 15px 0 15px 30px;
+            }
+
+            th:last-child {
+                padding: 15px 30px;
+            }
         }
+        tbody {
+            line-break: auto;
+            color: var(--gray-700);
+            height: 100%;
 
-        tr.disable {
-            filter: opacity(0.5);
+            td {
+                padding: 15px 30px;
+            }
+
+            tr:hover {
+                background: var(--gray-150);
+                cursor: pointer;
+            }
+
+            tr.disable {
+                filter: opacity(0.5);
+            }
         }
     }
 
@@ -42,19 +96,5 @@
         display: block;
         overflow-x: auto;
         white-space: nowrap;
-    }
-}
-
-div {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    flex: 1;
-
-    color: var(--gray-700);
-
-    h2 {
-        color: var(--gray-300);
     }
 }

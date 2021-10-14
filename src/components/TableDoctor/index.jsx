@@ -1,19 +1,36 @@
 import React from "react";
+import { connect } from "react-redux";
 import { Popup } from "reactjs-popup";
-import ModalDoctorInformation from "../ModalDoctorInformation/index";
+import CardAddDoctor from "../CardAddDoctor";
+import Button from "../Button/Button";
+import ModalDoctorInformation from "../ModalDoctorInformation";
 import "./styles.scoped.scss";
 
-function TableDoctor({ header = [], doctors = [] }) {
-    const modalRef = React.useRef();
-    const [activeDoctor, setActiveDoctor] = React.useState(doctors[1]);
-    const openModal = () => modalRef.current.open();
-    const closeModal = () => modalRef.current.close();
+function TableDoctor({ header = ["Id", "Nome", "Email", "CRM", "Área", "Sexo", "Telefone"], doctors = [] }) {
+    const [isCheck, setIsCheck] = React.useState(true);
+    const modalAddRef = React.useRef();
+    const openAddModal = () => modalAddRef.current.open();
+    const closeAddModal = () => modalAddRef.current.close();
+
+    const modalInformationRef = React.useRef();
+    const openInformationModal = () => modalInformationRef.current.open();
+    const closeInformationModal = () => modalInformationRef.current.close();
+
+    const [activeDoctor, setActiveDoctor] = React.useState(doctors[0]);
 
     function handleSelectRow(id) {
         const foundDoctor = doctors.find((doctor) => doctor.userId === id);
         if (foundDoctor) {
             setActiveDoctor(foundDoctor);
-            openModal();
+            openInformationModal();
+        }
+    }
+
+    function handleShowDoctor() {
+        if (!isCheck) {
+            return doctors;
+        } else {
+            return doctors.filter((doctor) => doctor.active);
         }
     }
 
@@ -25,41 +42,63 @@ function TableDoctor({ header = [], doctors = [] }) {
     );
 
     return (
-        <>
-            <table className="container">
-                <Popup ref={modalRef} modal>
-                    <ModalDoctorInformation doctor={activeDoctor} closeModal={closeModal} />
+        <section className="container">
+            <section id="buttons">
+                <span>
+                    <Button text="Adicionar Médico" color="cyan" handle={openAddModal} />
+                </span>
+                <div />
+                <p>Somente médicos ativos</p>
+                <input type="checkbox" checked={isCheck} onChange={() => setIsCheck(!isCheck)} />
+                <Popup ref={modalAddRef} modal>
+                    <CardAddDoctor close={closeAddModal} />
                 </Popup>
-                <thead>
-                    <tr>
-                        {header.map((row, index) => {
-                            return <th key={index}>{row}</th>;
+            </section>
+            <section id="table">
+                <table>
+                    <Popup ref={modalInformationRef} modal>
+                        <ModalDoctorInformation doctor={activeDoctor} closeModal={closeInformationModal} />
+                    </Popup>
+                    <thead>
+                        <tr>
+                            {header.map((row, index) => {
+                                return <th key={index}>{row}</th>;
+                            })}
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {handleShowDoctor().map((doctor, index) => {
+                            return (
+                                <tr
+                                    key={index}
+                                    className={doctor.active ? "" : "disable"}
+                                    onClick={() => handleSelectRow(doctor.userId)}
+                                >
+                                    <td>{doctor.userId}</td>
+                                    <td>{doctor.user.name}</td>
+                                    <td>{doctor.user.email}</td>
+                                    <td>{doctor.crm}</td>
+                                    <td>{doctor.area}</td>
+                                    <td>{doctor.user.gender}</td>
+                                    <td>{doctor.user.phone}</td>
+                                </tr>
+                            );
                         })}
-                    </tr>
-                </thead>
-                <tbody>
-                    {doctors.map((doctor, index) => {
-                        return (
-                            <tr
-                                key={index}
-                                className={doctor.active ? "" : "disable"}
-                                onClick={() => handleSelectRow(doctor.userId)}
-                            >
-                                <td>{doctor.userId}</td>
-                                <td>{doctor.user.name}</td>
-                                <td>{doctor.user.email}</td>
-                                <td>{doctor.crm}</td>
-                                <td>{doctor.area}</td>
-                                <td>{doctor.user.gender}</td>
-                                <td>{doctor.user.phone}</td>
-                            </tr>
-                        );
-                    })}
-                </tbody>
-            </table>
-            {doctors.length > 0 ? "" : emptyMessage}
-        </>
+                    </tbody>
+                </table>
+                {handleShowDoctor().length > 0 ? "" : emptyMessage}
+            </section>
+        </section>
     );
 }
 
-export default TableDoctor;
+const mapStateToProps = (states) => {
+    return {
+        doctors: states.doctors,
+    };
+};
+
+export default connect(
+    mapStateToProps,
+    null
+)(TableDoctor);
