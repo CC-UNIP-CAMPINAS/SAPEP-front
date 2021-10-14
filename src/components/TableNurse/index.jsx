@@ -1,10 +1,10 @@
 import React from "react";
+import { connect } from "react-redux";
 import { Popup } from "reactjs-popup";
 import Button from "../Button/Button";
-import CardAddDoctor from "../CardAddDoctor";
+import CardAddNurse from "../CardAddNurse";
 import ModalNurseInformation from "../ModalNurseInformation";
 import "./styles.scoped.scss";
-import { connect } from "react-redux";
 
 function TableNurse({ header = ["Id", "Nome", "Email", "COREN", "Sexo", "Telefone"], nurses = [] }) {
     const [isCheck, setIsCheck] = React.useState(true);
@@ -26,7 +26,7 @@ function TableNurse({ header = ["Id", "Nome", "Email", "COREN", "Sexo", "Telefon
         }
     }
 
-    function handleShowDoctor() {
+    function handleShowNurse() {
         if (!isCheck) {
             return nurses;
         } else {
@@ -51,7 +51,7 @@ function TableNurse({ header = ["Id", "Nome", "Email", "COREN", "Sexo", "Telefon
                 <p>Somente enfermeiros ativos</p>
                 <input type="checkbox" checked={isCheck} onChange={() => setIsCheck(!isCheck)} />
                 <Popup ref={modalAddRef} modal>
-                    <CardAddDoctor close={closeAddModal} />
+                    <CardAddNurse close={closeAddModal} />
                 </Popup>
             </section>
             <section id="table">
@@ -67,7 +67,7 @@ function TableNurse({ header = ["Id", "Nome", "Email", "COREN", "Sexo", "Telefon
                         </tr>
                     </thead>
                     <tbody>
-                        {handleShowDoctor().map((nurse, index) => {
+                        {handleShowNurse().map((nurse, index) => {
                             return (
                                 <tr
                                     key={index}
@@ -85,7 +85,7 @@ function TableNurse({ header = ["Id", "Nome", "Email", "COREN", "Sexo", "Telefon
                         })}
                     </tbody>
                 </table>
-                {handleShowDoctor().length > 0 ? "" : emptyMessage}
+                {handleShowNurse().length > 0 ? "" : emptyMessage}
             </section>
         </section>
     );

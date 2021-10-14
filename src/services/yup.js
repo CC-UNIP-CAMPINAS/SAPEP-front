@@ -96,6 +96,30 @@ const schemaCreateDoctor = yup.object().shape({
         .min(3, areaMatch),
 });
 
+const schemaCreateNurse = yup.object().shape({
+    email: yup
+        .string()
+        .email(emailMatch)
+        .required(emailEmpty),
+    password: yup
+        .string()
+        .required(passwordEmpty)
+        .min(8, passwordMatch),
+    name: yup
+        .string()
+        .required(nameEmpty)
+        .min(3, nameMatch),
+    coren: yup
+        .string()
+        .required(corenEmpty)
+        .min(6, corenMatch),
+    phone: yup
+        .string()
+        .optional()
+        .min(15, phoneMatch)
+        .max(15, phoneMatch),
+});
+
 const schemaUpdateDoctor = yup.object().shape({
     email: yup
         .string()
@@ -155,6 +179,8 @@ async function validate(schemaName, body) {
                 return await schemaLogin.validate(body);
             case "create-doctor":
                 return await schemaCreateDoctor.validate(body);
+            case "create-nurse":
+                return await schemaCreateNurse.validate(body);
             case "update-doctor":
                 return await schemaUpdateDoctor.validate(body);
             case "update-nurse":
