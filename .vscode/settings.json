@@ -11,6 +11,7 @@
         "Global",
         "Page: Home",
         "Component: TableNurse",
-        "Component: CardMenuHome"
+        "Component: CardMenuHome",
+        "Component: ModalNurseInformation"
     ]
 }
