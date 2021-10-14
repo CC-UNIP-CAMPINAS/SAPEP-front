@@ -1,12 +1,13 @@
 import React from "react";
-import "./styles.scoped.scss";
-import Button from "../Button/Button/index";
+import { connect } from "react-redux";
 import { api } from "../../services/api";
 import { notification } from "../../services/toastify";
 import types from "../../services/types";
 import validate from "../../services/yup";
-import { connect } from "react-redux";
-import { updateDoctor } from "../../store/actions/doctor.action";
+import { updateNurse } from "../../store/actions/nurse.action";
+import Button from "../Button/Button/index";
+import "./styles.scoped.scss";
+import { phoneMask } from "../../helpers/masks";
 
 function ModalNurseInformation({ nurse, updateNurse, closeModal }) {
     const [disabled, setDisabled] = React.useState(true);
@@ -62,7 +63,7 @@ function ModalNurseInformation({ nurse, updateNurse, closeModal }) {
         try {
             if (await validate("update-nurse", inputs)) {
                 const body = {
-                    doctorParams: { crm: inputs.crm, area: inputs.area, userId: nurse.userId },
+                    nurseParams: { coren: inputs.coren, userId: nurse.userId },
                     userParams: {
                         email: inputs.email,
                         name: inputs.name,
@@ -132,7 +133,7 @@ function ModalNurseInformation({ nurse, updateNurse, closeModal }) {
             <input
                 value={inputs.phone}
                 disabled={disabled}
-                onChange={(e) => setInputs({ ...inputs, phone: e.target.value })}
+                onChange={(e) => setInputs({ ...inputs, phone: phoneMask(e.target.value) })}
             />
 
             <div>
@@ -163,7 +164,7 @@ const mapStateToProps = (states) => {
 const mapDispatchToProps = (dispatch) => {
     return {
         updateNurse(nurse) {
-            const action = updateDoctor(nurse);
+            const action = updateNurse(nurse);
             dispatch(action);
         },
     };
