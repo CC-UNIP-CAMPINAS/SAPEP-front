@@ -9,6 +9,8 @@
         "Navbar",
         "Doctor",
         "Global",
-        "Page: Home"
+        "Page: Home",
+        "Component: TableNurse",
+        "Component: CardMenuHome"
     ]
 }

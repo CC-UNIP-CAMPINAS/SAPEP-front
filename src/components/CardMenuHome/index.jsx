@@ -10,7 +10,7 @@ function CardMenuHome({ title, icon, quant, active }) {
             <h1>
                 <Icon icon={icon} inline={true} /> {title}
             </h1>
-            <h2>{quant} Ativos</h2>
+            <h2>{quant} Registro(s)</h2>
             <Button text="Gerenciar" color="cyan" />
         </div>
     );
