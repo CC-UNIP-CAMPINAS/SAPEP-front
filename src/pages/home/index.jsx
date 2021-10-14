@@ -10,6 +10,35 @@ import { setNurses } from "../../store/actions/nurse.action";
 import "./styles.scoped.scss";
 
 function Home({ populateDoctors, doctors, populateNurses, nurses }) {
+    const [selectedTable, setSelectedTable] = React.useState("DOCTOR");
+    const [activeMenu, setActiveMenu] = React.useState({
+        doctor: false,
+        nurse: false,
+        adm: false,
+        patient: false,
+    });
+
+    React.useEffect(() => {
+        const defaultState = {
+            doctor: false,
+            nurse: false,
+            adm: false,
+            patient: false,
+        };
+
+        switch (selectedTable) {
+            case "NURSE":
+                return setActiveMenu({ ...defaultState, nurse: true });
+            case "ADM":
+                return setActiveMenu({ ...defaultState, adm: true });
+            case "PATIENT":
+                return setActiveMenu({ ...defaultState, patient: true });
+            default:
+                //DOCTOR
+                return setActiveMenu({ ...defaultState, doctor: true });
+        }
+    }, [selectedTable]);
+
     React.useEffect(() => {
         async function loadDoctors() {
             try {
@@ -30,30 +59,62 @@ function Home({ populateDoctors, doctors, populateNurses, nurses }) {
                 notification(types.ERROR, error.message);
             }
         }
-        
+
         loadDoctors();
         loadNurses();
     }, [populateDoctors, populateNurses]);
+
+    function switchTable() {
+        switch (selectedTable) {
+            case "NURSE":
+                return <TableNurse />;
+            default:
+                //DOCTOR
+                return;
+        }
+    }
 
     return (
         <div className="container">
             <section id="cards">
                 <span>
-                    <CardMenuHome title="Médicos" icon="vaadin:doctor" quant={doctors.length} active />
+                    <CardMenuHome
+                        title="Médicos"
+                        icon="vaadin:doctor"
+                        quant={doctors.length}
+                        handle={() => setSelectedTable("DOCTOR")}
+                        active={activeMenu.doctor}
+                    />
                 </span>
                 <span>
-                    <CardMenuHome title="Enfermeiros" icon="wpf:medical-doctor" quant={nurses.length} />
+                    <CardMenuHome
+                        title="Enfermeiros"
+                        icon="wpf:medical-doctor"
+                        quant={nurses.length}
+                        handle={() => setSelectedTable("NURSE")}
+                        active={activeMenu.nurse}
+                    />
                 </span>
                 <span>
-                    <CardMenuHome title="Administração" icon="wpf:administrator" quant={100} />
+                    <CardMenuHome
+                        title="Administração"
+                        icon="wpf:administrator"
+                        quant={100}
+                        handle={() => setSelectedTable("ADM")}
+                        active={activeMenu.adm}
+                    />
                 </span>
                 <span>
-                    <CardMenuHome title="Pacientes" icon="fluent:doctor-48-filled" quant={100} />
+                    <CardMenuHome
+                        title="Pacientes"
+                        icon="fluent:doctor-48-filled"
+                        quant={100}
+                        handle={() => setSelectedTable("PATIENT")}
+                        active={activeMenu.patient}
+                    />
                 </span>
             </section>
-            <section id="table">
-                <TableNurse />
-            </section>
+            <section id="table">{switchTable()}</section>
         </div>
     );
 }
