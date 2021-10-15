@@ -5,6 +5,15 @@
         "yup",
         "Redux",
         "Routes",
-        "Modal"
+        "Modal",
+        "Navbar",
+        "Doctor",
+        "Global",
+        "Page: Home",
+        "Component: TableNurse",
+        "Component: CardMenuHome",
+        "Component: ModalNurseInformation",
+        "component: CardAddNurse",
+        "Component: TableDoctor"
     ]
 }
