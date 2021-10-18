@@ -10,7 +10,7 @@ const reducers = combineReducers({
     groups: groupsReducer,
     doctors: doctorsReducer,
     nurses: nursesReducer,
-    adm: admsReducer,
+    adms: admsReducer,
 });
 
 function storeConfig() {
