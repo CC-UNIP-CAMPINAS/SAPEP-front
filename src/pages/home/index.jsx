@@ -1,6 +1,7 @@
 import React from "react";
 import { connect } from "react-redux";
 import CardMenuHome from "../../components/CardMenuHome";
+import TableAdm from "../../components/TableAdm";
 import TableDoctor from "../../components/TableDoctor";
 import TableNurse from "../../components/TableNurse";
 import { api } from "../../services/api";
@@ -10,7 +11,7 @@ import { setDoctors } from "../../store/actions/doctor.action";
 import { setNurses } from "../../store/actions/nurse.action";
 import "./styles.scoped.scss";
 
-function Home({ populateDoctors, doctors, populateNurses, nurses }) {
+function Home({ populateDoctors, doctors, populateNurses, nurses, adms }) {
     const [selectedTable, setSelectedTable] = React.useState("DOCTOR");
     const [activeMenu, setActiveMenu] = React.useState({
         doctor: false,
@@ -69,6 +70,8 @@ function Home({ populateDoctors, doctors, populateNurses, nurses }) {
         switch (selectedTable) {
             case "NURSE":
                 return <TableNurse />;
+            case "ADM":
+                return <TableAdm />;
             default:
                 //DOCTOR
                 return <TableDoctor />;
@@ -100,7 +103,7 @@ function Home({ populateDoctors, doctors, populateNurses, nurses }) {
                     <CardMenuHome
                         title="Administração"
                         icon="wpf:administrator"
-                        quant={100}
+                        quant={adms.length}
                         handle={() => setSelectedTable("ADM")}
                         active={activeMenu.adm}
                     />
@@ -137,6 +140,7 @@ const mapStateToProps = (states) => {
     return {
         doctors: states.doctors,
         nurses: states.nurses,
+        adms: states.adms,
     };
 };
 

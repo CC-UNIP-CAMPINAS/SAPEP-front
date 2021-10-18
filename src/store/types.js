@@ -10,6 +10,10 @@ const types = {
     ADD_NURSE: "ADD_NURSE",
     UPDATE_NURSE: "UPDATE_NURSE",
 
+    SET_ADM: "SET_ADM",
+    ADD_ADM: "ADD_ADM",
+    UPDATE_ADM: "UPDATE_ADM",
+
     SET_GROUPS: "SET_GROUPS",
 
     CLEAR: "CLEAR",

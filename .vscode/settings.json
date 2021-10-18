@@ -14,6 +14,9 @@
         "Component: CardMenuHome",
         "Component: ModalNurseInformation",
         "component: CardAddNurse",
-        "Component: TableDoctor"
+        "Component: TableDoctor",
+        "Component: CardAddAdm",
+        "Component: ModalAdmInformation",
+        "Component: TableAdm"
     ]
 }

@@ -3,12 +3,14 @@ import userReducer from "./reducers/user.reducer";
 import groupsReducer from "./reducers/groups.reducer";
 import doctorsReducer from "./reducers/doctor.reducer";
 import nursesReducer from "./reducers/nurse.reducer";
+import admsReducer from "./reducers/adm.reducer";
 
 const reducers = combineReducers({
     user: userReducer,
     groups: groupsReducer,
     doctors: doctorsReducer,
     nurses: nursesReducer,
+    adms: admsReducer,
 });
 
 function storeConfig() {
