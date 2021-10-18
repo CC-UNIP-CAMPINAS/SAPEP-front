@@ -13,9 +13,7 @@ export default function configsReducer(state = initialState, action) {
             const docs = tempNurses.filter((nurse) => nurse.userId !== action.payload.userId);
             return [...docs, action.payload];
         case types.CLEAR:
-            return {
-                ...initialState,
-            };
+            return initialState;
         default:
             return state;
     }

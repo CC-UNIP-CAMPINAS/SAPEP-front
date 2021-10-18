@@ -14,9 +14,7 @@ export default function configsReducer(state = initialState, action) {
 
             return [...docs, action.payload];
         case types.CLEAR:
-            return {
-                ...initialState,
-            };
+            return initialState;
         default:
             return state;
     }
