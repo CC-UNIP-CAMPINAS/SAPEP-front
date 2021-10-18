@@ -20,6 +20,8 @@ function Home({ populateDoctors, doctors, populateNurses, nurses, adms }) {
         patient: false,
     });
 
+    React.useEffect(() => (document.title = "SAPEP - Home"), []);
+
     React.useEffect(() => {
         const defaultState = {
             doctor: false,
