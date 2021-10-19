@@ -4,6 +4,7 @@ import groupsReducer from "./reducers/groups.reducer";
 import doctorsReducer from "./reducers/doctor.reducer";
 import nursesReducer from "./reducers/nurse.reducer";
 import admsReducer from "./reducers/adm.reducer";
+import patientsReducer from "./reducers/patients.reducer";
 
 const reducers = combineReducers({
     user: userReducer,
@@ -11,6 +12,7 @@ const reducers = combineReducers({
     doctors: doctorsReducer,
     nurses: nursesReducer,
     adms: admsReducer,
+    patients: patientsReducer,
 });
 
 function storeConfig() {
