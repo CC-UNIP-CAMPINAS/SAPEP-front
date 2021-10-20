@@ -17,6 +17,7 @@
         "Component: TableDoctor",
         "Component: CardAddAdm",
         "Component: ModalAdmInformation",
-        "Component: TableAdm"
+        "Component: TableAdm",
+        "Mascara"
     ]
 }
