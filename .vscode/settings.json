@@ -20,6 +20,7 @@
         "Component: TableAdm",
         "Mascara",
         "Component: CardAddPatient",
-        "Component: ModalPatientInformation"
+        "Component: ModalPatientInformation",
+        "Component: TablePatient"
     ]
 }

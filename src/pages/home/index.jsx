@@ -4,6 +4,7 @@ import CardMenuHome from "../../components/CardMenuHome";
 import TableAdm from "../../components/TableAdm";
 import TableDoctor from "../../components/TableDoctor";
 import TableNurse from "../../components/TableNurse";
+import TablePatient from "../../components/TablePatient";
 import { api } from "../../services/api";
 import { notification } from "../../services/toastify";
 import types from "../../services/types";
@@ -11,7 +12,7 @@ import { setDoctors } from "../../store/actions/doctor.action";
 import { setNurses } from "../../store/actions/nurse.action";
 import "./styles.scoped.scss";
 
-function Home({ populateDoctors, doctors, populateNurses, nurses, adms }) {
+function Home({ populateDoctors, doctors, populateNurses, nurses, adms, patients }) {
     const [selectedTable, setSelectedTable] = React.useState("DOCTOR");
     const [activeMenu, setActiveMenu] = React.useState({
         doctor: false,
@@ -74,6 +75,8 @@ function Home({ populateDoctors, doctors, populateNurses, nurses, adms }) {
                 return <TableNurse />;
             case "ADM":
                 return <TableAdm />;
+            case "PATIENT":
+                return <TablePatient />;
             default:
                 //DOCTOR
                 return <TableDoctor />;
@@ -114,7 +117,7 @@ function Home({ populateDoctors, doctors, populateNurses, nurses, adms }) {
                     <CardMenuHome
                         title="Pacientes"
                         icon="fluent:doctor-48-filled"
-                        quant={100}
+                        quant={patients.length}
                         handle={() => setSelectedTable("PATIENT")}
                         active={activeMenu.patient}
                     />
@@ -143,6 +146,7 @@ const mapStateToProps = (states) => {
         doctors: states.doctors,
         nurses: states.nurses,
         adms: states.adms,
+        patients: states.patients,
     };
 };
 
