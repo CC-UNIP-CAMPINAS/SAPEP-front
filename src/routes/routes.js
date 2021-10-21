@@ -1,7 +1,7 @@
 import { connect } from "react-redux";
 import { BrowserRouter, Redirect, Route, Switch } from "react-router-dom";
-import Login from "../pages/Login";
 import App from "../pages/App";
+import Login from "../pages/Login";
 
 const AppRoutes = ({ user }) => {
     function routesAuth() {

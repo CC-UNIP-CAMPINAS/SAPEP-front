@@ -1,18 +1,26 @@
 import React from "react";
+import { connect } from "react-redux";
+import { Redirect, Route, Switch } from "react-router-dom";
 import NavBar from "../../components/NavBar";
-
-import "./styles.scoped.scss";
-import { Switch } from "react-router-dom";
-import { Route } from "react-router-dom";
+import Adm from "../Adm";
 import Home from "../home/index";
-import { Redirect } from "react-router-dom";
+import "./styles.scoped.scss";
 
-function App() {
+function App({ user }) {
+    function handleRoutes() {
+        switch (user.groupId) {
+            case 3:
+                return [<Route key="/" component={Adm} />];
+            default:
+                return [<Route key="/" component={Home} />];
+        }
+    }
+
     return (
         <div className="container">
             <NavBar />
             <Switch>
-                <Route exact path="/" component={Home} />
+                {handleRoutes()}
                 <Route path="*">
                     <Redirect to="/login" />
                 </Route>
@@ -21,4 +29,13 @@ function App() {
     );
 }
 
-export default App;
+const mapStateToProps = (states) => {
+    return {
+        user: states.user,
+    };
+};
+
+export default connect(
+    mapStateToProps,
+    null
+)(App);
