@@ -23,6 +23,7 @@
         "Component: ModalPatientInformation",
         "Component: TablePatient",
         "Page: Adm",
-        "Page: App"
+        "Page: App",
+        "Component: CardDoctorInformation"
     ]
 }
