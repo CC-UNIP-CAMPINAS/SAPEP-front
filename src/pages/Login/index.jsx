@@ -1,16 +1,15 @@
-import "./styles.scoped.scss";
-import CardLogin from "../../components/CardLogin/index";
 import { useEffect, useState } from "react";
+import { connect } from "react-redux";
+import { Redirect } from "react-router-dom";
+import CardLogin from "../../components/CardLogin/index";
 import { api } from "../../services/api";
-import yup from "../../services/yup";
 import { notification } from "../../services/toastify";
 import types from "../../services/types";
-import { connect } from "react-redux";
+import yup from "../../services/yup";
 import { setUser } from "../../store/actions/user.action";
-import { Redirect } from "react-router-dom";
-import { setGroups } from "../../store/actions/groups.action";
+import "./styles.scoped.scss";
 
-function Login({ setUser, setGroups }) {
+function Login({ setUser }) {
     const [inputs, setInputs] = useState({
         password: "",
         user: "",
@@ -21,9 +20,6 @@ function Login({ setUser, setGroups }) {
     useEffect(() => {
         const loginJwt = async () => {
             try {
-                const resp = await api.get("/group");
-                setGroups(resp.data);
-
                 const { data } = await api.post("/login-jwt");
                 setUser({ ...data.payload.user, auth: true });
                 notification(types.SUCCESS, data.message);
@@ -33,7 +29,7 @@ function Login({ setUser, setGroups }) {
             }
         };
         loginJwt();
-    }, [setUser, setGroups]);
+    }, [setUser]);
 
     async function handleLogin() {
         try {
@@ -71,10 +67,6 @@ const mapDispatchToProps = (dispatch) => {
     return {
         setUser(user) {
             const action = setUser(user);
-            dispatch(action);
-        },
-        setGroups(groups) {
-            const action = setGroups(groups);
             dispatch(action);
         },
     };
