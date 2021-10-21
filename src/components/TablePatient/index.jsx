@@ -11,6 +11,7 @@ import "./styles.scoped.scss";
 function TablePatient({
     header = ["Id", "Nome", "Endereço", "Data Nasc.", "Telefone", "Convênio", "CPF", "RG", "Sexo"],
     patients = [],
+    user,
 }) {
     dayjs.extend(utc);
 
@@ -41,15 +42,20 @@ function TablePatient({
 
     return (
         <section className="container">
-            <section id="buttons">
-                <span>
-                    <Button text="Adicionar Paciente" color="cyan" handle={openAddModal} />
-                </span>
-                <div />
-                <Popup ref={modalAddRef} modal>
-                    <CardAddPatient close={closeAddModal} />
-                </Popup>
-            </section>
+            {user.groupId === 5 ? (
+                <section id="buttons">
+                    <span>
+                        <Button text="Adicionar Paciente" color="cyan" handle={openAddModal} />
+                    </span>
+                    <div />
+                    <Popup ref={modalAddRef} modal>
+                        <CardAddPatient close={closeAddModal} />
+                    </Popup>
+                </section>
+            ) : (
+                <h1>Pacientes</h1>
+            )}
+
             <section id="table">
                 <table>
                     <Popup ref={modalInformationRef} modal>
@@ -91,6 +97,7 @@ function TablePatient({
 const mapStateToProps = (states) => {
     return {
         patients: states.patients,
+        user: states.user,
     };
 };
 
