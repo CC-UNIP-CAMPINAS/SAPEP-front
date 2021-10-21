@@ -166,10 +166,6 @@ const schemaUpdateAdm = yup.object().shape({
         .string()
         .email(emailMatch)
         .required(emailEmpty),
-    password: yup
-        .string()
-        .required(passwordEmpty)
-        .min(8, passwordMatch),
     name: yup
         .string()
         .required(nameEmpty)
