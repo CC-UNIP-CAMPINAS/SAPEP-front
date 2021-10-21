@@ -21,6 +21,7 @@
         "Mascara",
         "Component: CardAddPatient",
         "Component: ModalPatientInformation",
-        "Component: TablePatient"
+        "Component: TablePatient",
+        "Page: Adm"
     ]
 }
