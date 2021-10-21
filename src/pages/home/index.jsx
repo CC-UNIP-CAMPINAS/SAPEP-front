@@ -8,11 +8,12 @@ import TablePatient from "../../components/TablePatient";
 import { api } from "../../services/api";
 import { notification } from "../../services/toastify";
 import types from "../../services/types";
+import { setAdms } from "../../store/actions/adm.action";
 import { setDoctors } from "../../store/actions/doctor.action";
 import { setNurses } from "../../store/actions/nurse.action";
 import "./styles.scoped.scss";
 
-function Home({ populateDoctors, doctors, populateNurses, nurses, adms, patients }) {
+function Home({ populateDoctors, doctors, populateNurses, nurses, adms, patients, populateAdms }) {
     const [selectedTable, setSelectedTable] = React.useState("DOCTOR");
     const [activeMenu, setActiveMenu] = React.useState({
         doctor: false,
@@ -65,9 +66,20 @@ function Home({ populateDoctors, doctors, populateNurses, nurses, adms, patients
             }
         }
 
+        async function loadAdms() {
+            try {
+                const { data } = await api.get("/user/adm");
+                populateAdms(data);
+            } catch (error) {
+                console.log(error);
+                notification(types.ERROR, error.message);
+            }
+        }
+
         loadDoctors();
         loadNurses();
-    }, [populateDoctors, populateNurses]);
+        loadAdms();
+    }, [populateDoctors, populateNurses, populateAdms]);
 
     function switchTable() {
         switch (selectedTable) {
@@ -136,6 +148,10 @@ const mapDispatchToProps = (dispatch) => {
         },
         populateNurses(nurses) {
             const action = setNurses(nurses);
+            dispatch(action);
+        },
+        populateAdms(adms) {
+            const action = setAdms(adms);
             dispatch(action);
         },
     };
