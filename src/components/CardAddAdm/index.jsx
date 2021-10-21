@@ -25,7 +25,7 @@ function CardAddAdm({ addAdm, close }) {
                 const { data } = await api.post("/user/adm", { ...inputs });
                 addAdm(data);
                 close();
-                notification(types.SUCCESS, data.message);
+                notification(types.SUCCESS, "Registro criado.");
             }
         } catch (error) {
             console.log(error);
