@@ -2,6 +2,7 @@ import dayjs from "dayjs";
 import utc from "dayjs/plugin/utc";
 import React from "react";
 import { connect } from "react-redux";
+import { useHistory } from "react-router";
 import { Popup } from "reactjs-popup";
 import Button from "../Button/Button";
 import CardAddPatient from "../CardAddPatient";
@@ -14,6 +15,8 @@ function TablePatient({
     user,
 }) {
     dayjs.extend(utc);
+
+    const history = useHistory();
 
     const modalAddRef = React.useRef();
     const openAddModal = () => modalAddRef.current.open();
@@ -29,7 +32,12 @@ function TablePatient({
         const foundPatient = patients.find((patient) => patient.id === id);
         if (foundPatient) {
             setActivePatient(foundPatient);
-            openInformationModal();
+            switch (user.groupId) {
+                case 1:
+                    return history.push(`/patient/${id}`);
+                default:
+                    return openInformationModal();
+            }
         }
     }
 

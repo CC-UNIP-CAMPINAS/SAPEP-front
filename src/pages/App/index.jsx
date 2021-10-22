@@ -5,6 +5,7 @@ import NavBar from "../../components/NavBar";
 import Adm from "../Adm";
 import Doctor from "../Doctor";
 import Home from "../home/index";
+import Patient from "../Patient";
 import "./styles.scoped.scss";
 
 function App({ user }) {
@@ -13,7 +14,10 @@ function App({ user }) {
             case 3:
                 return [<Route key="/" component={Adm} />];
             case 1:
-                return [<Route key="/" component={Doctor} />];
+                return [
+                    <Route key="/" exact path="/" component={Doctor} />,
+                    <Route key="/patient" exact path="/patient/:id" component={Patient} />,
+                ];
             default:
                 return [<Route key="/" component={Home} />];
         }
