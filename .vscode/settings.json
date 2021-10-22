@@ -25,6 +25,7 @@
         "Page: Adm",
         "Page: App",
         "Component: CardDoctorInformation",
-        "Page: Doctor"
+        "Page: Doctor",
+        "Component: CardMedicalInformation"
     ]
 }
