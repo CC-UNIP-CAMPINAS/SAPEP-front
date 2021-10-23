@@ -5,6 +5,16 @@ import types from "./types";
 const emailMatch = "Digite um email válido";
 const emailEmpty = "O email não pode ser vazio";
 
+const teamReportEmpty = "O relatório da equipe não pode ser vazio";
+
+const drugEmpty = "O medicamento não pode ser vazio.";
+
+const drugDosageEmpty = "A dosagem não pode ser vazia.";
+
+const drugWayEmpty = "A via de administração do medicamento não pode ser vazia.";
+
+const administrationIntervalEmpty = "O intervalo de administração do medicamento não pode ser vazio.";
+
 const cepMatch = "O CEP precisa ser: XXXXX-XXX";
 
 const nameMatch = "O nome precisa ter no mínimo 3 letras!";
@@ -39,6 +49,9 @@ const rgMatch = "O RG precisa ter no mínimo 9 caracteres. Ex. 00.000.000-0";
 
 const passwordEmpty = "A senha não pode ser vazia!";
 const passwordMatch = "A senha precisa ter no mínimo 8 caracteres!";
+
+const medicalRecordIdEmpty = "O id do prontuário não pode ser vazio!";
+const medicalRecordIdMatch = "O id do prontuário precisa ser um número";
 
 const schemaSign = yup.object().shape({
     name: yup
@@ -159,6 +172,26 @@ const schemaCreateAdm = yup.object().shape({
         .string()
         .required(genderEmpty)
         .matches(/(F|M|INDEFINIDO)/, genderMatch),
+});
+
+const schemaCreateTeamReport = yup.object().shape({
+    report: yup.string().required(teamReportEmpty),
+    medicalRecordId: yup
+        .number()
+        .required(medicalRecordIdEmpty)
+        .min(1, medicalRecordIdMatch),
+});
+
+const schemaCreateMedicalPrescription = yup.object().shape({
+    drug: yup.string().required(drugEmpty),
+    drugDosage: yup.string().required(drugDosageEmpty),
+    drugWay: yup.string().required(drugWayEmpty),
+    administrationInterval: yup.string().required(administrationIntervalEmpty),
+    obs: yup.string().optional(administrationIntervalEmpty),
+    medicalRecordId: yup
+        .number()
+        .required(medicalRecordIdEmpty)
+        .min(1, medicalRecordIdMatch),
 });
 
 const schemaUpdateAdm = yup.object().shape({
@@ -330,6 +363,10 @@ async function validate(schemaName, body) {
                 return await schemaCreatePatient.validate(body);
             case "create-adm":
                 return await schemaCreateAdm.validate(body);
+            case "create-team-report":
+                return await schemaCreateTeamReport.validate(body);
+            case "create-medical-prescription":
+                return await schemaCreateMedicalPrescription.validate(body);
             case "update-patient":
                 return await schemaUpdatePatient.validate(body);
             case "update-adm":
