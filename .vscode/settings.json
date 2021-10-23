@@ -28,6 +28,7 @@
         "Page: Doctor",
         "Component: CardMedicalInformation",
         "Component: CardPatientInformation",
-        "Page: Patient"
+        "Page: Patient",
+        "Component: CardAddMedicalPrescription"
     ]
 }
