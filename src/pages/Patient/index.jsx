@@ -1,12 +1,23 @@
 import React from "react";
-import CardPatientInformation from "../../components/CardPatientInformation";
-import "./styles.scoped.scss";
 import { connect } from "react-redux";
 import { useParams } from "react-router";
-import CardMedicalRecord from "../../components/CardMedicalRecord";
+import Popup from "reactjs-popup";
 import Button from "../../components/Button/Button";
+import CardAddMedicalPrescription from "../../components/CardAddMedicalPrescription";
+import CardAddTeamReport from "../../components/CardAddTeamReport";
+import CardMedicalRecord from "../../components/CardMedicalRecord";
+import CardPatientInformation from "../../components/CardPatientInformation";
+import "./styles.scoped.scss";
 
 function Patient({ patients }) {
+    const modalMedicalPrescription = React.useRef();
+    const openMedicalPrescriptionModal = () => modalMedicalPrescription.current.open();
+    const closeMedicalPrescriptionModal = () => modalMedicalPrescription.current.close();
+
+    const modalTeamReport = React.useRef();
+    const openTeamReportModal = () => modalTeamReport.current.open();
+    const closeTeamReportModal = () => modalTeamReport.current.close();
+
     let { id } = useParams();
 
     function handlePatient() {
@@ -16,21 +27,28 @@ function Patient({ patients }) {
         }
     }
 
+    const patient = handlePatient();
+
     return (
         <div className="container">
             <section id="information">
-                <CardPatientInformation patient={handlePatient()} />
+                <CardPatientInformation patient={patient} />
             </section>
             <section id="medical-record">
                 <header>
                     <span>
-                        <Button text="Adicionar Prescrição" color="cyan" handle={() => {}} />
+                        <Button text="Adicionar Prescrição" color="cyan" handle={openMedicalPrescriptionModal} />
                     </span>
                     <span>
-                        <Button text="Adicionar Relatório da equipe" color="cyan" handle={() => {}} />
+                        <Button text="Adicionar Relatório da Equipe" color="cyan" handle={openTeamReportModal} />
                     </span>
                 </header>
-
+                <Popup ref={modalMedicalPrescription} modal>
+                    <CardAddMedicalPrescription close={closeMedicalPrescriptionModal} id={patient?.MedicalRecord?.id} />
+                </Popup>
+                <Popup ref={modalTeamReport} modal>
+                    <CardAddTeamReport close={closeTeamReportModal} id={patient?.MedicalRecord?.id} />
+                </Popup>
                 <CardMedicalRecord />
             </section>
         </div>
