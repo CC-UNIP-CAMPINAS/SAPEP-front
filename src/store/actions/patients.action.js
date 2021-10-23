@@ -20,3 +20,17 @@ export function updatePatient(patient) {
         payload: patient,
     };
 }
+
+export function addMedicalPrescription(prescription) {
+    return {
+        type: types.ADD_MEDICAL_PRESCRIPTION,
+        payload: prescription,
+    };
+}
+
+export function addTeamReport(report) {
+    return {
+        type: types.ADD_TEAM_REPORT,
+        payload: report,
+    };
+}

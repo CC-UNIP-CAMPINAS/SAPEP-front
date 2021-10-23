@@ -15,6 +15,10 @@ const initialState = [
         rg: "39.329.130-3", //ok
         healthInsurance: "AMIL", //ok
         gender: "M", //ok
+        MedicalRecord: {
+            MedicalPrescription: [],
+            TeamReport: [],
+        },
     },
 ];
 
@@ -28,6 +32,22 @@ export default function configsReducer(state = initialState, action) {
             const tempPatients = [...state];
             const patients = tempPatients.filter((patient) => patient.userId !== action.payload.id);
             return [...patients, action.payload];
+        case types.ADD_MEDICAL_PRESCRIPTION:
+            return {
+                ...state,
+                MedicalRecord: {
+                    ...state.MedicalRecord,
+                    MedicalPrescription: [...state.MedicalRecord.MedicalPrescription, action.payload],
+                },
+            };
+        case types.ADD_TEAM_REPORT:
+            return {
+                ...state,
+                MedicalRecord: {
+                    ...state.MedicalRecord,
+                    TeamReport: [...state.MedicalRecord.TeamReport, action.payload],
+                },
+            };
         case types.CLEAR:
             return initialState;
         default:
