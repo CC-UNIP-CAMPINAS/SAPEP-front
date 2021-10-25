@@ -1,6 +1,9 @@
 .container {
+    top: 20px;
+    position: sticky;
+    position: -webkit-sticky;
     background: var(--gray-700);
-    border-radius: .9375rem;
+    border-radius: 0.9375rem;
     padding: 1.875rem;
     display: flex;
     flex-direction: column;
