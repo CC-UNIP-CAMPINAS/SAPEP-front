@@ -33,6 +33,7 @@
         "Component: CardAddTeamReport",
         "Component: CardMedicalPrescription",
         "Component: CardNursePrescription",
-        "Component: CardNurseReport"
+        "Component: CardNurseReport",
+        "Component: CardTeamReport"
     ]
 }
