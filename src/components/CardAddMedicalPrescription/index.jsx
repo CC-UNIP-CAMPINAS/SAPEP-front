@@ -21,6 +21,25 @@ function CardAddMedicalPrescription({ addMedicalPrescription, close, id }) {
         try {
             const body = { ...inputs, medicalRecordId: id };
             if (await validate("create-medical-prescription", body)) {
+                switch (body.administrationInterval) {
+                    default:
+                        //4/4H
+                        body.administrationCount = 6;
+                        break;
+                    case "6/6H":
+                        body.administrationCount = 4;
+                        break;
+                    case "8/8H":
+                        body.administrationCount = 3;
+                        break;
+                    case "12/12H":
+                        body.administrationCount = 2;
+                        break;
+                    case "24/24H":
+                        body.administrationCount = 1;
+                        break;
+                }
+
                 const { data } = await api.post("/medical-prescription", { ...inputs });
                 addMedicalPrescription(data);
                 close();
@@ -78,12 +97,16 @@ function CardAddMedicalPrescription({ addMedicalPrescription, close, id }) {
                 <label>
                     Intervalo de administração: <span>*</span>
                 </label>
-                <input
-                    value={inputs.administrationInterval}
-                    type="text"
-                    placeholder="6/6H"
+                <select
+                    name="administration-interval"
                     onChange={(e) => setInputs({ ...inputs, administrationInterval: e.target.value })}
-                />
+                >
+                    <option value="4/4H">4/4H</option>
+                    <option value="6/6H">6/6H</option>
+                    <option value="8/8H">8/8H</option>
+                    <option value="12/12H">12/12H</option>
+                    <option value="24/24H">24/24H</option>
+                </select>
                 <label>Observação: </label>
                 <textarea
                     value={inputs.obs}

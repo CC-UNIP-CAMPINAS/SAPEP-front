@@ -41,6 +41,12 @@
             height: 6rem;
             resize: none;
         }
+
+        select {
+            background: var(--gray-100);
+            margin-bottom: 0.9375rem;
+            min-height: 2.5rem;
+        }
     }
 
     #button {
