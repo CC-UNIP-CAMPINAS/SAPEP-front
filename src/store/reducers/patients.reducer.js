@@ -16,8 +16,16 @@ const initialState = [
         healthInsurance: "AMIL", //ok
         gender: "M", //ok
         MedicalRecord: {
-            MedicalPrescription: [],
-            TeamReport: [],
+            MedicalPrescription: [
+                {
+                    prescriptionDate: "2021-10-26T00:00:00.000Z",
+                    ExecutorsMedicalPrescription: [
+                        { executionDate: "2021-10-27T12:00:00.000Z", executor: "Dr. Júlia Nobre Colnaghi" },
+                        { executionDate: "2021-10-27T18:00:00.000Z", executor: "Dr. Júlia Nobre Colnaghi" },
+                    ],
+                },
+            ],
+            TeamReport: [{ reportDate: "2021-10-27T00:00:00.000Z" }, { reportDate: "2021-10-26T00:00:00.000Z" }],
         },
     },
 ];
