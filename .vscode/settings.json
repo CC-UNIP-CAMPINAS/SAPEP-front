@@ -31,6 +31,7 @@
         "Page: Patient",
         "Component: CardAddMedicalPrescription",
         "Component: CardAddTeamReport",
-        "Component: CardMedicalPrescription"
+        "Component: CardMedicalPrescription",
+        "Component: CardNursePrescription"
     ]
 }
