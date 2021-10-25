@@ -49,7 +49,7 @@ function Patient({ patients }) {
                 <Popup ref={modalTeamReport} modal>
                     <CardAddTeamReport close={closeTeamReportModal} id={patient?.MedicalRecord?.id} />
                 </Popup>
-                <CardMedicalRecord />
+                <CardMedicalRecord medicalRecord={patient.MedicalRecord} />
             </section>
         </div>
     );
