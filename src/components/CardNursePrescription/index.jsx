@@ -1,19 +1,22 @@
 import React from "react";
 import "./styles.scoped.scss";
 import { Icon } from "@iconify/react";
+import dayjs from "dayjs";
 
-function CardNursePrescription() {
+function CardNursePrescription({ prescription }) {
     return (
         <div className="container">
             <header>
                 <p>Prescrição de Enfermagem</p>
-                {true ? (
+                {prescription.realized ? (
                     <span>
-                        <Icon icon="akar-icons:circle-check-fill" inline={true} color="#41e64e" /> Executado
+                        <Icon icon="akar-icons:circle-check-fill" inline={true} color="#41e64e" />
+                        {` Administrado`}
                     </span>
                 ) : (
                     <span>
-                        <Icon icon="ant-design:clock-circle-filled" inline={true} color="#157992" /> Não executado
+                        <Icon icon="ant-design:clock-circle-filled" inline={true} color="#157992" />
+                        {` Aguardando administração`}
                     </span>
                 )}
             </header>
@@ -21,43 +24,52 @@ function CardNursePrescription() {
                 <div id="content">
                     <main>
                         <p>
-                            <span>Prescritor: </span>Leonardo Petta do Nascimento
+                            <span>Prescritor: </span>
+                            {prescription.Prescriber.user.name}
                         </p>
                         <p>
-                            <span>Data da prescrição: </span>23/10/2021 às 12:00
+                            <span>Data da prescrição: </span>
+                            {dayjs(prescription.prescriptionDate).format("DD/MM/YYYY [ás] HH:mm:ss")}
                         </p>
                     </main>
 
                     <div>
                         <p>
-                            <span>Prescrição: </span>Usar cobertura de carvão ativado na úlcera por pressão.
+                            <span>Prescrição: </span>
+                            {prescription.prescription}
                         </p>
                         <p>
-                            <span>Observação: </span>Nenhuma
+                            <span>Observação: </span>
+                            {prescription.obs}
                         </p>
                     </div>
                 </div>
 
                 <div id="administration">
                     <p>
-                        <span>Administrações</span>
+                        <span>Administração:</span>
                     </p>
-                    <div>
-                        <table>
-                            <thead>
-                                <tr>
-                                    <th>Data</th>
-                                    <th>Executor</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr onClick={() => {}}>
-                                    <td>24/10/2021 às 12:00</td>
-                                    <td>Dr. Júlia Nobre Colnaghi</td>
-                                </tr>
-                            </tbody>
-                        </table>
-                    </div>
+
+                    {prescription.Executor ? (
+                        <div>
+                            <table>
+                                <thead>
+                                    <tr>
+                                        <th>Data</th>
+                                        <th>Executor</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>{dayjs(prescription.executionDate).format("DD/MM/YYYY [ás] HH:mm:ss")}</td>
+                                        <td>{prescription.Executor.user.name}</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    ) : (
+                        <p>Nenhuma administração.</p>
+                    )}
                 </div>
             </section>
         </div>
