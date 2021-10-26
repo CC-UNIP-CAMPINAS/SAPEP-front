@@ -2,13 +2,17 @@ import React from "react";
 import { connect } from "react-redux";
 import { Redirect, Route, Switch } from "react-router-dom";
 import NavBar from "../../components/NavBar";
+import { api } from "../../services/api";
+import { notification } from "../../services/toastify";
+import types from "../../services/types";
+import { setPatients } from "../../store/actions/patients.action";
 import Adm from "../Adm";
 import Doctor from "../Doctor";
 import Home from "../home/index";
 import Patient from "../Patient";
 import "./styles.scoped.scss";
 
-function App({ user }) {
+function App({ user, populatePatients }) {
     function handleRoutes() {
         switch (user.groupId) {
             case 3:
@@ -22,6 +26,20 @@ function App({ user }) {
                 return [<Route key="/" component={Home} />];
         }
     }
+
+    React.useEffect(() => {
+        async function loadPatients() {
+            try {
+                const { data } = await api.get("/patient");
+                populatePatients(data);
+            } catch (error) {
+                console.log(error);
+                notification(types.ERROR, error.message);
+            }
+        }
+
+        loadPatients();
+    }, [populatePatients]);
 
     return (
         <div className="container">
@@ -42,7 +60,16 @@ const mapStateToProps = (states) => {
     };
 };
 
+const mapDispatchToProps = (dispatch) => {
+    return {
+        populatePatients(patients) {
+            const action = setPatients(patients);
+            dispatch(action);
+        },
+    };
+};
+
 export default connect(
     mapStateToProps,
-    null
+    mapDispatchToProps
 )(App);
