@@ -1,4 +1,4 @@
-import dayjs, { utc } from "dayjs";
+import dayjs from "dayjs";
 import React from "react";
 import CardMedicalPrescription from "../CardMedicalPrescription/index";
 import CardNursePrescription from "../CardNursePrescription";
@@ -7,35 +7,53 @@ import CardTeamReport from "../CardTeamReport";
 import "./styles.scoped.scss";
 
 function CardMedicalRecord({ medicalRecord }) {
-    dayjs.extend(utc);
-
     const [date, setDate] = React.useState(dayjs().format("YYYY-MM-DD"));
 
     function joinContent() {
-        const selectedDate = dayjs.utc(date);
+        const selectedDate = dayjs(date);
 
         const medicalPrescription = medicalRecord.MedicalPrescription.filter((item) => {
-            if (selectedDate.isSame(dayjs.utc(item.prescriptionDate))) {
+            if (selectedDate.isSame(dayjs(item.prescriptionDate), "day")) {
                 return item;
             }
 
             return 0;
-        }).map((item) => ({ ...item, type: "MEDICAL_PRESCRIPTION" }));
+        }).map((item) => ({ ...item, type: "MEDICAL_PRESCRIPTION", date: item.prescriptionDate }));
 
-        const teamReport = medicalRecord.TeamReport.filter((item) => {
-            if (selectedDate.isSame(dayjs.utc(item.reportDate))) {
+        const nursePrescription = medicalRecord.NursePrescription.filter((item) => {
+            if (selectedDate.isSame(dayjs(item.prescriptionDate), "day")) {
                 return item;
             }
 
             return 0;
-        }).map((item) => ({ ...item, type: "TEAM_REPORT" }));
+        }).map((item) => ({ ...item, type: "NURSE_PRESCRIPTION", date: item.prescriptionDate }));
 
-        return [...medicalPrescription, ...teamReport];
+        const teamReport = medicalRecord?.TeamReport?.filter((item) => {
+            if (selectedDate.isSame(dayjs(item.reportDate), "day")) {
+                return item;
+            }
+
+            return 0;
+        }).map((item) => {
+            return { ...item, type: "TEAM_REPORT", date: item.reportDate };
+        });
+
+        const nurseReport = medicalRecord?.NurseReport?.filter((item) => {
+            if (selectedDate.isSame(dayjs(item.reportDate), "day")) {
+                return item;
+            }
+
+            return 0;
+        }).map((item) => {
+            return { ...item, type: "NURSE_REPORT", date: item.reportDate };
+        });
+
+        return [...medicalPrescription, ...nursePrescription, ...teamReport, ...nurseReport].sort((a, b) => {
+            return dayjs(a.date).toDate() - dayjs(b.date).toDate();
+        });
     }
 
     const content = joinContent();
-
-    console.log(content);
 
     const emptyMessage = (
         <div id="empty-message">
@@ -56,11 +74,21 @@ function CardMedicalRecord({ medicalRecord }) {
                 </div>
             </div>
             <div id="content">
-                {/*{content.length > 0 ? "" : emptyMessage}*/}
-                <CardMedicalPrescription />
-                <CardTeamReport />
-                <CardNurseReport />
-                <CardNursePrescription />
+                {content.length > 0
+                    ? content.map((item, index) => {
+                          switch (item.type) {
+                              case "MEDICAL_PRESCRIPTION":
+                                  return <CardMedicalPrescription key={index} prescription={item} />;
+                              case "NURSE_PRESCRIPTION":
+                                  return <CardNursePrescription key={index} prescription={item} />;
+                              case "TEAM_REPORT":
+                                  return <CardTeamReport key={index} report={item} />;
+                              default:
+                                  //NURSE_REPORT
+                                  return <CardNurseReport key={index} report={item} />;
+                          }
+                      })
+                    : emptyMessage}
             </div>
         </section>
     );
