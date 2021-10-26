@@ -27,7 +27,8 @@ function CardMedicalPrescription({ prescription }) {
                 <div id="content">
                     <main>
                         <p>
-                            <span>Prescritor: </span>Leonardo Petta do Nascimento
+                            <span>Prescritor: </span>
+                            {prescription.Prescriber.user.name}
                         </p>
                         <p>
                             <span>Data da prescrição: </span>
@@ -61,7 +62,7 @@ function CardMedicalPrescription({ prescription }) {
 
                 <div id="administration">
                     <p>
-                        <span>Administrações</span>
+                        <span>Administrações:</span>
                     </p>
 
                     {prescription.Executors.length ? (
