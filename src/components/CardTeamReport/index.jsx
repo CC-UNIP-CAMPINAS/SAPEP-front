@@ -1,7 +1,8 @@
+import dayjs from "dayjs";
 import React from "react";
 import "./styles.scoped.scss";
 
-function CardTeamReport() {
+function CardTeamReport({ report }) {
     return (
         <div className="container">
             <header>
@@ -11,16 +12,19 @@ function CardTeamReport() {
                 <div id="content">
                     <main>
                         <p>
-                            <span>Colaborador: </span>Leonardo Petta do Nascimento
+                            <span>Colaborador: </span>
+                            {report.signatory.name}
                         </p>
                         <p>
-                            <span>Data do relatório: </span>23/10/2021 às 12:00
+                            <span>Data do relatório: </span>
+                            {dayjs(report.date).format("DD/MM/YYYY [ás] HH:mm:ss")}
                         </p>
                     </main>
 
                     <div>
                         <p>
-                            <span>Relatório: </span>Procedimento e informações pertinentes ao paciente.
+                            <span>Relatório: </span>
+                            {report.report}
                         </p>
                     </div>
                 </div>
