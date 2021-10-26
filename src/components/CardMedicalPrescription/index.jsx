@@ -2,19 +2,24 @@ import { Icon } from "@iconify/react";
 import React from "react";
 
 import "./styles.scoped.scss";
+import dayjs from "dayjs";
 
-function CardMedicalPrescription() {
+function CardMedicalPrescription({ prescription }) {
     return (
         <div className="container">
             <header>
                 <p>Prescrição Médica</p>
-                {true ? (
+                {prescription.realized ? (
                     <span>
-                        <Icon icon="akar-icons:circle-check-fill" inline={true} color="#41e64e" /> Executado
+                        <Icon icon="akar-icons:circle-check-fill" inline={true} color="#41e64e" />
+                        {` Administrado ${prescription.Executors.length}/${prescription.administrationCount}`}
                     </span>
                 ) : (
                     <span>
-                        <Icon icon="ant-design:clock-circle-filled" inline={true} color="#157992" /> Não executado
+                        <Icon icon="ant-design:clock-circle-filled" inline={true} color="#157992" />
+                        {` Aguardando administração ${prescription.Executors.length}/${
+                            prescription.administrationCount
+                        }`}
                     </span>
                 )}
             </header>
@@ -25,25 +30,31 @@ function CardMedicalPrescription() {
                             <span>Prescritor: </span>Leonardo Petta do Nascimento
                         </p>
                         <p>
-                            <span>Data da prescrição: </span>23/10/2021 às 12:00
+                            <span>Data da prescrição: </span>
+                            {dayjs(prescription.date).format("DD/MM/YYYY [ás] HH:mm:ss")}
                         </p>
                     </main>
 
                     <div>
                         <p>
-                            <span>Medicamento: </span>Dipirona
+                            <span>Medicamento: </span>
+                            {prescription.drug}
                         </p>
                         <p>
-                            <span>Dosagem: </span>10mg
+                            <span>Dosagem: </span>
+                            {prescription.drugDosage}
                         </p>
                         <p>
-                            <span>Via de administração: </span>VO
+                            <span>Via de administração: </span>
+                            {prescription.drugWay}
                         </p>
                         <p>
-                            <span>Intervalo de administração: </span>6/6H
+                            <span>Intervalo de administração: </span>
+                            {prescription.administrationInterval}
                         </p>
                         <p>
-                            <span>Observação: </span>Nenhuma
+                            <span>Observação: </span>
+                            {prescription.obs}
                         </p>
                     </div>
                 </div>
@@ -52,34 +63,29 @@ function CardMedicalPrescription() {
                     <p>
                         <span>Administrações</span>
                     </p>
-                    <div>
-                        <table>
-                            <thead>
-                                <tr>
-                                    <th>Data</th>
-                                    <th>Executor</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr onClick={() => {}}>
-                                    <td>24/10/2021 às 12:00</td>
-                                    <td>Dr. Júlia Nobre Colnaghi</td>
-                                </tr>
-                                <tr onClick={() => {}}>
-                                    <td>24/10/2021 às 12:00</td>
-                                    <td>Dr. Júlia Nobre Colnaghi</td>
-                                </tr>
-                                <tr onClick={() => {}}>
-                                    <td>24/10/2021 às 12:00</td>
-                                    <td>Dr. Júlia Nobre Colnaghi</td>
-                                </tr>
-                                <tr onClick={() => {}}>
-                                    <td>24/10/2021 às 12:00</td>
-                                    <td>Dr. Júlia Nobre Colnaghi</td>
-                                </tr>
-                            </tbody>
-                        </table>
-                    </div>
+
+                    {prescription.Executors.length ? (
+                        <div>
+                            <table>
+                                <thead>
+                                    <tr>
+                                        <th>Data</th>
+                                        <th>Executor</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    {prescription.Executors.map((executor, index) => (
+                                        <tr key={index}>
+                                            <td>{dayjs(executor.executionDate).format("DD/MM/YYYY [ás] HH:mm:ss")}</td>
+                                            <td>{executor.Executor.user.name}</td>
+                                        </tr>
+                                    ))}
+                                </tbody>
+                            </table>
+                        </div>
+                    ) : (
+                        <p>Nenhuma administração.</p>
+                    )}
                 </div>
             </section>
         </div>
