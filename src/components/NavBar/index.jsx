@@ -6,16 +6,19 @@ import Button from "../Button/Button";
 import { api } from "../../services/api";
 import { connect } from "react-redux";
 import { clearStore } from "../../store/actions/app.action";
+import { useHistory } from "react-router";
 
 function NavBar({ logoff, user }) {
+    const history = useHistory();
+
     async function handleLogoff() {
         await api.get("logoff");
         logoff();
     }
-
+    
     return (
         <header className="container">
-            <img src="/logo_mini.svg" alt="logo" />
+            <img src="/logo_mini.svg" alt="logo" onClick={() => (history.location !== "/" ? history.push("/") : "")} />
             <span id="space" />
             <section id="menu_drop">
                 <header>
