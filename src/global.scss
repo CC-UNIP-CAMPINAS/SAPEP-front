@@ -24,6 +24,7 @@
     --gray-600: #666666;
     --gray-700: #545454;
 
+    --cyan: rgb(98, 205, 255);
     --cyan-100: rgb(41, 187, 255);
     --cyan-200: #00c2cb;
     --cyan-300: #157992;
@@ -165,6 +166,19 @@ select {
         box-shadow: 0 0 500px rgba(241, 241, 241, 0);
     }
 }
+
 .popup-content {
     -webkit-animation: anvil 0.3s cubic-bezier(0.38, 0.1, 0.36, 0.9) forwards;
+}
+
+#button-up-page {
+    height: 50px;
+    width: 50px;
+    color: var(--gray-700);
+
+    transition: filter 0.5s;
+
+    &:hover {
+        filter: opacity(0.8);
+    }
 }
