@@ -9,7 +9,7 @@ import { addMedicalPrescription } from "../../store/actions/patients.action";
 import Button from "../Button/Button";
 import "./styles.scoped.scss";
 
-function CardAddMedicalPrescription({ addMedicalPrescription, close, id: medicalRecordId }) {
+function CardAddMedicalPrescription({ addMedicalPrescription, close, medicalRecordId }) {
     const { id } = useParams();
 
     const [inputs, setInputs] = React.useState({
