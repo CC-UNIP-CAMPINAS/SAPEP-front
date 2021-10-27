@@ -1,6 +1,8 @@
+import { Icon } from "@iconify/react";
 import React from "react";
 import { connect } from "react-redux";
 import { Redirect, Route, Switch } from "react-router-dom";
+import ScrollToTop from "react-scroll-up";
 import NavBar from "../../components/NavBar";
 import { api } from "../../services/api";
 import { notification } from "../../services/toastify";
@@ -50,6 +52,9 @@ function App({ user, populatePatients }) {
                     <Redirect to="/login" />
                 </Route>
             </Switch>
+            <ScrollToTop showUnder={160} duration={600} className="testando">
+                <Icon icon="akar-icons:circle-chevron-up-fill" id="button-up-page" />
+            </ScrollToTop>
         </div>
     );
 }
