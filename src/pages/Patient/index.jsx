@@ -44,10 +44,10 @@ function Patient({ patients }) {
                     </span>
                 </header>
                 <Popup ref={modalMedicalPrescription} modal>
-                    <CardAddMedicalPrescription close={closeMedicalPrescriptionModal} id={patient?.MedicalRecord?.id} />
+                    <CardAddMedicalPrescription close={closeMedicalPrescriptionModal} medicalRecordId={patient?.MedicalRecord?.id} />
                 </Popup>
                 <Popup ref={modalTeamReport} modal>
-                    <CardAddTeamReport close={closeTeamReportModal} id={patient?.MedicalRecord?.id} />
+                    <CardAddTeamReport close={closeTeamReportModal} medicalRecordId={patient?.MedicalRecord?.id} />
                 </Popup>
                 <CardMedicalRecord medicalRecord={patient.MedicalRecord} />
             </section>
