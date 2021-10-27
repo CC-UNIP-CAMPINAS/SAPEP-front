@@ -13,7 +13,6 @@ export default function configsReducer(state = initialState, action) {
             const patients = tempPatients.filter((patient) => patient.id !== action.payload.id);
             return [...patients, action.payload];
         case types.ADD_MEDICAL_PRESCRIPTION:
-            console.log(action.payload);
             const patientsTemp = state.filter((patient) => patient.id !== action.payload.patientId);
             const patient = state.find((patient) => patient.id === +action.payload.patientId);
 
@@ -24,13 +23,15 @@ export default function configsReducer(state = initialState, action) {
 
             return [...patientsTemp, patient];
         case types.ADD_TEAM_REPORT:
-            return {
-                ...state,
-                MedicalRecord: {
-                    ...state.MedicalRecord,
-                    TeamReport: [...state.MedicalRecord.TeamReport, action.payload],
-                },
+            const stateCopy = state.filter((patient) => patient.id !== action.payload.patientId);
+            const foundPatient = state.find((patient) => patient.id === +action.payload.patientId);
+
+            foundPatient.MedicalRecord = {
+                ...foundPatient.MedicalRecord,
+                TeamReport: [...foundPatient.MedicalRecord.TeamReport, action.payload.data],
             };
+
+            return [...stateCopy, foundPatient];
         case types.CLEAR:
             return initialState;
         default:

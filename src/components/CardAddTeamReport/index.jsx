@@ -1,5 +1,6 @@
 import React from "react";
 import { connect } from "react-redux";
+import { useParams } from "react-router";
 import { api } from "../../services/api";
 import { notification } from "../../services/toastify";
 import types from "../../services/types";
@@ -8,17 +9,19 @@ import { addTeamReport } from "../../store/actions/patients.action";
 import Button from "../Button/Button";
 import "./styles.scoped.scss";
 
-function CardAddTeamReport({ addTeamReport, close, id }) {
+function CardAddTeamReport({ addTeamReport, close, medicalRecordId }) {
+    const { id } = useParams();
+
     const [inputs, setInputs] = React.useState({
         report: "",
     });
 
     async function handleAddMedicalPrescription() {
         try {
-            const body = { ...inputs, medicalRecordId: id };
+            const body = { ...inputs, medicalRecordId };
             if (await validate("create-team-report", body)) {
-                const { data } = await api.post("/team-report", { ...inputs });
-                addTeamReport(data);
+                const { data } = await api.post("/team-report", body);
+                addTeamReport({ data, patientId: id });
                 close();
                 notification(types.SUCCESS, "Relatório criado.");
             }
