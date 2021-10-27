@@ -10,16 +10,19 @@ export default function configsReducer(state = initialState, action) {
             return [...state, action.payload];
         case types.UPDATE_PATIENT:
             const tempPatients = [...state];
-            const patients = tempPatients.filter((patient) => patient.userId !== action.payload.id);
+            const patients = tempPatients.filter((patient) => patient.id !== action.payload.id);
             return [...patients, action.payload];
         case types.ADD_MEDICAL_PRESCRIPTION:
-            return {
-                ...state,
-                MedicalRecord: {
-                    ...state.MedicalRecord,
-                    MedicalPrescription: [...state.MedicalRecord.MedicalPrescription, action.payload],
-                },
+            console.log(action.payload);
+            const patientsTemp = state.filter((patient) => patient.id !== action.payload.patientId);
+            const patient = state.find((patient) => patient.id === +action.payload.patientId);
+
+            patient.MedicalRecord = {
+                ...patient.MedicalRecord,
+                MedicalPrescription: [...patient.MedicalRecord.MedicalPrescription, action.payload.data],
             };
+
+            return [...patientsTemp, patient];
         case types.ADD_TEAM_REPORT:
             return {
                 ...state,

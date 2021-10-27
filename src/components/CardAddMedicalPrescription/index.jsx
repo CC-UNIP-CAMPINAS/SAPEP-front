@@ -1,5 +1,6 @@
 import React from "react";
 import { connect } from "react-redux";
+import { useParams } from "react-router";
 import { api } from "../../services/api";
 import { notification } from "../../services/toastify";
 import types from "../../services/types";
@@ -8,18 +9,20 @@ import { addMedicalPrescription } from "../../store/actions/patients.action";
 import Button from "../Button/Button";
 import "./styles.scoped.scss";
 
-function CardAddMedicalPrescription({ addMedicalPrescription, close, id }) {
+function CardAddMedicalPrescription({ addMedicalPrescription, close, id: medicalRecordId }) {
+    const { id } = useParams();
+
     const [inputs, setInputs] = React.useState({
         drug: "",
         drugDosage: "",
         drugWay: "",
-        administrationInterval: "",
+        administrationInterval: "4/4H",
         obs: "",
     });
 
     async function handleAddMedicalPrescription() {
         try {
-            const body = { ...inputs, medicalRecordId: id };
+            const body = { ...inputs, medicalRecordId };
             if (await validate("create-medical-prescription", body)) {
                 switch (body.administrationInterval) {
                     default:
@@ -40,8 +43,8 @@ function CardAddMedicalPrescription({ addMedicalPrescription, close, id }) {
                         break;
                 }
 
-                const { data } = await api.post("/medical-prescription", { ...inputs });
-                addMedicalPrescription(data);
+                const { data } = await api.post("/medical-prescription", body);
+                addMedicalPrescription({ data, patientId: id });
                 close();
                 notification(types.SUCCESS, "Prescrição criada.");
             }
@@ -98,6 +101,7 @@ function CardAddMedicalPrescription({ addMedicalPrescription, close, id }) {
                     Intervalo de administração: <span>*</span>
                 </label>
                 <select
+                    value={inputs.administrationInterval}
                     name="administration-interval"
                     onChange={(e) => setInputs({ ...inputs, administrationInterval: e.target.value })}
                 >
