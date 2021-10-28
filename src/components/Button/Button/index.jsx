@@ -13,6 +13,10 @@ function Button({ handle, text, disabled, isLoading, color, styles }) {
         };
     }, []);
 
+    React.useEffect(() => {
+        setDisabled(disabled);
+    }, [disabled]);
+
     async function handleClick() {
         if (isLoading) {
             setLoading(true);
