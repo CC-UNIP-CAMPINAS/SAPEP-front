@@ -50,7 +50,7 @@ function TablePatient({
 
     return (
         <section className="container">
-            {user.groupId === 5 ? (
+            {[5, 3].includes(user.groupId) ? (
                 <section id="buttons">
                     <span>
                         <Button text="Adicionar Paciente" color="cyan" handle={openAddModal} />
