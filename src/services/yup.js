@@ -214,89 +214,105 @@ const schemaUpdateAdm = yup.object().shape({
         .matches(/(F|M|INDEFINIDO)/, genderMatch),
 });
 
-const schemaCreatePatient = yup.object().shape({
-    name: yup
-        .string()
-        .required(nameEmpty)
-        .min(3, nameMatch),
-    lastName: yup
-        .string()
-        .required(lastNameEmpty)
-        .min(3, lastNameMatch),
-    cep: yup
-        .string()
-        .optional()
-        .min(9, cepMatch),
-    complement: yup.string().optional(),
-    addressNumber: yup.number().optional(),
-    phone: yup
-        .string()
-        .optional()
-        .min(15, phoneMatch)
-        .max(15, phoneMatch),
-    birthday: yup
-        .string()
-        .required(birthdayEmpty)
-        .min(10, birthdayMatch)
-        .max(10, birthdayMatch),
-    cpf: yup
-        .string()
-        .required(cpfEmpty)
-        .min(14, cpfMatch)
-        .max(14, cpfMatch),
-    rg: yup
-        .string()
-        .required(rgEmpty)
-        .min(12, rgMatch)
-        .max(12, rgMatch),
-    healthInsurance: yup.string().optional(),
-    gender: yup
-        .string()
-        .required(genderEmpty)
-        .matches(/(F|M|INDEFINIDO)/, genderMatch),
-});
+const schemaCreatePatient = yup.object().shape(
+    {
+        name: yup
+            .string()
+            .required(nameEmpty)
+            .min(3, nameMatch),
+        lastName: yup
+            .string()
+            .required(lastNameEmpty)
+            .min(3, lastNameMatch),
+        cep: yup
+            .string()
+            .notRequired()
+            .when("cep", {
+                is: (value) => value?.length,
+                then: (rule) => rule.min(9, cepMatch),
+            }),
+        complement: yup.string().optional(),
+        addressNumber: yup.string().optional(),
+        phone: yup.string().when("phone", {
+            is: (value) => value?.length,
+            then: (rule) => {
+                rule.min(15, phoneMatch);
+                rule.max(15, phoneMatch);
+            },
+        }),
+        birthday: yup
+            .string()
+            .required(birthdayEmpty)
+            .min(24, birthdayMatch)
+            .max(24, birthdayMatch),
+        cpf: yup
+            .string()
+            .required(cpfEmpty)
+            .min(14, cpfMatch)
+            .max(14, cpfMatch),
+        rg: yup
+            .string()
+            .required(rgEmpty)
+            .min(12, rgMatch)
+            .max(12, rgMatch),
+        healthInsurance: yup.string().optional(),
+        gender: yup
+            .string()
+            .required(genderEmpty)
+            .matches(/(F|M|INDEFINIDO)/, genderMatch),
+    },
+    [["phone", "phone"], ["cep", "cep"]]
+);
 
-const schemaUpdatePatient = yup.object().shape({
-    name: yup
-        .string()
-        .required(nameEmpty)
-        .min(3, nameMatch),
-    lastName: yup
-        .string()
-        .required(lastNameEmpty)
-        .min(3, lastNameMatch),
-    cep: yup
-        .string()
-        .optional()
-        .min(9, cepMatch),
-    complement: yup.string().optional(),
-    addressNumber: yup.number().optional(),
-    phone: yup
-        .string()
-        .optional()
-        .min(15, phoneMatch)
-        .max(15, phoneMatch),
-    birthday: yup
-        .string()
-        .required(birthdayEmpty)
-        .min(10, birthdayMatch)
-        .max(10, birthdayMatch),
-    cpf: yup
-        .string()
-        .required(cpfEmpty)
-        .min(14, cpfMatch)
-        .max(14, cpfMatch),
-    rg: yup
-        .string()
-        .required(rgEmpty)
-        .min(12, rgMatch)
-        .max(12, rgMatch),
-    healthInsurance: yup.string().optional(),
-    gender: yup
-        .string()
-        .required(genderEmpty)
-        .matches(/(F|M|INDEFINIDO)/, genderMatch),
-});
+const schemaUpdatePatient = yup.object().shape(
+    {
+        name: yup
+            .string()
+            .required(nameEmpty)
+            .min(3, nameMatch),
+        lastName: yup
+            .string()
+            .required(lastNameEmpty)
+            .min(3, lastNameMatch),
+        cep: yup
+            .string()
+            .notRequired()
+            .when("cep", {
+                is: (value) => value?.length,
+                then: (rule) => rule.min(9, cepMatch),
+            }),
+        complement: yup.string().optional(),
+        addressNumber: yup.string().optional(),
+        phone: yup.string().when("phone", {
+            is: (value) => value?.length,
+            then: (rule) => {
+                rule.min(15, phoneMatch);
+                rule.max(15, phoneMatch);
+            },
+        }),
+        birthday: yup
+            .string()
+            .required(birthdayEmpty)
+            .min(10, birthdayMatch)
+            .max(10, birthdayMatch),
+        cpf: yup
+            .string()
+            .required(cpfEmpty)
+            .min(14, cpfMatch)
+            .max(14, cpfMatch),
+        rg: yup
+            .string()
+            .required(rgEmpty)
+            .min(12, rgMatch)
+            .max(12, rgMatch),
+        healthInsurance: yup.string().optional(),
+        gender: yup
+            .string()
+            .required(genderEmpty)
+            .matches(/(F|M|INDEFINIDO)/, genderMatch),
+    },
+    [["phone", "phone"], ["cep", "cep"]]
+);
 
 const schemaUpdateDoctor = yup.object().shape({
     email: yup
