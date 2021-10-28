@@ -1,4 +1,5 @@
 import axios from "axios";
+import dayjs from "dayjs";
 import React from "react";
 import { connect } from "react-redux";
 import { cepMask, cpfMask, phoneMask, rgMask } from "../../helpers/masks";
@@ -26,6 +27,7 @@ function CardAddPatient({ addPatient, close }) {
     });
 
     const [address, setAddress] = React.useState("");
+    const [cepPermission, setCepPermission] = React.useState(true);
 
     React.useEffect(() => {
         async function handleSearchCep() {
@@ -36,12 +38,21 @@ function CardAddPatient({ addPatient, close }) {
 
                     if (data.erro) {
                         setAddress("Problema para achar o endereço pelo CEP 😢");
+                        notification(types.INFO, "Digite um CEP válido.");
+                        setCepPermission(true);
                     } else {
                         setAddress(`${data.logradouro}, ${data.bairro}, ${data.localidade} - ${data.uf}`);
+                        setCepPermission(false);
                     }
+                }
+                if (inputs.cep.length === 0) {
+                    setAddress(``);
+                    setCepPermission(false);
                 }
             } catch (error) {
                 setAddress("Problema para achar o endereço pelo CEP 😢");
+                notification(types.INFO, "Digite um CEP válido.");
+                setCepPermission(true);
             }
         }
 
@@ -50,12 +61,24 @@ function CardAddPatient({ addPatient, close }) {
 
     async function handleAddPatient() {
         try {
-            const body = { ...inputs };
+            const body = {
+                ...inputs,
+                birthday: inputs.birthday
+                    ? dayjs(inputs.birthday)
+                          .utc(true)
+                          .toISOString()
+                    : "",
+            };
+
             if (await validate("create-patient", body)) {
-                const { data } = await api.post("/patient", { ...inputs });
-                addPatient(data);
-                close();
-                notification(types.SUCCESS, data.message);
+                if (!cepPermission) {
+                    const { data } = await api.post("/patient", body);
+                    addPatient(data);
+                    close();
+                    notification(types.SUCCESS, data.message);
+                } else {
+                    notification(types.INFO, "Digite um CEP válido.");
+                }
             }
         } catch (error) {
             console.log(error);
@@ -170,7 +193,13 @@ function CardAddPatient({ addPatient, close }) {
 
             <div id="button">
                 <span>
-                    <Button text="Criar" color="green" handle={handleAddPatient} isLoading={true} />
+                    <Button
+                        text="Criar"
+                        color="green"
+                        handle={handleAddPatient}
+                        isLoading={true}
+                        disabled={cepPermission}
+                    />
                 </span>
             </div>
         </section>
