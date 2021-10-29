@@ -10,10 +10,13 @@
         flex-direction: column;
 
         header {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
+            display: flex;
             gap: 15px;
             margin-bottom: 30px;
+
+            * {
+                flex: 1;
+            }
         }
     }
 }

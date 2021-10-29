@@ -35,6 +35,8 @@ function TablePatient({
             switch (user.groupId) {
                 case 1:
                     return history.push(`/patient/${id}`);
+                case 2:
+                    return history.push(`/patient/${id}`);
                 default:
                     return openInformationModal();
             }

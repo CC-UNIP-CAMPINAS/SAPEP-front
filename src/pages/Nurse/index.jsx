@@ -1,5 +1,5 @@
 import React from "react";
-import CardDoctorInformation from "../../components/CardDoctorInformation";
+import CardNurseInformation from "../../components/CardNurseInformation";
 import TablePatient from "../../components/TablePatient";
 import "./styles.scoped.scss";
 
@@ -9,7 +9,7 @@ function Nurse() {
     return (
         <div className="container">
             <section id="information">
-                <CardDoctorInformation />
+                <CardNurseInformation />
             </section>
             <section id="table">
                 <TablePatient />

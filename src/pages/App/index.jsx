@@ -9,6 +9,7 @@ import { notification } from "../../services/toastify";
 import types from "../../services/types";
 import { setPatients } from "../../store/actions/patients.action";
 import Adm from "../Adm";
+import Nurse from "../Nurse";
 import Doctor from "../Doctor";
 import Home from "../home/index";
 import Patient from "../Patient";
@@ -22,6 +23,11 @@ function App({ user, populatePatients }) {
             case 1:
                 return [
                     <Route key="/" exact path="/" component={Doctor} />,
+                    <Route key="/patient" exact path="/patient/:id" component={Patient} />,
+                ];
+            case 2:
+                return [
+                    <Route key="/" exact path="/" component={Nurse} />,
                     <Route key="/patient" exact path="/patient/:id" component={Patient} />,
                 ];
             default:
