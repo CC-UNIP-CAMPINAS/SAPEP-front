@@ -6,6 +6,7 @@ const emailMatch = "Digite um email válido";
 const emailEmpty = "O email não pode ser vazio";
 
 const teamReportEmpty = "O relatório da equipe não pode ser vazio";
+const nurseReportEmpty = "O relatório de enfermagem não pode ser vazio";
 
 const drugEmpty = "O medicamento não pode ser vazio.";
 
@@ -176,6 +177,14 @@ const schemaCreateAdm = yup.object().shape({
 
 const schemaCreateTeamReport = yup.object().shape({
     report: yup.string().required(teamReportEmpty),
+    medicalRecordId: yup
+        .number()
+        .required(medicalRecordIdEmpty)
+        .min(1, medicalRecordIdMatch),
+});
+
+const schemaCreateNurseReport = yup.object().shape({
+    report: yup.string().required(nurseReportEmpty),
     medicalRecordId: yup
         .number()
         .required(medicalRecordIdEmpty)
@@ -381,6 +390,8 @@ async function validate(schemaName, body) {
                 return await schemaCreateAdm.validate(body);
             case "create-team-report":
                 return await schemaCreateTeamReport.validate(body);
+            case "create-nurse-report":
+                return await schemaCreateNurseReport.validate(body);
             case "create-medical-prescription":
                 return await schemaCreateMedicalPrescription.validate(body);
             case "update-patient":

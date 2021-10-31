@@ -5,23 +5,23 @@ import { api } from "../../services/api";
 import { notification } from "../../services/toastify";
 import types from "../../services/types";
 import validate from "../../services/yup";
-import { addTeamReport } from "../../store/actions/patients.action";
+import { addNurseReport } from "../../store/actions/patients.action";
 import Button from "../Button/Button";
 import "./styles.scoped.scss";
 
-function CardAddNurseReport({ addTeamReport, close, medicalRecordId }) {
+function CardAddNurseReport({ addNurseReport, close, medicalRecordId }) {
     const { id } = useParams();
 
     const [inputs, setInputs] = React.useState({
         report: "",
     });
 
-    async function handleAddMedicalPrescription() {
+    async function handleAddNurseReport() {
         try {
             const body = { ...inputs, medicalRecordId };
-            if (await validate("create-team-report", body)) {
-                const { data } = await api.post("/team-report", body);
-                addTeamReport({ data, patientId: id });
+            if (await validate("create-nurse-report", body)) {
+                const { data } = await api.post("/nurse-report", body);
+                addNurseReport({ data, patientId: id });
                 close();
                 notification(types.SUCCESS, "Relatório criado.");
             }
@@ -42,7 +42,7 @@ function CardAddNurseReport({ addTeamReport, close, medicalRecordId }) {
     return (
         <section className="container">
             <header>
-                <h1>Criar Relatório da Equipe</h1>
+                <h1>Criar Relatório de Enfermagem</h1>
                 <span>Campos obrigatórios: *</span>
             </header>
 
@@ -60,7 +60,7 @@ function CardAddNurseReport({ addTeamReport, close, medicalRecordId }) {
 
             <div id="button">
                 <span>
-                    <Button text="Criar" color="green" handle={handleAddMedicalPrescription} isLoading={true} />
+                    <Button text="Criar" color="green" handle={handleAddNurseReport} isLoading={true} />
                 </span>
             </div>
         </section>
@@ -69,8 +69,8 @@ function CardAddNurseReport({ addTeamReport, close, medicalRecordId }) {
 
 const mapDispatchToProps = (dispatch) => {
     return {
-        addTeamReport(report) {
-            const action = addTeamReport(report);
+        addNurseReport(report) {
+            const action = addNurseReport(report);
             dispatch(action);
         },
     };

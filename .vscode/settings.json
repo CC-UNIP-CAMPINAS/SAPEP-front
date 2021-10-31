@@ -37,6 +37,7 @@
         "Component: CardTeamReport",
         "Component: CardMedicalRecord",
         "Component: Button",
-        "Page: Nurse"
+        "Page: Nurse",
+        "Component: CardAddNurseReport"
     ]
 }
