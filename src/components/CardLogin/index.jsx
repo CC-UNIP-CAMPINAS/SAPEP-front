@@ -3,6 +3,12 @@ import Button from "../Button/Button";
 import "./styles.scoped.scss";
 
 function CardLogin({ inputs, setInputs, handleLogin }) {
+    async function execOnKeyPress(event) {
+        if (event.key === "Enter") {
+            document.getElementById("button-login")?.click();
+        }
+    }
+
     return (
         <div className="container">
             <span>
@@ -16,6 +22,9 @@ function CardLogin({ inputs, setInputs, handleLogin }) {
                     onChange={(e) => setInputs({ ...inputs, user: e.target.value })}
                     type="text"
                     placeholder="Usuário"
+                    onKeyPress={(event) => {
+                        execOnKeyPress(event);
+                    }}
                 />
 
                 <label>Senha</label>
@@ -24,10 +33,13 @@ function CardLogin({ inputs, setInputs, handleLogin }) {
                     onChange={(e) => setInputs({ ...inputs, password: e.target.value })}
                     type="password"
                     placeholder="Senha"
+                    onKeyPress={(event) => {
+                        execOnKeyPress(event);
+                    }}
                 />
             </div>
 
-            <Button handle={handleLogin} text="Entrar" isLoading={true} color="cyan" />
+            <Button id="button-login" handle={handleLogin} text="Entrar" isLoading={true} color="cyan" disable />
         </div>
     );
 }
