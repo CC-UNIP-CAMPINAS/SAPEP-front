@@ -1,5 +1,6 @@
 import types from "../types";
 import _ from "lodash";
+import update from "immutability-helper";
 
 const initialState = [];
 
@@ -23,6 +24,16 @@ export default function configsReducer(state = initialState, action) {
             };
 
             return _.sortBy([...patientsTemp, patient], ["id"]);
+        case types.ADD_NURSE_PRESCRIPTION:
+            const patientsCopy = state.filter((patient) => patient.id !== +action.payload.patientId);
+            const patientCopy = state.find((patient) => patient.id === +action.payload.patientId);
+
+            patientCopy.MedicalRecord = {
+                ...patientCopy.MedicalRecord,
+                NursePrescription: [...patientCopy.MedicalRecord.NursePrescription, action.payload.data],
+            };
+
+            return _.sortBy([...patientsCopy, patientCopy], ["id"]);
         case types.ADD_TEAM_REPORT:
             const stateCopy = state.filter((patient) => patient.id !== +action.payload.patientId);
             const foundPatient = state.find((patient) => patient.id === +action.payload.patientId);
@@ -43,6 +54,21 @@ export default function configsReducer(state = initialState, action) {
             };
 
             return _.sortBy([...copyState, patientFonded], ["id"]);
+
+        case types.SET_REALIZED_NURSE_PRESCRIPTION:
+            const indexPatient = state.findIndex((patient) => patient.id === +action.payload.patientId);
+            const indexPrescription = state[indexPatient].MedicalRecord.NursePrescription.findIndex(
+                (prescription) => prescription.id === action.payload.data.id
+            );
+            return indexPrescription !== -1
+                ? update(state, {
+                      [indexPatient]: {
+                          MedicalRecord: {
+                              NursePrescription: { [indexPrescription]: { $merge: { ...action.payload.data } } },
+                          },
+                      },
+                  })
+                : state;
         case types.CLEAR:
             return initialState;
         default:

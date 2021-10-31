@@ -10,6 +10,8 @@ const nurseReportEmpty = "O relatório de enfermagem não pode ser vazio";
 
 const drugEmpty = "O medicamento não pode ser vazio.";
 
+const prescriptionEmpty = "A prescrição não pode ser vazia.";
+
 const drugDosageEmpty = "A dosagem não pode ser vazia.";
 
 const drugWayEmpty = "A via de administração do medicamento não pode ser vazia.";
@@ -196,6 +198,15 @@ const schemaCreateMedicalPrescription = yup.object().shape({
     drugDosage: yup.string().required(drugDosageEmpty),
     drugWay: yup.string().required(drugWayEmpty),
     administrationInterval: yup.string().required(administrationIntervalEmpty),
+    obs: yup.string().optional(administrationIntervalEmpty),
+    medicalRecordId: yup
+        .number()
+        .required(medicalRecordIdEmpty)
+        .min(1, medicalRecordIdMatch),
+});
+
+const schemaCreateNursePrescription = yup.object().shape({
+    prescription: yup.string().required(prescriptionEmpty),
     obs: yup.string().optional(administrationIntervalEmpty),
     medicalRecordId: yup
         .number()
@@ -394,6 +405,8 @@ async function validate(schemaName, body) {
                 return await schemaCreateNurseReport.validate(body);
             case "create-medical-prescription":
                 return await schemaCreateMedicalPrescription.validate(body);
+            case "create-nurse-prescription":
+                return await schemaCreateNursePrescription.validate(body);
             case "update-patient":
                 return await schemaUpdatePatient.validate(body);
             case "update-adm":
