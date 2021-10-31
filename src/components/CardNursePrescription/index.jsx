@@ -1,9 +1,37 @@
-import React from "react";
-import "./styles.scoped.scss";
 import { Icon } from "@iconify/react";
 import dayjs from "dayjs";
+import React from "react";
+import { connect } from "react-redux";
+import { useParams } from "react-router";
+import { api } from "../../services/api";
+import { notification } from "../../services/toastify";
+import types from "../../services/types";
+import { setRealizedNursePrescription } from "../../store/actions/patients.action";
+import Button from "../Button/Button";
+import "./styles.scoped.scss";
 
-function CardNursePrescription({ prescription }) {
+function CardNursePrescription({ prescription, user, setRealized }) {
+    const { id } = useParams();
+
+    async function handleExecutePrescription() {
+        try {
+            const { data } = await api.patch("/nurse-prescription/set-realized", { id: prescription.id });
+            setRealized({ data, patientId: id });
+            notification(types.SUCCESS, "Prescrição executada.");
+        } catch (error) {
+            console.log(error);
+            if (error.response.status === 401) {
+                notification(types.NOT_AUTHORIZED, error.response.data.message);
+            }
+            if (error.response.status === 409) {
+                notification(types.WARNING, error.response.data.message);
+            }
+            if (error.response.status === 500) {
+                notification(types.ERROR, "Algum problema ocorreu, tente novamente.");
+            }
+        }
+    }
+
     return (
         <div className="container">
             <header>
@@ -46,29 +74,42 @@ function CardNursePrescription({ prescription }) {
                 </div>
 
                 <div id="administration">
-                    <p>
-                        <span>Administração:</span>
-                    </p>
+                    <main>
+                        <p>
+                            <span>Administração:</span>
+                        </p>
 
-                    {prescription.Executor ? (
-                        <div>
-                            <table>
-                                <thead>
-                                    <tr>
-                                        <th>Data</th>
-                                        <th>Executor</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <tr>
-                                        <td>{dayjs(prescription.executionDate).format("DD/MM/YYYY [ás] HH:mm:ss")}</td>
-                                        <td>{prescription.Executor.user.name}</td>
-                                    </tr>
-                                </tbody>
-                            </table>
-                        </div>
+                        {prescription.Executor ? (
+                            <div>
+                                <table>
+                                    <thead>
+                                        <tr>
+                                            <th>Data</th>
+                                            <th>Executor</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td>
+                                                {dayjs(prescription.executionDate).format("DD/MM/YYYY [às] HH:mm:ss")}
+                                            </td>
+                                            <td>{prescription.Executor.user.name}</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        ) : (
+                            <p>Nenhuma administração.</p>
+                        )}
+                    </main>
+                    {prescription.realized ? (
+                        ""
+                    ) : user.groupId === 2 ? (
+                        <span>
+                            <Button text="Executar" color="cyan" handle={handleExecutePrescription} isLoading={true} />
+                        </span>
                     ) : (
-                        <p>Nenhuma administração.</p>
+                        ""
                     )}
                 </div>
             </section>
@@ -76,4 +117,22 @@ function CardNursePrescription({ prescription }) {
     );
 }
 
-export default CardNursePrescription;
+const mapStateToProps = (states) => {
+    return {
+        user: states.user,
+    };
+};
+
+const mapDispatchToProps = (dispatch) => {
+    return {
+        setRealized(prescription) {
+            const action = setRealizedNursePrescription(prescription);
+            dispatch(action);
+        },
+    };
+};
+
+export default connect(
+    mapStateToProps,
+    mapDispatchToProps
+)(CardNursePrescription);
