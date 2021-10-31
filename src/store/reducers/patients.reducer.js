@@ -33,6 +33,16 @@ export default function configsReducer(state = initialState, action) {
             };
 
             return _.sortBy([...stateCopy, foundPatient], ["id"]);
+        case types.ADD_NURSE_REPORT:
+            const copyState = state.filter((patient) => patient.id !== +action.payload.patientId);
+            const patientFonded = state.find((patient) => patient.id === +action.payload.patientId);
+
+            patientFonded.MedicalRecord = {
+                ...patientFonded.MedicalRecord,
+                NurseReport: [...patientFonded.MedicalRecord.NurseReport, action.payload.data],
+            };
+
+            return _.sortBy([...copyState, patientFonded], ["id"]);
         case types.CLEAR:
             return initialState;
         default:

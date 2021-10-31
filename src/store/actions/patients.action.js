@@ -34,3 +34,10 @@ export function addTeamReport(report) {
         payload: report,
     };
 }
+
+export function addNurseReport(report) {
+    return {
+        type: types.ADD_NURSE_REPORT,
+        payload: report,
+    };
+}
