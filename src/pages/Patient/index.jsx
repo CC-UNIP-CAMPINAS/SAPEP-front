@@ -74,7 +74,7 @@ function Patient({ patients, user }) {
                     )}
                 </Popup>
                 <Popup ref={modalNurseReport} modal>
-                    <CardAddNurseReport close={closeTeamReportModal} medicalRecordId={patient?.MedicalRecord?.id} />
+                    <CardAddNurseReport close={closeNurseReportModal} medicalRecordId={patient?.MedicalRecord?.id} />
                 </Popup>
                 <Popup ref={modalTeamReport} modal>
                     <CardAddTeamReport close={closeTeamReportModal} medicalRecordId={patient?.MedicalRecord?.id} />
