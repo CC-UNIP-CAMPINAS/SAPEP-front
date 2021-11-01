@@ -46,6 +46,11 @@
 
         #administration {
             width: 400px;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            margin-left: 20px;
+
             div {
                 border-radius: 0.5rem;
                 max-height: 150px;
