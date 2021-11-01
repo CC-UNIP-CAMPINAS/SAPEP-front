@@ -55,3 +55,9 @@ export function setRealizedNursePrescription(prescription) {
         payload: prescription,
     };
 }
+export function setRealizedMedicalPrescription(prescription) {
+    return {
+        type: types.SET_REALIZED_MEDICAL_PRESCRIPTION,
+        payload: prescription,
+    };
+}

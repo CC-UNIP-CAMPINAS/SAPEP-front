@@ -69,6 +69,20 @@ export default function configsReducer(state = initialState, action) {
                       },
                   })
                 : state;
+        case types.SET_REALIZED_MEDICAL_PRESCRIPTION:
+            const patientIndex = state.findIndex((patient) => patient.id === +action.payload.patientId);
+            const prescriptionIndex = state[patientIndex].MedicalRecord.MedicalPrescription.findIndex(
+                (prescription) => prescription.id === action.payload.data.id
+            );
+            return prescriptionIndex !== -1
+                ? update(state, {
+                      [patientIndex]: {
+                          MedicalRecord: {
+                              MedicalPrescription: { [prescriptionIndex]: { $merge: { ...action.payload.data } } },
+                          },
+                      },
+                  })
+                : state;
         case types.CLEAR:
             return initialState;
         default:
