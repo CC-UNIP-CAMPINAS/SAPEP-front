@@ -17,7 +17,7 @@ function CardTeamReport({ report }) {
                         </p>
                         <p>
                             <span>Data do relatório: </span>
-                            {dayjs(report.date).format("DD/MM/YYYY [ás] HH:mm:ss")}
+                            {dayjs(report.date).format("DD/MM/YYYY [às] HH:mm:ss")}
                         </p>
                     </main>
 

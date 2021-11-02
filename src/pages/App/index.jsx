@@ -9,9 +9,9 @@ import { notification } from "../../services/toastify";
 import types from "../../services/types";
 import { setPatients } from "../../store/actions/patients.action";
 import Adm from "../Adm";
-import Nurse from "../Nurse";
 import Doctor from "../Doctor";
 import Home from "../home/index";
+import Nurse from "../Nurse";
 import Patient from "../Patient";
 import "./styles.scoped.scss";
 

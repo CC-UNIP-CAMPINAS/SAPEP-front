@@ -60,7 +60,7 @@ function CardMedicalPrescription({ prescription, user, setRealized }) {
                         </p>
                         <p>
                             <span>Data da prescrição: </span>
-                            {dayjs(prescription.date).format("DD/MM/YYYY [ás] HH:mm:ss")}
+                            {dayjs(prescription.date).format("DD/MM/YYYY [às] HH:mm:ss")}
                         </p>
                     </main>
 
@@ -107,7 +107,7 @@ function CardMedicalPrescription({ prescription, user, setRealized }) {
                                         {prescription.Executors.map((executor, index) => (
                                             <tr key={index}>
                                                 <td>
-                                                    {dayjs(executor.executionDate).format("DD/MM/YYYY [ás] HH:mm:ss")}
+                                                    {dayjs(executor.executionDate).format("DD/MM/YYYY [às] HH:mm:ss")}
                                                 </td>
                                                 <td>{executor.Executor.user.name}</td>
                                             </tr>

@@ -57,7 +57,7 @@ function CardNursePrescription({ prescription, user, setRealized }) {
                         </p>
                         <p>
                             <span>Data da prescrição: </span>
-                            {dayjs(prescription.prescriptionDate).format("DD/MM/YYYY [ás] HH:mm:ss")}
+                            {dayjs(prescription.prescriptionDate).format("DD/MM/YYYY [às] HH:mm:ss")}
                         </p>
                     </main>
 
