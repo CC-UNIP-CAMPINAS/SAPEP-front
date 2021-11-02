@@ -1,0 +1,55 @@
+.container {
+    display: flex;
+    flex-direction: column;
+    padding: 1.25rem 1.875rem;
+
+    color: var(--gray-700);
+
+    header {
+        margin-bottom: 1.875rem;
+    }
+
+    span {
+        color: var(--red);
+        font-weight: bold;
+    }
+
+    #inputs {
+        display: flex;
+        flex-direction: column;
+        max-height: 490px;
+        overflow: auto;
+        padding-right: 1.25rem;
+
+        label {
+            margin-bottom: 0.3125rem;
+        }
+
+        input {
+            background: var(--gray-100);
+            margin-bottom: 0.9375rem;
+            scroll-margin: 0 530px;
+            width: 100%;
+            height: 2.5rem;
+        }
+
+        textarea {
+            background: var(--gray-100);
+            margin-bottom: 0.9375rem;
+            scroll-margin: 0 530px;
+            width: 100%;
+            height: 6rem;
+            resize: none;
+        }
+
+        select {
+            background: var(--gray-100);
+            margin-bottom: 0.9375rem;
+            min-height: 2.5rem;
+        }
+    }
+
+    #button {
+        margin-top: 1.25rem;
+    }
+}

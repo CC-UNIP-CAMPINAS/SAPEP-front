@@ -35,6 +35,7 @@ function ModalPatientInformation({ patient, updatePatient, closeModal }) {
     });
 
     const [address, setAddress] = React.useState("");
+    const [cepPermission, setCepPermission] = React.useState(true);
 
     React.useEffect(() => {
         async function handleSearchCep() {
@@ -45,12 +46,21 @@ function ModalPatientInformation({ patient, updatePatient, closeModal }) {
 
                     if (data.erro) {
                         setAddress("Problema para achar o endereço pelo CEP 😢");
+                        notification(types.INFO, "Digite um CEP válido.");
+                        setCepPermission(true);
                     } else {
                         setAddress(`${data.logradouro}, ${data.bairro}, ${data.localidade} - ${data.uf}`);
+                        setCepPermission(false);
                     }
+                }
+                if (inputs.cep.length === 0) {
+                    setAddress(``);
+                    setCepPermission(false);
                 }
             } catch (error) {
                 setAddress("Problema para achar o endereço pelo CEP 😢");
+                notification(types.INFO, "Digite um CEP válido.");
+                setCepPermission(true);
             }
         }
 
@@ -71,14 +81,28 @@ function ModalPatientInformation({ patient, updatePatient, closeModal }) {
 
     async function handleUpdatePatient() {
         try {
+            const body = {
+                ...inputs,
+                id: patient.id,
+                birthday: inputs.birthday
+                    ? dayjs(inputs.birthday)
+                          .utc(true)
+                          .toISOString()
+                    : "",
+            };
             if (await validate("update-patient", inputs)) {
-                const { data } = await api.patch("/patient", inputs);
+                if (!cepPermission) {
+                    const { data } = await api.patch("/patient", body);
 
-                updatePatient(data.payload.patient);
-                notification(types.SUCCESS, "Cadastro atualizado.");
-                closeModal();
+                    updatePatient(data);
+                    notification(types.SUCCESS, "Cadastro atualizado.");
+                    closeModal();
+                } else {
+                    notification(types.INFO, "Digite um CEP válido.");
+                }
             }
         } catch (error) {
+            console.log(error);
             if (error.response.status === 401) {
                 notification(types.NOT_AUTHORIZED, error.response.data.message);
             }
@@ -180,7 +204,13 @@ function ModalPatientInformation({ patient, updatePatient, closeModal }) {
                 {disabled ? (
                     <Button text="Liberar atualização" color="cyan" handle={handleEditInputs} />
                 ) : (
-                    <Button text="Atualizar" color="green" handle={handleUpdatePatient} isLoading={true} />
+                    <Button
+                        text="Atualizar"
+                        color="green"
+                        handle={handleUpdatePatient}
+                        isLoading={true}
+                        disabled={cepPermission}
+                    />
                 )}
 
                 <span />

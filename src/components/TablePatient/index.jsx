@@ -2,6 +2,7 @@ import dayjs from "dayjs";
 import utc from "dayjs/plugin/utc";
 import React from "react";
 import { connect } from "react-redux";
+import { useHistory } from "react-router";
 import { Popup } from "reactjs-popup";
 import Button from "../Button/Button";
 import CardAddPatient from "../CardAddPatient";
@@ -11,8 +12,11 @@ import "./styles.scoped.scss";
 function TablePatient({
     header = ["Id", "Nome", "Endereço", "Data Nasc.", "Telefone", "Convênio", "CPF", "RG", "Sexo"],
     patients = [],
+    user,
 }) {
     dayjs.extend(utc);
+
+    const history = useHistory();
 
     const modalAddRef = React.useRef();
     const openAddModal = () => modalAddRef.current.open();
@@ -28,7 +32,14 @@ function TablePatient({
         const foundPatient = patients.find((patient) => patient.id === id);
         if (foundPatient) {
             setActivePatient(foundPatient);
-            openInformationModal();
+            switch (user.groupId) {
+                case 1:
+                    return history.push(`/patient/${id}`);
+                case 2:
+                    return history.push(`/patient/${id}`);
+                default:
+                    return openInformationModal();
+            }
         }
     }
 
@@ -41,15 +52,20 @@ function TablePatient({
 
     return (
         <section className="container">
-            <section id="buttons">
-                <span>
-                    <Button text="Adicionar Paciente" color="cyan" handle={openAddModal} />
-                </span>
-                <div />
-                <Popup ref={modalAddRef} modal>
-                    <CardAddPatient close={closeAddModal} />
-                </Popup>
-            </section>
+            {[5, 3].includes(user.groupId) ? (
+                <section id="buttons">
+                    <span>
+                        <Button text="Adicionar Paciente" color="cyan" handle={openAddModal} />
+                    </span>
+                    <div />
+                    <Popup ref={modalAddRef} modal>
+                        <CardAddPatient close={closeAddModal} />
+                    </Popup>
+                </section>
+            ) : (
+                <h1>Pacientes</h1>
+            )}
+
             <section id="table">
                 <table>
                     <Popup ref={modalInformationRef} modal>
@@ -91,6 +107,7 @@ function TablePatient({
 const mapStateToProps = (states) => {
     return {
         patients: states.patients,
+        user: states.user,
     };
 };
 

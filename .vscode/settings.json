@@ -23,6 +23,22 @@
         "Component: ModalPatientInformation",
         "Component: TablePatient",
         "Page: Adm",
-        "Page: App"
+        "Page: App",
+        "Component: CardDoctorInformation",
+        "Page: Doctor",
+        "Component: CardMedicalInformation",
+        "Component: CardPatientInformation",
+        "Page: Patient",
+        "Component: CardAddMedicalPrescription",
+        "Component: CardAddTeamReport",
+        "Component: CardMedicalPrescription",
+        "Component: CardNursePrescription",
+        "Component: CardNurseReport",
+        "Component: CardTeamReport",
+        "Component: CardMedicalRecord",
+        "Component: Button",
+        "Page: Nurse",
+        "Component: CardAddNurseReport",
+        "Component: CardAddNursePrescription"
     ]
 }

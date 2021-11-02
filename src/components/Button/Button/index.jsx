@@ -2,7 +2,7 @@ import React from "react";
 import { Icon } from "@iconify/react";
 import "./styles.scoped.scss";
 
-function Button({ handle, text, disabled, isLoading, color, styles }) {
+function Button({ id, handle, text, disabled, isLoading, color, styles }) {
     const _isMounted = React.useRef(true);
     const [loading, setLoading] = React.useState(false);
     const [isDisabled, setDisabled] = React.useState(disabled);
@@ -12,6 +12,10 @@ function Button({ handle, text, disabled, isLoading, color, styles }) {
             _isMounted.current = false;
         };
     }, []);
+
+    React.useEffect(() => {
+        setDisabled(disabled);
+    }, [disabled]);
 
     async function handleClick() {
         if (isLoading) {
@@ -35,7 +39,7 @@ function Button({ handle, text, disabled, isLoading, color, styles }) {
     }
 
     return (
-        <button className={color} styles={styles} type="button" onClick={handleClick} disabled={isDisabled}>
+        <button id={id} className={color} styles={styles} type="button" onClick={handleClick} disabled={isDisabled}>
             {loading ? <Icon icon="eos-icons:loading" /> : text}
         </button>
     );

@@ -12,6 +12,10 @@
 
     --red: rgb(255, 95, 95);
     --green: rgb(65, 230, 78);
+    --orange: #ffa946;
+
+    --blue-200: #0081cb;
+    --blue-400: rgb(21, 75, 146);
 
     --gray-100: #f3f3f3;
     --gray-150: #ebe9e9;
@@ -20,7 +24,10 @@
     --gray-600: #666666;
     --gray-700: #545454;
 
+    --cyan: rgb(98, 205, 255);
+    --cyan-100: rgb(41, 187, 255);
     --cyan-200: #00c2cb;
+    --cyan-300: #157992;
     --cyan-500: #158c92;
 }
 
@@ -84,7 +91,8 @@ button {
     }
 }
 
-input {
+input,
+textarea {
     padding: 1rem;
     background: var(--white);
     border-radius: 0.5rem;
@@ -158,6 +166,19 @@ select {
         box-shadow: 0 0 500px rgba(241, 241, 241, 0);
     }
 }
+
 .popup-content {
     -webkit-animation: anvil 0.3s cubic-bezier(0.38, 0.1, 0.36, 0.9) forwards;
+}
+
+#button-up-page {
+    height: 50px;
+    width: 50px;
+    color: var(--gray-700);
+
+    transition: filter 0.5s;
+
+    &:hover {
+        filter: opacity(0.8);
+    }
 }

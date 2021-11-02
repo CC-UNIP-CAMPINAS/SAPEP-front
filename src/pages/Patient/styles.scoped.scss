@@ -1,0 +1,22 @@
+.container {
+    display: grid;
+    gap: 1.875rem;
+    grid-template-columns: 25rem 1fr;
+    margin: 2.5rem;
+    flex: 1;
+
+    #medical-record {
+        display: flex;
+        flex-direction: column;
+
+        header {
+            display: flex;
+            gap: 15px;
+            margin-bottom: 30px;
+
+            * {
+                flex: 1;
+            }
+        }
+    }
+}
