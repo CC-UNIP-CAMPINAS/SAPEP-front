@@ -8,7 +8,7 @@ import CardAddNursePrescription from "../../components/CardAddNursePrescription"
 import CardAddNurseReport from "../../components/CardAddNurseReport";
 import CardAddTeamReport from "../../components/CardAddTeamReport";
 import CardMedicalRecord from "../../components/CardMedicalRecord";
-import CardPatientInformation from "../../components/CardPatientInformation";
+import CardPatientInformation from "../../components/CardPatientInformation/index";
 import "./styles.scoped.scss";
 
 function Patient({ patients, user }) {
@@ -79,7 +79,7 @@ function Patient({ patients, user }) {
                 <Popup ref={modalTeamReport} modal>
                     <CardAddTeamReport close={closeTeamReportModal} medicalRecordId={patient?.MedicalRecord?.id} />
                 </Popup>
-                <CardMedicalRecord medicalRecord={patient.MedicalRecord} />
+                <CardMedicalRecord patient={patient} medicalRecord={patient.MedicalRecord} />
             </section>
         </div>
     );

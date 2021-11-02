@@ -1,12 +1,15 @@
+import { Icon } from "@iconify/react";
+import { PDFDownloadLink } from "@react-pdf/renderer";
 import dayjs from "dayjs";
 import React from "react";
+import PatientInPdf from "../../pages/Patient/pdfVersion";
 import CardMedicalPrescription from "../CardMedicalPrescription/index";
 import CardNursePrescription from "../CardNursePrescription";
 import CardNurseReport from "../CardNurseReport";
 import CardTeamReport from "../CardTeamReport";
 import "./styles.scoped.scss";
 
-function CardMedicalRecord({ medicalRecord }) {
+function CardMedicalRecord({ patient, medicalRecord }) {
     const [date, setDate] = React.useState(dayjs().format("YYYY-MM-DD"));
 
     function joinContent() {
@@ -65,8 +68,30 @@ function CardMedicalRecord({ medicalRecord }) {
     return (
         <section className="container">
             <div id="date-selector">
-                <div>
-                    <h1>Prontuário do paciente</h1>
+                <div id="div-title">
+                    <h1>Prontuário do paciente </h1>
+                    {date ? (
+                        <PDFDownloadLink
+                            document={<PatientInPdf patient={patient} date={date} />}
+                            fileName={`${dayjs(date).format("DD-MM-YYYY")} - Prontuário de ${patient.name} ${
+                                patient.lastName
+                            }.pdf`}
+                        >
+                            {({ blob, url, loading, error }) =>
+                                loading ? (
+                                    <button id="button-download-medical-record" title="Download do prontuário">
+                                        Carregando PDF...
+                                    </button>
+                                ) : (
+                                    <button id="button-download-medical-record" title="Download do prontuário">
+                                        <Icon icon="bi:cloud-download-fill" />
+                                    </button>
+                                )
+                            }
+                        </PDFDownloadLink>
+                    ) : (
+                        ""
+                    )}
                 </div>
                 <div>
                     <label>Data dos dados: </label>
