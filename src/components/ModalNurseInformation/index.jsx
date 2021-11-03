@@ -38,14 +38,14 @@ function ModalNurseInformation({ nurse, updateNurse, closeModal }) {
 
     async function handleActivationNurse() {
         try {
-            if (nurse.active) {
+            if (nurse.user.active) {
                 await api.patch("/user/nurse/disable/" + nurse.userId);
                 notification(types.SUCCESS, "Cadastro desativado.");
-                updateNurse({ ...nurse, active: false });
+                updateNurse({ ...nurse, user: { ...nurse.user, active: false } });
             } else {
                 await api.patch("/user/nurse/enable/" + nurse.userId);
                 notification(types.SUCCESS, "Cadastro ativado.");
-                updateNurse({ ...nurse, active: true });
+                updateNurse({ ...nurse, user: { ...nurse.user, active: true } });
             }
 
             closeModal();
@@ -145,7 +145,7 @@ function ModalNurseInformation({ nurse, updateNurse, closeModal }) {
                 <span />
                 {!disabled ? (
                     <Button text="Cancelar" color="red" handle={clear} />
-                ) : nurse.active ? (
+                ) : nurse.user.active ? (
                     <Button text="Desativar" color="red" handle={handleActivationNurse} isLoading={true} />
                 ) : (
                     <Button text="Restaurar" color="green" handle={handleActivationNurse} isLoading={true} />

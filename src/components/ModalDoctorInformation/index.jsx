@@ -39,14 +39,14 @@ function ModalDoctorInformation({ doctor, updateDoctor, closeModal }) {
 
     async function handleActivationDoctor() {
         try {
-            if (doctor.active) {
+            if (doctor.user.active) {
                 await api.patch("/user/doctor/disable/" + doctor.userId);
                 notification(types.SUCCESS, "Cadastro desativado.");
-                updateDoctor({ ...doctor, active: false });
+                updateDoctor({ ...doctor, user: { ...doctor.user, active: false } });
             } else {
                 await api.patch("/user/doctor/enable/" + doctor.userId);
                 notification(types.SUCCESS, "Cadastro ativado.");
-                updateDoctor({ ...doctor, active: true });
+                updateDoctor({ ...doctor, user: { ...doctor.user, active: true } });
             }
 
             closeModal();
@@ -152,7 +152,7 @@ function ModalDoctorInformation({ doctor, updateDoctor, closeModal }) {
                 <span />
                 {!disabled ? (
                     <Button text="Cancelar" color="red" handle={clear} />
-                ) : doctor.active ? (
+                ) : doctor.user.active ? (
                     <Button text="Desativar" color="red" handle={handleActivationDoctor} isLoading={true} />
                 ) : (
                     <Button text="Restaurar" color="green" handle={handleActivationDoctor} isLoading={true} />

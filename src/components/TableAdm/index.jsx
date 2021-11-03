@@ -30,7 +30,7 @@ function TableAdm({ header = ["Id", "Nome", "Email", "Sexo", "Telefone"], adms =
         if (!isCheck) {
             return adms;
         } else {
-            return adms.filter((adm) => adm.active);
+            return adms.filter((adm) => adm.user.active);
         }
     }
 
@@ -71,7 +71,7 @@ function TableAdm({ header = ["Id", "Nome", "Email", "Sexo", "Telefone"], adms =
                             return (
                                 <tr
                                     key={index}
-                                    className={adm.active ? "" : "disable"}
+                                    className={adm.user.active ? "" : "disable"}
                                     onClick={() => handleSelectRow(adm.userId)}
                                 >
                                     <td>{adm.userId}</td>

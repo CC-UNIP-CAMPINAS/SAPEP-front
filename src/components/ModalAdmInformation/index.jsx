@@ -37,14 +37,14 @@ function ModalAdmInformation({ adm, updateAdm, closeModal }) {
 
     async function handleActivationAdm() {
         try {
-            if (adm.active) {
+            if (adm.user.active) {
                 await api.patch("/user/adm/disable/" + adm.userId);
                 notification(types.SUCCESS, "Cadastro desativado.");
-                updateAdm({ ...adm, active: false });
+                updateAdm({ ...adm, user: { ...adm.user, active: false } });
             } else {
                 await api.patch("/user/adm/enable/" + adm.userId);
                 notification(types.SUCCESS, "Cadastro ativado.");
-                updateAdm({ ...adm, active: true });
+                updateAdm({ ...adm, user: { ...adm.user, active: true } });
             }
 
             closeModal();
@@ -137,7 +137,7 @@ function ModalAdmInformation({ adm, updateAdm, closeModal }) {
                 <span />
                 {!disabled ? (
                     <Button text="Cancelar" color="red" handle={clear} />
-                ) : adm.active ? (
+                ) : adm.user.active ? (
                     <Button text="Desativar" color="red" handle={handleActivationAdm} isLoading={true} />
                 ) : (
                     <Button text="Restaurar" color="green" handle={handleActivationAdm} isLoading={true} />

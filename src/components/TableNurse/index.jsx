@@ -30,7 +30,7 @@ function TableNurse({ header = ["Id", "Nome", "Email", "COREN", "Sexo", "Telefon
         if (!isCheck) {
             return nurses;
         } else {
-            return nurses.filter((nurse) => nurse.active);
+            return nurses.filter((nurse) => nurse.user.active);
         }
     }
 
@@ -71,7 +71,7 @@ function TableNurse({ header = ["Id", "Nome", "Email", "COREN", "Sexo", "Telefon
                             return (
                                 <tr
                                     key={index}
-                                    className={nurse.active ? "" : "disable"}
+                                    className={nurse.user.active ? "" : "disable"}
                                     onClick={() => handleSelectRow(nurse.userId)}
                                 >
                                     <td>{nurse.userId}</td>
