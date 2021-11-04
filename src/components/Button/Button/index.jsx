@@ -39,7 +39,7 @@ function Button({ id, handle, text, disabled, isLoading, color, styles }) {
     }
 
     return (
-        <button id={id} className={color} styles={styles} type="button" onClick={handleClick} disabled={isDisabled}>
+        <button id={id} className={color} style={styles} type="button" onClick={handleClick} disabled={isDisabled}>
             {loading ? <Icon icon="eos-icons:loading" /> : text}
         </button>
     );
