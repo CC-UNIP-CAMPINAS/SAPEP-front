@@ -15,7 +15,7 @@ function NavBar({ logoff, user }) {
         await api.get("logoff");
         logoff();
     }
-    
+
     return (
         <header className="container">
             <img src="/logo_mini.svg" alt="logo" onClick={() => (history.location !== "/" ? history.push("/") : "")} />
@@ -28,6 +28,19 @@ function NavBar({ logoff, user }) {
                 </header>
 
                 <div id="button-area">
+                    {user.groupId === 5 ? (
+                        <div>
+                            <Button
+                                text="Perfil"
+                                color="cyan"
+                                handle={() => {}}
+                                styles={{ height: "fit-content", padding: "5px" }}
+                            />
+                        </div>
+                    ) : (
+                        ""
+                    )}
+
                     <Button text="Sair" color="cyan" handle={handleLogoff} />
                 </div>
             </section>

@@ -74,6 +74,13 @@
             transform: scaleY(0);
             transform-origin: top left;
             transition: transform 0.3s;
+
+            div{
+                margin-bottom: 10px;
+                button{
+                    height:20px
+                }
+            }
         }
 
         &:hover {
