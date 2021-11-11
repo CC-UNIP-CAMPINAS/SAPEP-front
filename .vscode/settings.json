@@ -39,6 +39,7 @@
         "Component: Button",
         "Page: Nurse",
         "Component: CardAddNurseReport",
-        "Component: CardAddNursePrescription"
+        "Component: CardAddNursePrescription",
+        "Component: ModalRootInformation"
     ]
 }
