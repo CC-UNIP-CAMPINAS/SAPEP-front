@@ -7,17 +7,29 @@ import { api } from "../../services/api";
 import { connect } from "react-redux";
 import { clearStore } from "../../store/actions/app.action";
 import { useHistory } from "react-router";
+import Popup from "reactjs-popup";
+import ModalRootInformation from "../ModalRootInformation";
 
 function NavBar({ logoff, user }) {
     const history = useHistory();
 
+    const popupRef = React.useRef();
+
     async function handleLogoff() {
-        await api.get("logoff");
-        logoff();
+        try {
+            await api.get("logoff");
+        } catch (error) {
+            console.log(error);
+        } finally {
+            logoff();
+        }
     }
 
     return (
         <header className="container">
+            <Popup ref={popupRef}>
+                <ModalRootInformation root={user} closeModa={() => popupRef.current.close()} />
+            </Popup>
             <img src="/logo_mini.svg" alt="logo" onClick={() => (history.location !== "/" ? history.push("/") : "")} />
             <span id="space" />
             <section id="menu_drop">
@@ -33,7 +45,9 @@ function NavBar({ logoff, user }) {
                             <Button
                                 text="Perfil"
                                 color="cyan"
-                                handle={() => {}}
+                                handle={() => {
+                                    popupRef.current.open();
+                                }}
                                 styles={{ height: "fit-content", padding: "5px" }}
                             />
                         </div>
