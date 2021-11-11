@@ -16,12 +16,12 @@ function CardLogin({ inputs, setInputs, handleLogin }) {
             </span>
 
             <div>
-                <label>Usuário</label>
+                <label>Email</label>
                 <input
                     value={inputs.user}
                     onChange={(e) => setInputs({ ...inputs, user: e.target.value })}
                     type="text"
-                    placeholder="Usuário"
+                    placeholder="amanda@gmail.com"
                     onKeyPress={(event) => {
                         execOnKeyPress(event);
                     }}
