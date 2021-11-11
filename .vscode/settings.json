@@ -40,6 +40,7 @@
         "Page: Nurse",
         "Component: CardAddNurseReport",
         "Component: CardAddNursePrescription",
-        "Component: ModalRootInformation"
+        "Component: ModalRootInformation",
+        "Page: ConfirmationEmail"
     ]
 }
