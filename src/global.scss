@@ -89,6 +89,17 @@ button {
         background: var(--green);
         color: var(--white);
     }
+    &.black {
+        background: var(--gray-700);
+        color: var(--white);
+
+        transition: all 0.2s;
+
+        &:hover {
+            filter: opacity(0.8);
+            background: var(--red);
+        }
+    }
 }
 
 input,
