@@ -386,6 +386,20 @@ const schemaUpdateNurse = yup.object().shape({
         .matches(/(F|M|INDEFINIDO)/, genderMatch),
 });
 
+const schemaResetPassword = yup.object().shape({
+    password: yup
+        .string()
+        .required(passwordEmpty)
+        .min(8, passwordMatch),
+
+    rePassword: yup
+        .string()
+        .required(passwordEmpty)
+        .test("passwords-match", "Senhas diferem!", function(value) {
+            return this.parent.password === value;
+        }),
+});
+
 async function validate(schemaName, body) {
     try {
         switch (schemaName) {
@@ -417,6 +431,8 @@ async function validate(schemaName, body) {
                 return await schemaUpdateNurse.validate(body);
             case "sign":
                 return await schemaSign.validate(body);
+            case "reset-password":
+                return await schemaResetPassword.validate(body);
             default:
                 return false.valueOf;
         }
