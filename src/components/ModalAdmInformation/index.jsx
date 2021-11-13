@@ -93,6 +93,29 @@ function ModalAdmInformation({ adm, updateAdm, closeModal }) {
         }
     }
 
+    async function handleUpdatePassword() {
+        try {
+            const { data } = await api.post(`${process.env.REACT_APP_API_HOST}/reset-password`, {
+                email: adm.user.email,
+            });
+            notification(types.SUCCESS, data.message);
+        } catch (error) {
+            if (error.response.status === 401) {
+                return notification(types.NOT_AUTHORIZED, error.response.data.message);
+            }
+            if (error.response.status === 409) {
+                return notification(types.WARNING, error.response.data.message);
+            }
+            if (error.response.status === 404) {
+                return notification(types.WARNING, error.response.data.message);
+            }
+            if (error.response.status === 400) {
+                return notification(types.WARNING, error.response.data.message);
+            }
+            notification(types.ERROR, "Algum problema ocorreu, tente novamente.");
+        }
+    }
+
     return (
         <div className="container" id="container-adm">
             <h1>Dados do usuário administrativo</h1>
@@ -127,6 +150,20 @@ function ModalAdmInformation({ adm, updateAdm, closeModal }) {
                 disabled={disabled}
                 onChange={(e) => setInputs({ ...inputs, phone: phoneMask(e.target.value) })}
             />
+
+            {!disabled ? (
+                <>
+                    <label>Senha: </label>
+                    <Button
+                        text="Enviar email de troca de senha"
+                        color="black"
+                        handle={handleUpdatePassword}
+                        isLoading={true}
+                    />
+                </>
+            ) : (
+                ""
+            )}
 
             <div>
                 {disabled ? (
