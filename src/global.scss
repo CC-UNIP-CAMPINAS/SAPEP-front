@@ -100,6 +100,16 @@ button {
             background: var(--red);
         }
     }
+
+    &.link {
+        background: transparent;
+        width: fit-content;
+        height: fit-content;
+        color: var(--cyan-300);
+        box-shadow: none;
+        padding: 0;
+        font-size: inherit;
+    }
 }
 
 input,
