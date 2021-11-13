@@ -70,7 +70,6 @@ function PatientInPdf({ patient, date }) {
     }
 
     const content = joinContent();
-    console.log(content[0]);
 
     return (
         <Document>
@@ -85,7 +84,7 @@ function PatientInPdf({ patient, date }) {
                         <Text>Endereço: {patient.address}</Text>
                         <Text>Telefone: {patient.phone}</Text>
                         <Text>
-                            Data de Nascimento:
+                            Data de Nascimento:{" "}
                             {patient.birthday ? dayjs.utc(patient.birthday).format("DD/MM/YYYY") : "---"}
                         </Text>
                         <Text>CPF: {patient.cpf}</Text>

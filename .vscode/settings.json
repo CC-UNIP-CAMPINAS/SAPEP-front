@@ -42,6 +42,7 @@
         "Component: CardAddNursePrescription",
         "Component: ModalRootInformation",
         "Page: ConfirmationEmail",
-        "Page: ConfirmaPassword"
+        "Page: ConfirmaPassword",
+        "Page(PDF): Patient"
     ]
 }
