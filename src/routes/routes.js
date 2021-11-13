@@ -2,6 +2,7 @@ import { connect } from "react-redux";
 import { BrowserRouter, Redirect, Route, Switch } from "react-router-dom";
 import App from "../pages/App";
 import ConfirmationEmail from "../pages/ConfirmationEmail";
+import ConfirmationPassword from "../pages/ConfirmationPassword";
 import Login from "../pages/Login";
 
 const AppRoutes = ({ user }) => {
@@ -18,6 +19,7 @@ const AppRoutes = ({ user }) => {
             <Switch>
                 <Route exact path="/login" component={Login} />
                 <Route exact path="/change-email/:id" component={ConfirmationEmail} />
+                <Route exact path="/change-password/:id" component={ConfirmationPassword} />
                 {routesAuth()}
                 <Route path="*">
                     <Redirect to="/login" />
