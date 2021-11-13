@@ -1,6 +1,7 @@
 import React from "react";
 import { connect } from "react-redux";
 import { useParams } from "react-router";
+import { useStopwatch } from "react-timer-hook";
 import Popup from "reactjs-popup";
 import Button from "../../components/Button/Button";
 import CardAddMedicalPrescription from "../../components/CardAddMedicalPrescription";
@@ -9,9 +10,11 @@ import CardAddNurseReport from "../../components/CardAddNurseReport";
 import CardAddTeamReport from "../../components/CardAddTeamReport";
 import CardMedicalRecord from "../../components/CardMedicalRecord";
 import CardPatientInformation from "../../components/CardPatientInformation/index";
+import { api } from "../../services/api";
+import { updatePatient } from "../../store/actions/patients.action";
 import "./styles.scoped.scss";
 
-function Patient({ patients, user }) {
+function Patient({ patients, user, updatePatient }) {
     const modalPrescription = React.useRef();
     const openModalPrescription = () => modalPrescription.current.open();
     const closeModalPrescription = () => modalPrescription.current.close();
@@ -34,6 +37,20 @@ function Patient({ patients, user }) {
     }
 
     const patient = handlePatient();
+
+    const { minutes } = useStopwatch({ autoStart: true });
+
+    React.useEffect(() => {
+        async function handleAutoUpdateMedicalRecord() {
+            try {
+                const { data } = await api.get(`${process.env.REACT_APP_API_HOST}/patient/${patient.id}`);
+                updatePatient(data);
+            } catch (error) {
+                console.log(error);
+            }
+        }
+        handleAutoUpdateMedicalRecord();
+    }, [patient.id, minutes, updatePatient]);
 
     return (
         <div className="container">
@@ -92,7 +109,16 @@ const mapStateToProps = (states) => {
     };
 };
 
+const mapDispatchToProps = (dispatch) => {
+    return {
+        updatePatient(patient) {
+            const action = updatePatient(patient);
+            dispatch(action);
+        },
+    };
+};
+
 export default connect(
     mapStateToProps,
-    null
+    mapDispatchToProps
 )(Patient);
