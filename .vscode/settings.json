@@ -41,6 +41,7 @@
         "Component: CardAddNurseReport",
         "Component: CardAddNursePrescription",
         "Component: ModalRootInformation",
-        "Page: ConfirmationEmail"
+        "Page: ConfirmationEmail",
+        "Page: ConfirmaPassword"
     ]
 }
