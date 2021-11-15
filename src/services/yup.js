@@ -41,7 +41,6 @@ const genderEmpty = "O gênero precisar ser informado.";
 const birthdayMatch = "Coloque uma data de nascimento válida.";
 const birthdayEmpty = "A data de nascimento não pode ser vazia. ";
 
-//const phoneEmpty = "O telefone não pode ser vazio";
 const phoneMatch = "O telefone precisa ter no mínimo 11 caracteres. Ex. DDD + 9 Dígitos.";
 
 const cpfEmpty = "O CPF não pode ser vazio";
@@ -93,89 +92,104 @@ const schemaLogin = yup.object().shape({
         .min(8, passwordMatch),
 });
 
-const schemaCreateDoctor = yup.object().shape({
-    email: yup
-        .string()
-        .email(emailMatch)
-        .required(emailEmpty),
-    password: yup
-        .string()
-        .required(passwordEmpty)
-        .min(8, passwordMatch),
-    name: yup
-        .string()
-        .required(nameEmpty)
-        .min(3, nameMatch),
-    crm: yup
-        .string()
-        .required(crmEmpty)
-        .min(6, crmMatch),
-    phone: yup
-        .string()
-        .optional()
-        .min(15, phoneMatch)
-        .max(15, phoneMatch),
-    area: yup
-        .string()
-        .required(areaEmpty)
-        .min(3, areaMatch),
-    gender: yup
-        .string()
-        .required(genderEmpty)
-        .matches(/(F|M|INDEFINIDO)/, genderMatch),
-});
+const schemaCreateDoctor = yup.object().shape(
+    {
+        email: yup
+            .string()
+            .email(emailMatch)
+            .required(emailEmpty),
+        password: yup
+            .string()
+            .required(passwordEmpty)
+            .min(8, passwordMatch),
+        name: yup
+            .string()
+            .required(nameEmpty)
+            .min(3, nameMatch),
+        crm: yup
+            .string()
+            .required(crmEmpty)
+            .min(6, crmMatch),
+        phone: yup.string().when("phone", {
+            is: (value) => value?.length,
+            then: (rule) => {
+                rule.min(15, phoneMatch);
+                rule.max(15, phoneMatch);
+            },
+        }),
+        area: yup
+            .string()
+            .required(areaEmpty)
+            .min(3, areaMatch),
+        gender: yup
+            .string()
+            .required(genderEmpty)
+            .matches(/(F|M|INDEFINIDO)/, genderMatch),
+    },
+    [["phone", "phone"]]
+);
 
-const schemaCreateNurse = yup.object().shape({
-    email: yup
-        .string()
-        .email(emailMatch)
-        .required(emailEmpty),
-    password: yup
-        .string()
-        .required(passwordEmpty)
-        .min(8, passwordMatch),
-    name: yup
-        .string()
-        .required(nameEmpty)
-        .min(3, nameMatch),
-    coren: yup
-        .string()
-        .required(corenEmpty)
-        .min(6, corenMatch),
-    phone: yup
-        .string()
-        .optional()
-        .min(15, phoneMatch)
-        .max(15, phoneMatch),
-    gender: yup
-        .string()
-        .required(genderEmpty)
-        .matches(/(F|M|INDEFINIDO)/, genderMatch),
-});
+const schemaCreateNurse = yup.object().shape(
+    {
+        email: yup
+            .string()
+            .email(emailMatch)
+            .required(emailEmpty),
+        password: yup
+            .string()
+            .required(passwordEmpty)
+            .min(8, passwordMatch),
+        name: yup
+            .string()
+            .required(nameEmpty)
+            .min(3, nameMatch),
+        coren: yup
+            .string()
+            .required(corenEmpty)
+            .min(6, corenMatch),
+        phone: yup.string().when("phone", {
+            is: (value) => value?.length,
+            then: (rule) => {
+                rule.min(15, phoneMatch);
+                rule.max(15, phoneMatch);
+            },
+        }),
+        gender: yup
+            .string()
+            .required(genderEmpty)
+            .matches(/(F|M|INDEFINIDO)/, genderMatch),
+    },
+    [["phone", "phone"]]
+);
 
-const schemaCreateAdm = yup.object().shape({
-    email: yup
-        .string()
-        .email(emailMatch)
-        .required(emailEmpty),
-    password: yup
-        .string()
-        .required(passwordEmpty)
-        .min(8, passwordMatch),
-    name: yup
-        .string()
-        .required(nameEmpty)
-        .min(3, nameMatch),
-    phone: yup
-        .string()
-        .optional()
-        .min(15, phoneMatch)
-        .max(15, phoneMatch),
-    gender: yup
-        .string()
-        .required(genderEmpty)
-        .matches(/(F|M|INDEFINIDO)/, genderMatch),
-});
+const schemaCreateAdm = yup.object().shape(
+    {
+        email: yup
+            .string()
+            .email(emailMatch)
+            .required(emailEmpty),
+        password: yup
+            .string()
+            .required(passwordEmpty)
+            .min(8, passwordMatch),
+        name: yup
+            .string()
+            .required(nameEmpty)
+            .min(3, nameMatch),
+        phone: yup.string().when("phone", {
+            is: (value) => value?.length,
+            then: (rule) => {
+                rule.min(15, phoneMatch);
+                rule.max(15, phoneMatch);
+            },
+        }),
+        gender: yup
+            .string()
+            .required(genderEmpty)
+            .matches(/(F|M|INDEFINIDO)/, genderMatch),
+    },
+    [["phone", "phone"]]
+);
 
 const schemaCreateTeamReport = yup.object().shape({
     report: yup.string().required(teamReportEmpty),
@@ -214,25 +228,30 @@ const schemaCreateNursePrescription = yup.object().shape({
         .min(1, medicalRecordIdMatch),
 });
 
-const schemaUpdateAdm = yup.object().shape({
-    email: yup
-        .string()
-        .email(emailMatch)
-        .required(emailEmpty),
-    name: yup
-        .string()
-        .required(nameEmpty)
-        .min(3, nameMatch),
-    phone: yup
-        .string()
-        .optional()
-        .min(15, phoneMatch)
-        .max(15, phoneMatch),
-    gender: yup
-        .string()
-        .required(genderEmpty)
-        .matches(/(F|M|INDEFINIDO)/, genderMatch),
-});
+const schemaUpdateAdm = yup.object().shape(
+    {
+        email: yup
+            .string()
+            .email(emailMatch)
+            .required(emailEmpty),
+        name: yup
+            .string()
+            .required(nameEmpty)
+            .min(3, nameMatch),
+        phone: yup.string().when("phone", {
+            is: (value) => value?.length,
+            then: (rule) => {
+                rule.min(15, phoneMatch);
+                rule.max(15, phoneMatch);
+            },
+        }),
+        gender: yup
+            .string()
+            .required(genderEmpty)
+            .matches(/(F|M|INDEFINIDO)/, genderMatch),
+    },
+    [["phone", "phone"]]
+);
 
 const schemaCreatePatient = yup.object().shape(
     {
@@ -334,57 +353,67 @@ const schemaUpdatePatient = yup.object().shape(
     [["phone", "phone"], ["cep", "cep"]]
 );
 
-const schemaUpdateDoctor = yup.object().shape({
-    email: yup
-        .string()
-        .email(emailMatch)
-        .required(emailEmpty),
-    name: yup
-        .string()
-        .required(nameEmpty)
-        .min(3, nameMatch),
-    crm: yup
-        .string()
-        .required(crmEmpty)
-        .min(6, crmMatch),
-    phone: yup
-        .string()
-        .optional()
-        .min(15, phoneMatch)
-        .max(15, phoneMatch),
-    area: yup
-        .string()
-        .required(areaEmpty)
-        .min(3, areaMatch),
-    gender: yup
-        .string()
-        .required(genderEmpty)
-        .matches(/(F|M|INDEFINIDO)/, genderMatch),
-});
+const schemaUpdateDoctor = yup.object().shape(
+    {
+        email: yup
+            .string()
+            .email(emailMatch)
+            .required(emailEmpty),
+        name: yup
+            .string()
+            .required(nameEmpty)
+            .min(3, nameMatch),
+        crm: yup
+            .string()
+            .required(crmEmpty)
+            .min(6, crmMatch),
+        phone: yup.string().when("phone", {
+            is: (value) => value?.length,
+            then: (rule) => {
+                rule.min(15, phoneMatch);
+                rule.max(15, phoneMatch);
+            },
+        }),
+        area: yup
+            .string()
+            .required(areaEmpty)
+            .min(3, areaMatch),
+        gender: yup
+            .string()
+            .required(genderEmpty)
+            .matches(/(F|M|INDEFINIDO)/, genderMatch),
+    },
+    [["phone", "phone"]]
+);
 
-const schemaUpdateNurse = yup.object().shape({
-    email: yup
-        .string()
-        .email(emailMatch)
-        .required(emailEmpty),
-    name: yup
-        .string()
-        .required(nameEmpty)
-        .min(3, nameMatch),
-    coren: yup
-        .string()
-        .required(corenEmpty)
-        .min(6, corenMatch),
-    phone: yup
-        .string()
-        .optional()
-        .min(15, phoneMatch)
-        .max(15, phoneMatch),
-    gender: yup
-        .string()
-        .required(genderEmpty)
-        .matches(/(F|M|INDEFINIDO)/, genderMatch),
-});
+const schemaUpdateNurse = yup.object().shape(
+    {
+        email: yup
+            .string()
+            .email(emailMatch)
+            .required(emailEmpty),
+        name: yup
+            .string()
+            .required(nameEmpty)
+            .min(3, nameMatch),
+        coren: yup
+            .string()
+            .required(corenEmpty)
+            .min(6, corenMatch),
+        phone: yup.string().when("phone", {
+            is: (value) => value?.length,
+            then: (rule) => {
+                rule.min(15, phoneMatch);
+                rule.max(15, phoneMatch);
+            },
+        }),
+        gender: yup
+            .string()
+            .required(genderEmpty)
+            .matches(/(F|M|INDEFINIDO)/, genderMatch),
+    },
+    [["phone", "phone"]]
+);
 
 const schemaResetPassword = yup.object().shape({
     password: yup
