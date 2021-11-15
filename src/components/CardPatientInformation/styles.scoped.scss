@@ -1,0 +1,54 @@
+.container {
+    top: 20px;
+    position: sticky;
+    position: -webkit-sticky;
+    background: var(--gray-700);
+    border-radius: 0.9375rem;
+    padding: 1.875rem;
+    display: flex;
+    flex-direction: column;
+    width: fit-content;
+
+    box-shadow: 0px 24px 32px rgba(0, 0, 0, 0.04), 0px 16px 24px rgba(0, 0, 0, 0.04), 0px 4px 8px rgba(0, 0, 0, 0.04),
+        0px 0px 1px rgba(0, 0, 0, 0.04);
+
+    span {
+        font-weight: bold;
+    }
+
+    p {
+        font-size: 1.2rem;
+        &:not(:last-child) {
+            margin-bottom: 15px;
+        }
+    }
+
+    color: var(--white);
+
+    #button-return {
+        position: absolute;
+        display: flex;
+        align-items: center;
+        top: 0;
+        left: -116px;
+        background: var(--cyan-200);
+        color: white;
+        font-weight: bold;
+        padding: 0.5rem;
+        font-size: 1.3rem;
+        border-radius: 0 0.9375rem 0.9375rem 0;
+        transition: 0.5s ease-in-out;
+        cursor: pointer;
+
+        &:hover {
+            left: -40px;
+            background: var(--cyan);
+        }
+
+        svg {
+            margin-left: 0.5rem;
+            width: 30px;
+            height: 30px;
+        }
+    }
+}

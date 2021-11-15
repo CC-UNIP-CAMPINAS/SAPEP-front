@@ -1,0 +1,50 @@
+.container {
+    display: flex;
+    flex-direction: column;
+    margin: 2.5rem;
+    flex: 1;
+
+    #cards {
+        display: flex;
+        flex-wrap: wrap;
+        align-items: center;
+
+        span {
+            flex: 1;
+            margin-bottom: 30px;
+        }
+
+        span:not(:last-child) {
+            margin-right: 50px;
+        }
+    }
+
+    #buttons {
+        margin-bottom: 30px;
+        display: flex;
+        align-items: flex-end;
+        div {
+            flex: 1;
+        }
+
+        p {
+            margin-right: 15px;
+        }
+        p {
+            color: var(--gray-700);
+            font-size: 1.1rem;
+        }
+
+        input[type="checkbox"] {
+            width: 20px;
+            height: 20px;
+        }
+    }
+
+    #table {
+        display: flex;
+        flex-direction: column;
+        min-height: 70vh;
+        border-radius: 1.375rem;
+    }
+}
