@@ -115,6 +115,7 @@ function PatientInPdf({ patient, date }) {
                     >
                         {content.length > 0 ? (
                             content.map((item, index) => {
+                                const styleForCancel = item.canceled ? { opacity: "0.3" } : {};
                                 switch (item.type) {
                                     case "NURSE_PRESCRIPTION":
                                         return (
@@ -128,6 +129,7 @@ function PatientInPdf({ patient, date }) {
                                                     display: "flex",
                                                     flexDirection: "column",
                                                     marginBottom: "20px",
+                                                    ...styleForCancel,
                                                 }}
                                             >
                                                 <Text style={{ fontSize: "20px", marginBottom: "10px" }}>
@@ -169,6 +171,7 @@ function PatientInPdf({ patient, date }) {
                                                     display: "flex",
                                                     flexDirection: "column",
                                                     marginBottom: "20px",
+                                                    ...styleForCancel,
                                                 }}
                                             >
                                                 <Text style={{ fontSize: "20px", marginBottom: "10px" }}>
