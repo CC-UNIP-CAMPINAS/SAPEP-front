@@ -32,11 +32,41 @@ function CardNursePrescription({ prescription, user, setRealized }) {
         }
     }
 
+    async function handleCancelPrescription() {
+        try {
+            const { data } = await api.patch(`/nurse-prescription/${prescription.id}/set-canceled`);
+            setRealized({ data, patientId: id });
+            notification(types.SUCCESS, "Prescrição cancelada.");
+        } catch (error) {
+            console.log(error);
+            if (error.response.status === 401) {
+                notification(types.NOT_AUTHORIZED, error.response.data.message);
+            }
+            if (error.response.status === 409) {
+                notification(types.WARNING, error.response.data.message);
+            }
+            if (error.response.status === 500) {
+                notification(types.ERROR, "Algum problema ocorreu, tente novamente.");
+            }
+        }
+    }
+
     return (
-        <div className="container">
+        <div className={`container ${prescription.canceled ? "canceled" : ""}`}>
+            {!prescription.canceled & (prescription.Prescriber.user.email === user.email) ? (
+                <Icon icon="carbon:close-filled" id="icon-cancel" onClick={handleCancelPrescription} />
+            ) : (
+                ""
+            )}
+
             <header>
                 <p>Prescrição de Enfermagem</p>
-                {prescription.realized ? (
+                {prescription.canceled ? (
+                    <span>
+                        <Icon icon="carbon:close-filled" inline={true} color="#ff5f5f" />
+                        {` Prescrição cancelada.`}
+                    </span>
+                ) : prescription.realized ? (
                     <span>
                         <Icon icon="akar-icons:circle-check-fill" inline={true} color="#41e64e" />
                         {` Administrado`}
@@ -105,9 +135,18 @@ function CardNursePrescription({ prescription, user, setRealized }) {
                     {prescription.realized ? (
                         ""
                     ) : user.groupId === 2 ? (
-                        <span>
-                            <Button text="Executar" color="cyan" handle={handleExecutePrescription} isLoading={true} />
-                        </span>
+                        prescription.canceled ? (
+                            ""
+                        ) : (
+                            <span>
+                                <Button
+                                    text="Executar"
+                                    color="cyan"
+                                    handle={handleExecutePrescription}
+                                    isLoading={true}
+                                />
+                            </span>
+                        )
                     ) : (
                         ""
                     )}
