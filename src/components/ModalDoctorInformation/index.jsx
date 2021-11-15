@@ -8,6 +8,7 @@ import types from "../../services/types";
 import validate from "../../services/yup";
 import { connect } from "react-redux";
 import { updateDoctor } from "../../store/actions/doctor.action";
+import { phoneMask } from "../../helpers/masks";
 
 function ModalDoctorInformation({ doctor, updateDoctor, closeModal }) {
     const [disabled, setDisabled] = React.useState(true);
@@ -163,7 +164,7 @@ function ModalDoctorInformation({ doctor, updateDoctor, closeModal }) {
             <input
                 value={inputs.phone}
                 disabled={disabled}
-                onChange={(e) => setInputs({ ...inputs, phone: e.target.value })}
+                onChange={(e) => setInputs({ ...inputs, phone: phoneMask(e.target.value) })}
             />
             {!disabled ? (
                 <>

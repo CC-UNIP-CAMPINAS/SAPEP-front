@@ -43,6 +43,7 @@
         "Component: ModalRootInformation",
         "Page: ConfirmationEmail",
         "Page: ConfirmaPassword",
-        "Page(PDF): Patient"
+        "Page(PDF): Patient",
+        "Component: ModalDoctorInformation"
     ]
 }
