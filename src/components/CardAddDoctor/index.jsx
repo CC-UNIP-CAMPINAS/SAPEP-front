@@ -26,7 +26,6 @@ function CardAddDoctor({ addDoctor, close }) {
             const body = { ...inputs };
             if (await validate("create-doctor", body)) {
                 const { data } = await api.post("/user/doctor", { ...inputs });
-                console.log(data);
                 addDoctor(data);
                 close();
                 notification(types.SUCCESS, "Médico criado com sucesso!");

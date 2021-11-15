@@ -36,7 +36,6 @@ function Login({ setUser }) {
             const body = { email: inputs.user, password: inputs.password };
             if (await yup("login", body)) {
                 const { data } = await api.post("/login", body);
-                console.log(data);
                 setUser({ ...data.payload.user, auth: true });
                 notification(types.SUCCESS, data.message);
                 setRedirect(<Redirect to="/" />);

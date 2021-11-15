@@ -24,7 +24,6 @@ function CardAddNurse({ addNurse, close }) {
             const body = { ...inputs };
             if (await validate("create-nurse", body)) {
                 const { data } = await api.post("/user/nurse", { ...inputs });
-                console.log(data);
                 addNurse(data);
                 close();
                 notification(types.SUCCESS, data.message);
