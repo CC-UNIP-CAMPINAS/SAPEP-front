@@ -1,70 +1,104 @@
-# Getting Started with Create React App
+<p align="center" style={bac}>
+    <img alt="SAPEP" title="#SAPEP" src="./public/logo.svg" width="200px" />
+</p>
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+<p align="center">🏥 Sistema Aberto de Prontuário Eletrônico do Paciente 🏥</p>
 
-## Available Scripts
+<div align="center">
 
-In the project directory, you can run:
+![GitHub](https://img.shields.io/github/license/CC-UNIP-CAMPINAS/SAPEP-front)
+![GitHub commit activity](https://img.shields.io/github/commit-activity/m/CC-UNIP-CAMPINAS/SAPEP-front)
+![Version](https://img.shields.io/badge/version-1.0.1-green)
 
-### `yarn start`
+</div>
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+## Resumo
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+Repositório criado como trabalho de conclusão de curso para bacharelado em ciência da computação na Universidade Paulista.
+O projeto consiste em um sistema para gerenciamento de prontuários eletrônicos de pacientes utilizando como tecnologia: 
 
-### `yarn test`
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+- React
+- Node.JS
+- E Amor 💝
 
-### `yarn build`
+## Funcionalidades
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+- Gerência de usuários (médicos, enfermeiros e administração) por uma interface administrativa;
+- Gerência de pacientes e seus prontuários;
+- Exportação em PDF dos prontuários;
+- Adição de prescrições e relatórios nos prontuários;
+- Reset de senha dos usuários;
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+## Tecnologias
 
-### `yarn eject`
+Dillinger uses a number of open source projects to work properly:
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+- [React](https://pt-br.reactjs.org/)
+- [Redux](https://redux.js.org/)
+- [Node.JS]
+- [Express]
+- [Prisma](https://www.prisma.io/)
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+## Installation
 
-## Learn More
+Dillinger requires [Node.js](https://nodejs.org/) v10+ to run.
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+Install the dependencies and devDependencies and start the server.
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+```sh
+cd dillinger
+npm i
+node app
+```
 
-### Code Splitting
+For production environments...
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+```sh
+npm install --production
+NODE_ENV=production node app
+```
 
-### Analyzing the Bundle Size
+## Development
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+Want to contribute? Great!
 
-### Making a Progressive Web App
+Dillinger uses Gulp + Webpack for fast developing.
+Make a change in your file and instantaneously see your updates!
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
+Open your favorite Terminal and run these commands.
 
-### Advanced Configuration
+First Tab:
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
+```sh
+node app
+```
 
-### Deployment
+Second Tab:
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
+```sh
+gulp watch
+```
 
-### `yarn build` fails to minify
+(optional) Third:
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+```sh
+karma test
+```
+
+#### Building for source
+
+For production release:
+
+```sh
+gulp build --prod
+```
+
+Generating pre-built zip archives for distribution:
+
+```sh
+gulp build dist --prod
+```
