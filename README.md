@@ -15,17 +15,15 @@
 ## Sumário
 
 <!--ts-->
-   * [Resumo 🚀](#resumo)
-   * [Tabela de Conteudo](#tabela-de-conteudo)
-   * [Instalação](#instalacao)
-   * [Como usar](#como-usar)
-      * [Pre Requisitos](#pre-requisitos)
-      * [Local files](#local-files)
-      * [Remote files](#remote-files)
-      * [Multiple files](#multiple-files)
-      * [Combo](#combo)
-   * [Tests](#testes)
-   * [Tecnologias](#tecnologias)
+   * [Resumo 🚀](#resumo-)
+   * [Programa em execução 💻](#programa-em-execução)
+   * [Funcionalidades 💡](#funcionalidades-)
+   * [Tecnologias 👨‍💻](#tecnologias-)
+   * [Como usar 🔧](#como-usar-)
+      * [Pré Requisitos](#pre-requisitos)
+      * [Para o desenvolvimento](#para-o-desenvolvimento)
+      * [Para a produção](#para-a-produção)
+   * [Como contribuir? 🤜🤛](#como-contribuir-)
 <!--te-->
 
 ## Resumo 🚀
@@ -37,7 +35,9 @@ O projeto consiste em um sistema para gerenciamento de prontuários eletrônicos
 -   Node.JS
 -   E Amor 💝
 
-## Programa em execução
+A ideia do projetos era criar um sistema que auxilia-se os profissionais de saúde em seu dia a dia, informatizando toda a parte de gerência dos profissionais e os prontuários dos pacientes, evitando erros e ajudando na saúde mental dos profissionais de saúde.
+
+## Programa em execução 💻
 
 🚧 Em construção...
 
@@ -57,14 +57,10 @@ Todas as bibliotecas estão listadas no `package.json`, porém essas são as pri
 -   [Redux](https://redux.js.org/)
 -   [SASS](https://sass-lang.com/)
 
-## Instalação 🔧
+## Como usar 🔧
 
-### Backend
+### Pré-requisitos
 Antes de prosseguir, clone o repositório de [backend](https://github.com/CC-UNIP-CAMPINAS/SAPEP-back), siga os passos de instalação e volte aqui.
-
-Clone o repositório e então siga os seguintes passos:
-
-###  Variáveis de ambiente
 
 Para as variáveis de ambiente pode ser utilizado um arquivo `.env` com o conteúdo: 
 
@@ -73,6 +69,8 @@ REACT_APP_API_HOST=IP_DO_SEU_BACKEND
 ```
 
 Ou adicionar um valor para o campo `REACT_APP_API_HOST` em sua plataforma de hospedagem.
+
+Clone o repositório e então siga os seguintes passos:
 
 ### Para o desenvolvimento
 
