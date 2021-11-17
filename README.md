@@ -15,16 +15,17 @@
 ## Sumário
 
 <!--ts-->
-   * [Resumo 🚀](#resumo-)
-   * [Programa em execução 💻](#programa-em-execução-)
-   * [Funcionalidades 💡](#funcionalidades-)
-   * [Tecnologias 👨‍💻](#tecnologias-)
-   * [Como usar 🔧](#como-usar-)
-      * [Pré Requisitos](#pré-requisitos)
-      * [Para o desenvolvimento](#para-o-desenvolvimento)
-      * [Para a produção](#para-a-produção)
-   * [Como contribuir? 🤜🤛](#como-contribuir-)
-<!--te-->
+
+-   [Resumo 🚀](#resumo-)
+-   [Programa em execução 💻](#programa-em-execução-)
+-   [Funcionalidades 💡](#funcionalidades-)
+-   [Tecnologias 👨‍💻](#tecnologias-)
+-   [Como usar 🔧](#como-usar-)
+    -   [Pré Requisitos](#pré-requisitos)
+    -   [Para o desenvolvimento](#para-o-desenvolvimento)
+    -   [Para a produção](#para-a-produção)
+-   [Como contribuir? 🤜🤛](#como-contribuir-)
+    <!--te-->
 
 ## Resumo 🚀
 
@@ -60,9 +61,10 @@ Todas as bibliotecas estão listadas no `package.json`, porém essas são as pri
 ## Como usar 🔧
 
 ### Pré-requisitos
+
 Antes de prosseguir, clone o repositório de [backend](https://github.com/CC-UNIP-CAMPINAS/SAPEP-back), siga os passos de instalação e volte aqui.
 
-Para as variáveis de ambiente pode ser utilizado um arquivo `.env` com o conteúdo: 
+Para as variáveis de ambiente pode ser utilizado um arquivo `.env` com o conteúdo:
 
 ```
 REACT_APP_API_HOST=IP_DO_SEU_BACKEND
@@ -112,4 +114,9 @@ Após rodar os comandos acima a pasta build conterá os arquivos que podem ser u
 
 ## Como contribuir? 🤜🤛
 
-O sistema foi pensado para ser gratuito e de livre modificação, fique livre para adaptar o sistema e disponibiliza-lo ao público! 😁
+O sistema foi pensado para ser gratuito e de livre modificação, fique a vontade para adaptar o sistema e disponibiliza-lo ao público! 😁
+
+-   ⭐️ De uma estrela para o projeto;
+-   🐛 Procure e reporte bugs;
+-   📥 Realize PRs com suas implementações e melhorias;
+-   ☕ Por fim, tome um café!
