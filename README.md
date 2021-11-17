@@ -36,7 +36,7 @@ O projeto consiste em um sistema para gerenciamento de prontuários eletrônicos
 -   Node.JS
 -   E Amor 💝
 
-A ideia do projetos era criar um sistema que auxilia-se os profissionais de saúde em seu dia a dia, informatizando toda a parte de gerência dos profissionais e os prontuários dos pacientes, evitando erros e ajudando na saúde mental dos profissionais de saúde.
+A ideia do projetos era criar um sistema que auxiliasse os profissionais de saúde em seu dia a dia, informatizando toda a parte de gerência dos profissionais e os prontuários dos pacientes, evitando erros e ajudando na saúde mental dos profissionais de saúde.
 
 ## Programa em execução 💻
 
