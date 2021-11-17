@@ -16,11 +16,11 @@
 
 <!--ts-->
    * [Resumo 🚀](#resumo-)
-   * [Programa em execução 💻](#programa-em-execução)
+   * [Programa em execução 💻](#programa-em-execução-)
    * [Funcionalidades 💡](#funcionalidades-)
    * [Tecnologias 👨‍💻](#tecnologias-)
    * [Como usar 🔧](#como-usar-)
-      * [Pré Requisitos](#pre-requisitos)
+      * [Pré Requisitos](#pré-requisitos)
       * [Para o desenvolvimento](#para-o-desenvolvimento)
       * [Para a produção](#para-a-produção)
    * [Como contribuir? 🤜🤛](#como-contribuir-)
