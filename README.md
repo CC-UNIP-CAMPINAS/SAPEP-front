@@ -40,7 +40,7 @@ A ideia do projetos era criar um sistema que auxiliasse os profissionais de saú
 
 ## Programa em execução 💻
 
-🚧 Em construção...
+[🎥  Playlist de vídeos do funcionamento 🎬](https://www.youtube.com/watch?v=XLMl-xBSD0Y&list=PLTdKWk6BdL7bPU56ZQ82tDiHYjUo38DXM&index=4)
 
 ## Funcionalidades 💡
 
