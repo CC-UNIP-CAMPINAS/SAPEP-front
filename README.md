@@ -1,70 +1,122 @@
-# Getting Started with Create React App
+<p align="center">
+    <img alt="SAPEP" title="#SAPEP" src="./public/logo.svg" width="250px" />
+</p>
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+<p align="center">🏥 Sistema Aberto de Prontuário Eletrônico do Paciente 🏥</p>
 
-## Available Scripts
+<div align="center">
 
-In the project directory, you can run:
+![GitHub](https://img.shields.io/github/license/CC-UNIP-CAMPINAS/SAPEP-front)
+![GitHub commit activity](https://img.shields.io/github/commit-activity/m/CC-UNIP-CAMPINAS/SAPEP-front)
+![Version](https://img.shields.io/badge/version-1.0.1-green)
 
-### `yarn start`
+</div>
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+## Sumário
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+<!--ts-->
 
-### `yarn test`
+-   [Resumo 🚀](#resumo-)
+-   [Programa em execução 💻](#programa-em-execução-)
+-   [Funcionalidades 💡](#funcionalidades-)
+-   [Tecnologias 👨‍💻](#tecnologias-)
+-   [Como usar 🔧](#como-usar-)
+    -   [Pré Requisitos](#pré-requisitos)
+    -   [Para o desenvolvimento](#para-o-desenvolvimento)
+    -   [Para a produção](#para-a-produção)
+-   [Como contribuir? 🤜🤛](#como-contribuir-)
+    <!--te-->
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+## Resumo 🚀
 
-### `yarn build`
+Repositório criado como trabalho de conclusão de curso para bacharelado em ciência da computação na Universidade Paulista.
+O projeto consiste em um sistema para gerenciamento de prontuários eletrônicos de pacientes utilizando como tecnologia:
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+-   React
+-   Node.JS
+-   E Amor 💝
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+A ideia do projetos era criar um sistema que auxiliasse os profissionais de saúde em seu dia a dia, informatizando toda a parte de gerência dos profissionais e os prontuários dos pacientes, evitando erros e ajudando na saúde mental dos profissionais de saúde.
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+## Programa em execução 💻
 
-### `yarn eject`
+[🎥  Playlist de vídeos do funcionamento 🎬](https://www.youtube.com/watch?v=XLMl-xBSD0Y&list=PLTdKWk6BdL7bPU56ZQ82tDiHYjUo38DXM&index=4)
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+## Funcionalidades 💡
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+-   Gerência de usuários (médicos, enfermeiros e administração) por uma interface administrativa;
+-   Gerência de pacientes e seus prontuários;
+-   Exportação em PDF dos prontuários;
+-   Adição de prescrições e relatórios nos prontuários;
+-   Reset de senha dos usuários;
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+## Tecnologias 👨‍💻
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+Todas as bibliotecas estão listadas no `package.json`, porém essas são as principais tecnologias utilizadas:
 
-## Learn More
+-   [React](https://pt-br.reactjs.org/)
+-   [Redux](https://redux.js.org/)
+-   [SASS](https://sass-lang.com/)
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+## Como usar 🔧
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+### Pré-requisitos
 
-### Code Splitting
+Antes de prosseguir, clone o repositório de [backend](https://github.com/CC-UNIP-CAMPINAS/SAPEP-back), siga os passos de instalação e volte aqui.
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+Para as variáveis de ambiente pode ser utilizado um arquivo `.env` com o conteúdo:
 
-### Analyzing the Bundle Size
+```
+REACT_APP_API_HOST=IP_DO_SEU_BACKEND
+```
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+Ou adicionar um valor para o campo `REACT_APP_API_HOST` em sua plataforma de hospedagem.
 
-### Making a Progressive Web App
+Clone o repositório e então siga os seguintes passos:
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
+### Para o desenvolvimento
 
-### Advanced Configuration
+#### Usando yarn:
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
+```sh
+cd SAPEP-FRONT
+yarn
+yarn start
+```
 
-### Deployment
+#### Usando npm:
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
+```sh
+cd SAPEP-FRONT
+npm i
+npm start
+```
 
-### `yarn build` fails to minify
+### Para a produção
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+#### Usando yarn:
+
+```sh
+cd SAPEP-FRONT
+yarn
+yarn build
+```
+
+#### Usando npm:
+
+```sh
+cd SAPEP-FRONT
+npm i
+npm run build
+```
+
+Após rodar os comandos acima a pasta build conterá os arquivos que podem ser utilizados para a hospedagem da aplicação React.
+
+## Como contribuir? 🤜🤛
+
+O sistema foi pensado para ser gratuito e de livre modificação, fique a vontade para adaptar o sistema e disponibiliza-lo ao público! 😁
+
+-   ⭐️ De uma estrela para o projeto;
+-   🐛 Procure e reporte bugs;
+-   📥 Realize PRs com suas implementações e melhorias;
+-   ☕ Por fim, tome um café!
